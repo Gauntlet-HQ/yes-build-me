@@ -1,0 +1,16 @@
+{
+  "name": "yesfundme",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "echo 'Dev script placeholder'",
+    "seed": "npm run seed --workspace=@yesfundme/database",
+    "reset-db": "rm -f packages/server/yesfundme.db && npm run seed"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}
