@@ -6,11 +6,14 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "echo 'Dev script placeholder'",
+    "dev": "concurrently \"npm run dev --workspace=@yesfundme/client\" \"npm run dev --workspace=@yesfundme/server\"",
     "seed": "npm run seed --workspace=@yesfundme/database",
     "reset-db": "rm -f packages/server/yesfundme.db && npm run seed"
   },
   "engines": {
     "node": ">=22.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
   }
 }
