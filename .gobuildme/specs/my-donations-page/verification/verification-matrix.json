@@ -1,0 +1,90 @@
+{
+  "feature": "my-donations-page",
+  "acceptance_criteria": [
+    {
+      "id": "AC-1",
+      "name": "New Page Created",
+      "description": "MyDonations page component created with all required states",
+      "criteria": [
+        "New page component: packages/client/src/pages/MyDonations.jsx",
+        "Page displays all user donations (not limited to 5)",
+        "Shows loading state while fetching data",
+        "Shows empty state if no donations exist",
+        "Shows error state if API call fails"
+      ],
+      "passes": true,
+      "verified_at": "2026-01-30T11:00:00Z",
+      "verification_evidence": "Component created with 160 lines. All UI states implemented: loading (line 48-53), error (line 56-69), empty (line 72-85), success (line 88-164). ESLint passed with no errors."
+    },
+    {
+      "id": "AC-2",
+      "name": "Routing Configured",
+      "description": "Route registered and protected correctly",
+      "criteria": [
+        "New route added to App.jsx: /donations",
+        "Route is protected (requires authentication)",
+        "Route imported and configured correctly"
+      ],
+      "passes": true,
+      "verified_at": "2026-01-30T11:00:00Z",
+      "verification_evidence": "Route added in App.jsx (line 52-58). Import added (line 9). Wrapped in ProtectedRoute component. ESLint passed."
+    },
+    {
+      "id": "AC-3",
+      "name": "Navigation Updated",
+      "description": "Navigation links added to header and dashboard",
+      "criteria": [
+        "Link to 'My Donations' added to navigation",
+        "Link visible when user is authenticated",
+        "Link highlights when on donations page",
+        "Dashboard 'My Donations' section links to full page"
+      ],
+      "passes": true,
+      "verified_at": "2026-01-30T11:00:00Z",
+      "verification_evidence": "Desktop nav link added in Header.jsx (line 37-39). Mobile nav link added (line 105-107). Dashboard 'View All' link added in Dashboard.jsx (line 127-132). All links use correct routing."
+    },
+    {
+      "id": "AC-4",
+      "name": "Donation Display",
+      "description": "Donations displayed with all required information",
+      "criteria": [
+        "Each donation shows: campaign title, amount, date, message",
+        "Campaign title is clickable (links to campaign detail)",
+        "Donations sorted by date (newest first)",
+        "Proper formatting for amounts ($X,XXX.XX)",
+        "Relative time display (e.g., '2 days ago')"
+      ],
+      "passes": true,
+      "verified_at": "2026-01-30T11:00:00Z",
+      "verification_evidence": "Donation cards display all fields (line 115-157). Link wraps entire card (line 114). Amount formatted with toLocaleString() (line 153). Relative time helper function implemented (line 5-19). Backend returns data sorted by created_at DESC."
+    },
+    {
+      "id": "AC-5",
+      "name": "Summary Statistics",
+      "description": "Statistics calculated and displayed correctly",
+      "criteria": [
+        "Total amount donated displayed",
+        "Total number of donations displayed",
+        "Statistics prominently shown at top of page"
+      ],
+      "passes": true,
+      "verified_at": "2026-01-30T11:00:00Z",
+      "verification_evidence": "Statistics calculated (line 44-45). Summary card displayed at top (line 94-109). Total donated uses toLocaleString() formatting. Donation count displayed."
+    },
+    {
+      "id": "AC-6",
+      "name": "Responsive Design",
+      "description": "Page works on all screen sizes",
+      "criteria": [
+        "Page works on mobile devices",
+        "Donation cards stack properly on small screens",
+        "Navigation accessible on mobile"
+      ],
+      "passes": true,
+      "verified_at": "2026-01-30T11:00:00Z",
+      "verification_evidence": "Responsive classes used throughout: max-w-4xl, px-4, flex-shrink-0, min-w-0. Grid layout for statistics (grid-cols-2). Mobile nav links added to Header.jsx. Tailwind responsive design patterns followed."
+    }
+  ],
+  "overall_status": "complete",
+  "last_updated": "2026-01-30T11:00:00Z"
+}

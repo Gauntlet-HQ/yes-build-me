@@ -1,0 +1,14 @@
+{
+  "feature": "my-donations-page",
+  "allowed_files": [
+    "packages/client/src/pages/MyDonations.jsx",
+    "packages/client/src/App.jsx",
+    "packages/client/src/components/layout/Header.jsx",
+    "packages/client/src/pages/Dashboard.jsx"
+  ],
+  "allowed_patterns": [],
+  "rationale": "New MyDonations page requires: (1) new page component, (2) route registration in App.jsx, (3) navigation link in Header.jsx, (4) 'View All' link in Dashboard.jsx. No backend changes needed - API endpoint already exists.",
+  "backend_changes": false,
+  "estimated_loc": 120,
+  "risk_level": "low-medium"
+}
