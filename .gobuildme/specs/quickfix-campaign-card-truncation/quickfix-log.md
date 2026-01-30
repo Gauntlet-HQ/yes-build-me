@@ -4,5 +4,5 @@
 **Why**: Long titles/descriptions break card layout (Issue #2)
 **Files**: packages/client/src/components/campaigns/CampaignCard.jsx
 **Lines changed**: 4
-**PR**: pending
+**PR**: https://github.com/Gauntlet-HQ/yes-build-me/pull/31
 **Timestamp**: 2026-01-30T12:00:00Z
