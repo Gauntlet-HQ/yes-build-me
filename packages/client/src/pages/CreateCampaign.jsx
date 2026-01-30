@@ -16,8 +16,7 @@ export default function CreateCampaign() {
       const campaign = await api.post('/campaigns', data)
       navigate(`/campaigns/${campaign.id}`)
     } catch (err) {
-      // Bug: Error not being displayed to user
-      console.log(err)
+      setError(err.message)
     } finally {
       setLoading(false)
     }
