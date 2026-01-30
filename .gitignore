@@ -32,3 +32,9 @@ npm-debug.log*
 
 # Testing
 coverage/
+
+# GoBuildMe - auto-generated content (managed by gobuildme init)
+.gobuildme/*
+!.gobuildme/memory
+!.gobuildme/docs
+.cursor/commands/
