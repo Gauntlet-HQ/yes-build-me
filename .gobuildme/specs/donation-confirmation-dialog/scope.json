@@ -1,0 +1,32 @@
+{
+  "feature": "donation-confirmation-dialog",
+  "created_at": "2026-01-30T19:30:00Z",
+  "updated_at": "2026-01-30T19:30:00Z",
+
+  "allowed_files": [
+    "packages/client/src/components/donations/DonationForm.jsx"
+  ],
+  "allowed_patterns": [
+    "packages/client/src/components/donations/**/*.jsx",
+    "packages/client/src/components/donations/**/*.test.jsx"
+  ],
+  "excludes": [
+    "**/*.lock",
+    "**/.env*",
+    "**/secrets/**",
+    "**/node_modules/**"
+  ],
+  "touched_files": [],
+
+  "scope_source": "plan",
+  "scope_precision": "refined",
+
+  "slice_name": null,
+  "epic_slug": null,
+  "registry_mode": "local",
+  "module_path": null,
+  "repo_path": null,
+
+  "violations": [],
+  "last_validated": null
+}
