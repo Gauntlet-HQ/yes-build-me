@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import api from '../api/client'
+import { isTokenExpired } from '../api/tokenUtils'
 
 const AuthContext = createContext(null)
 
@@ -10,6 +11,15 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const token = api.getToken()
     if (token) {
+      // Check token expiration before making API call
+      if (isTokenExpired(token)) {
+        // Token expired - clear and logout without API call
+        api.setToken(null)
+        setLoading(false)
+        return
+      }
+
+      // Token valid - proceed with /auth/me call
       api.get('/auth/me')
         .then(userData => {
           setUser(userData)
