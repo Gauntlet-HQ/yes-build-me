@@ -1,0 +1,288 @@
+# Comprehensive PR Review and Analysis for GoBuildMe CLI
+# Combines multiple review types with intelligent triggering
+
+name: Enhanced PR Review and Analysis
+on:
+  pull_request:
+    types: [opened, synchronize, ready_for_review]
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  # Determine what type of review is needed
+  review-strategy:
+    runs-on: ubuntu-latest
+    outputs:
+      needs-basic-review: ${{ steps.strategy.outputs.needs-basic-review }}
+      needs-augment-review: ${{ steps.strategy.outputs.needs-augment-review }}
+      needs-description: ${{ steps.strategy.outputs.needs-description }}
+      is-draft: ${{ github.event.pull_request.draft }}
+    steps:
+      - name: Determine review strategy
+        id: strategy
+        run: |
+          # Basic review for all new PRs
+          if [[ "${{ github.event.action }}" == "opened" ]]; then
+            echo "needs-basic-review=true" >> $GITHUB_OUTPUT
+            echo "needs-description=true" >> $GITHUB_OUTPUT
+          fi
+
+          # Augment review for ready PRs or when requested
+          if [[ "${{ github.event.action }}" == "ready_for_review" ]] || \
+             [[ "${{ contains(github.event.pull_request.labels.*.name, 'augment_review') }}" == "true" ]]; then
+            echo "needs-augment-review=true" >> $GITHUB_OUTPUT
+          fi
+
+  # Generate PR description if needed
+  generate-description:
+    needs: review-strategy
+    if: needs.review-strategy.outputs.needs-description == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate PR Description
+        uses: actions/github-script@v7
+        continue-on-error: true
+        with:
+          script: |
+            // Enhanced PR description generation for GoBuildMe CLI
+            const { data: files } = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            });
+
+            const changedFiles = files.map(f => f.filename);
+            const hasWorkflows = changedFiles.some(f => f.startsWith('.github/workflows/'));
+            const hasTemplates = changedFiles.some(f => f.startsWith('templates/'));
+            const hasScripts = changedFiles.some(f => f.startsWith('scripts/'));
+            const hasCLI = changedFiles.some(f => f.startsWith('src/gobuildme_cli/'));
+
+            let description = `## 🔄 GoBuildMe CLI Changes\n\n`;
+            
+            if (hasWorkflows) description += `### 🔧 Workflow Changes\n- Modified GitHub Actions workflows\n\n`;
+            if (hasTemplates) description += `### 📝 Template Changes\n- Updated command templates or project templates\n\n`;
+            if (hasScripts) description += `### 🛠️ Script Changes\n- Modified automation scripts\n\n`;
+            if (hasCLI) description += `### 💻 CLI Changes\n- Updated GoBuildMe CLI functionality\n\n`;
+
+            description += `### 📋 Changed Files\n`;
+            changedFiles.forEach(file => {
+              description += `- \`${file}\`\n`;
+            });
+
+            description += `\n### 🧪 Testing\n- [ ] Manual testing completed\n- [ ] All CI checks pass\n- [ ] Agent integration tested (if applicable)\n\n`;
+            description += `### 📚 Documentation\n- [ ] Documentation updated (if needed)\n- [ ] CHANGELOG.md updated (if needed)\n`;
+
+            await github.rest.pulls.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+              body: description
+            });
+
+  # Basic review for all PRs
+  basic-review:
+    needs: review-strategy
+    if: needs.review-strategy.outputs.needs-basic-review == 'true' && needs.review-strategy.outputs.is-draft == 'false'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          version: "latest"
+
+      - name: Install dependencies
+        run: |
+          if [[ -f "pyproject.toml" ]]; then
+            uv sync --dev
+          fi
+
+      - name: Run basic quality checks
+        id: quality-check
+        run: |
+          echo "🔍 Running basic quality checks..."
+          
+          # Check for common issues
+          ISSUES=""
+          
+          # Check for TODO/FIXME comments in new code
+          if git diff origin/main...HEAD | grep -E "^\+.*TODO|^\+.*FIXME" > /dev/null; then
+            ISSUES="${ISSUES}- ⚠️ New TODO/FIXME comments found\n"
+          fi
+          
+          # Check for print statements in Python code (should use logging)
+          if git diff origin/main...HEAD | grep -E "^\+.*print\(" > /dev/null; then
+            ISSUES="${ISSUES}- ⚠️ New print() statements found (consider using logging)\n"
+          fi
+          
+          # Check for large files
+          if git diff origin/main...HEAD --name-only | xargs -I {} sh -c 'test -f "{}" && test $(wc -c < "{}") -gt 10000' 2>/dev/null; then
+            ISSUES="${ISSUES}- ⚠️ Large files detected (>10KB)\n"
+          fi
+          
+          echo "issues=${ISSUES}" >> $GITHUB_OUTPUT
+
+      - name: Post basic review comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issues = `${{ steps.quality-check.outputs.issues }}`;
+            let comment = `## 🤖 Basic PR Review\n\n`;
+            
+            if (issues) {
+              comment += `### ⚠️ Issues Found:\n${issues}\n`;
+            } else {
+              comment += `### ✅ No obvious issues detected\n\n`;
+            }
+            
+            comment += `### 💡 Suggestions:\n`;
+            comment += `- Ensure all tests pass\n`;
+            comment += `- Consider adding the \`augment_review\` label for enhanced analysis\n`;
+            comment += `- Verify documentation is updated if needed\n\n`;
+            comment += `*This is an automated basic review. For comprehensive analysis, add the \`augment_review\` label.*`;
+
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+  # Enhanced Augment Code review
+  augment-review:
+    needs: review-strategy
+    if: needs.review-strategy.outputs.needs-augment-review == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Enhanced Augment Code Review Simulation
+        id: augment-review
+        run: |
+          echo "🚀 Running enhanced Augment Code review simulation..."
+          echo "💡 In production, this would use Augment Code's comprehensive analysis"
+          
+          # Simulate comprehensive analysis
+          echo "📊 Analyzing architecture impact..."
+          echo "🔍 Checking convention compliance..."
+          echo "🏗️ Validating design patterns..."
+          echo "📋 Reviewing code quality..."
+          
+          # Check for specific GoBuildMe CLI patterns
+          ANALYSIS=""
+          
+          # Check for agent support changes
+          if git diff origin/main...HEAD | grep -E "AI_CHOICES|agent.*support" > /dev/null; then
+            ANALYSIS="${ANALYSIS}🤖 **Agent Support Changes Detected**\n- Review agent compatibility\n- Validate all agents are supported\n- Check documentation updates\n\n"
+          fi
+          
+          # Check for workflow changes
+          if git diff origin/main...HEAD --name-only | grep -E "\.github/workflows/" > /dev/null; then
+            ANALYSIS="${ANALYSIS}🔧 **Workflow Changes Detected**\n- Validate workflow syntax\n- Check for breaking changes\n- Ensure backward compatibility\n\n"
+          fi
+          
+          # Check for template changes
+          if git diff origin/main...HEAD --name-only | grep -E "templates/" > /dev/null; then
+            ANALYSIS="${ANALYSIS}📝 **Template Changes Detected**\n- Validate template syntax\n- Check placeholder consistency\n- Ensure all agents supported\n\n"
+          fi
+          
+          echo "analysis=${ANALYSIS}" >> $GITHUB_OUTPUT
+
+      - name: Post enhanced review comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const analysis = `${{ steps.augment-review.outputs.analysis }}`;
+            
+            let comment = `## 🧠 Enhanced Augment Code Review\n\n`;
+            comment += `*This is a simulation of Augment Code's comprehensive analysis capabilities*\n\n`;
+            
+            if (analysis) {
+              comment += `### 🔍 Analysis Results:\n${analysis}`;
+            } else {
+              comment += `### ✅ No specific issues detected\n\n`;
+            }
+            
+            comment += `### 🎯 Augment Code Analysis Features:\n`;
+            comment += `- 🏗️ **Architecture Analysis**: 200k-token context understanding\n`;
+            comment += `- 📋 **Convention Checking**: Semantic pattern recognition\n`;
+            comment += `- 🔍 **Real-time Validation**: Live codebase analysis\n`;
+            comment += `- 🤖 **Agent Integration**: Multi-agent compatibility validation\n\n`;
+            
+            comment += `### 💡 Recommendations:\n`;
+            comment += `- Run \`make pre-commit\` before merging\n`;
+            comment += `- Validate all CI checks pass\n`;
+            comment += `- Consider running \`make analyze-architecture\` for complex changes\n\n`;
+            
+            comment += `*For full Augment Code analysis, this would require an interactive agent session.*`;
+
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+  # Draft PR handling
+  draft-review:
+    needs: review-strategy
+    if: needs.review-strategy.outputs.is-draft == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Draft PR Guidance
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const comment = `## 📝 Draft PR Detected
+
+            This PR is marked as draft. Here's what you can do:
+
+            ### ✅ **Ready for Review?**
+            - Mark as "Ready for review" to trigger comprehensive analysis
+            - Add \`augment_review\` label for enhanced Augment Code review
+
+            ### 🔧 **GoBuildMe CLI Development Tips**
+            - Run \`make pre-commit\` before pushing
+            - Use conventional commit messages
+            - Test with multiple AI agents if making agent changes
+            - Validate templates with \`make validate-architecture\`
+
+            ### 📚 **Resources**
+            - [Development Guidelines](../AGENTS.md)
+            - [CLI Documentation](../README.md)
+            - [Workflow Commands](../templates/commands/)
+            `;
+
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });

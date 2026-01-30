@@ -1,0 +1,32 @@
+# Persona configuration for Spec-Driven Development flows.
+# Set the default persona id to tailor prompts and validation.
+# Default is fullstack_engineer. If you're not a fullstack engineer, change this!
+
+default_persona: "fullstack_engineer"  # Change this to match your role if different
+
+# Optional: allowed personas registry (ids should match files under .gobuildme/personas/)
+personas:
+  - id: product_manager
+    name: Product Manager / PM / Product Owner
+  - id: data_engineer
+    name: Data Engineer
+  - id: ml_engineer
+    name: ML Engineer
+  - id: data_scientist
+    name: Data Scientist
+  - id: architect
+    name: Spec Lead / Architect
+  - id: backend_engineer
+    name: Backend Engineer
+  - id: frontend_engineer
+    name: Frontend Engineer
+  - id: fullstack_engineer
+    name: Fullstack Engineer
+  - id: qa_engineer
+    name: QA / Test Engineer
+  - id: sre
+    name: DevOps / SRE
+  - id: security_compliance
+    name: Security / Compliance
+  - id: maintainer
+    name: Maintainer / Project Lead

@@ -1,0 +1,36 @@
+id: maintainer
+name: Maintainer / Project Lead
+description: |
+  Owns standards, releases, and PR quality; enforces /review and /push gates.
+expertise: "Release management, versioning, repo hygiene, governance"
+communication_style: "Decisive, checklist-driven, standards-focused"
+goals:
+  - High‑quality, reviewable PRs with clear release notes
+  - Versioning and ownership hygiene
+  - CI green with appropriate labels and reviewers
+pains:
+  - Noisy, unclear PRs and missing release notes
+  - Inconsistent versioning and ownership gaps
+  - Merging with failing or flaky CI
+contributes_steps:
+  - "/review"
+  - "/push"
+required_sections:
+  "/review":
+    - "Release Notes"
+    - "Versioning"
+    - "Ownership"
+    - "Risk Assessment"
+    - "CI Status"
+  "/push":
+    - "PR Checklist"
+    - "Labels/Reviewers"
+    - "Merge Policy"
+prompt_guidance: |
+  Keep PRs crisp and auditable. Ensure version bumps, ownership metadata, and risk
+  notes are present. CI must be green before merge.
+defaults:
+  coverage_floor: 0.0
+  quality_gates:
+    - release_notes_present
+    - ci_green

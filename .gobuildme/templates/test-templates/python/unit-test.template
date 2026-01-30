@@ -1,0 +1,266 @@
+"""
+Unit tests for {MODULE_NAME}
+
+This file contains:
+- 2 SAMPLE tests demonstrating best practices
+- TODO tests for remaining scenarios
+
+Testing Pattern:
+1. Setup: Create test data (no external dependencies)
+2. Execute: Call the function/method
+3. Verify: Assert the output
+4. Cleanup: Not needed (unit tests are isolated)
+
+Unit Test Principles:
+- Test ONE function/method at a time
+- No database, no network, no file system
+- Use mocks for all dependencies
+- Fast execution (< 100ms per test)
+- Deterministic (same input = same output)
+"""
+
+import pytest
+from unittest.mock import Mock, patch, MagicMock
+from app.{MODULE_PATH} import {CLASS_NAME}
+
+# ============================================================================
+# SAMPLE TESTS - Demonstrating Best Practices
+# ============================================================================
+
+def test_{FUNCTION_NAME}_with_valid_input():
+    """
+    SAMPLE TEST: Test {FUNCTION_NAME} with valid input
+    
+    This demonstrates:
+    - Testing a single function
+    - Using simple, predictable inputs
+    - Clear assertions
+    - No external dependencies
+    """
+    # Arrange: Prepare input
+    input_value = "test_input"
+    expected_output = "expected_result"
+    
+    # Act: Call the function
+    result = {FUNCTION_NAME}(input_value)
+    
+    # Assert: Verify output
+    assert result == expected_output
+    # TODO: Add more specific assertions
+
+
+def test_{CLASS_NAME}_method_with_mocked_dependency():
+    """
+    SAMPLE TEST: Test class method with mocked dependency
+    
+    This demonstrates:
+    - Testing a class method
+    - Mocking external dependencies
+    - Verifying method calls
+    - Isolating the unit under test
+    """
+    # Arrange: Create instance and mock dependency
+    mock_dependency = Mock()
+    mock_dependency.get_data.return_value = {"key": "value"}
+    
+    instance = {CLASS_NAME}(dependency=mock_dependency)
+    
+    # Act: Call the method
+    result = instance.process()
+    
+    # Assert: Verify output
+    assert result is not None
+    
+    # Assert: Verify dependency was called correctly
+    mock_dependency.get_data.assert_called_once()
+    
+    # TODO: Add more specific assertions
+
+
+# ============================================================================
+# TODO TESTS - Fill in the implementation
+# ============================================================================
+
+def test_{FUNCTION_NAME}_with_empty_input():
+    """
+    TODO: Test function with empty input
+    
+    Test scenarios:
+    - Empty string
+    - Empty list
+    - Empty dict
+    - None value
+    
+    Assertions:
+    - Returns default value
+    - Raises ValueError
+    - Returns empty result
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement empty input test")
+
+
+def test_{FUNCTION_NAME}_with_invalid_input():
+    """
+    TODO: Test function with invalid input
+    
+    Test scenarios:
+    - Wrong type (string instead of int)
+    - Negative numbers
+    - Out of range values
+    
+    Assertions:
+    - Raises TypeError
+    - Raises ValueError
+    - Returns error result
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement invalid input test")
+
+
+def test_{FUNCTION_NAME}_edge_cases():
+    """
+    TODO: Test edge cases
+    
+    Test scenarios:
+    - Maximum values
+    - Minimum values
+    - Boundary conditions
+    - Special characters
+    
+    Assertions:
+    - Handles edge cases correctly
+    - No overflow/underflow
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement edge cases test")
+
+
+def test_{CLASS_NAME}_initialization():
+    """
+    TODO: Test class initialization
+    
+    Test scenarios:
+    - Default initialization
+    - Initialization with parameters
+    - Invalid initialization parameters
+    
+    Assertions:
+    - Instance created correctly
+    - Attributes set properly
+    - Raises errors for invalid params
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement initialization test")
+
+
+def test_{CLASS_NAME}_method_error_handling():
+    """
+    TODO: Test method error handling
+    
+    Test scenarios:
+    - Dependency raises exception
+    - Invalid state
+    - Resource not available
+    
+    Assertions:
+    - Exception handled gracefully
+    - Error message is clear
+    - State remains consistent
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement error handling test")
+
+
+def test_{CLASS_NAME}_method_with_different_inputs():
+    """
+    TODO: Test method with various inputs
+    
+    Test scenarios:
+    - Different data types
+    - Different data sizes
+    - Different configurations
+    
+    Assertions:
+    - Correct output for each input
+    - Performance is acceptable
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement various inputs test")
+
+
+def test_{FUNCTION_NAME}_idempotency():
+    """
+    TODO: Test function idempotency
+    
+    Test scenarios:
+    - Call function multiple times with same input
+    - Verify same output each time
+    
+    Assertions:
+    - Function is idempotent
+    - No side effects
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement idempotency test")
+
+
+def test_{FUNCTION_NAME}_performance():
+    """
+    TODO: Test function performance
+    
+    Test scenarios:
+    - Large input data
+    - Many iterations
+    - Time complexity
+    
+    Assertions:
+    - Completes within time limit
+    - Memory usage is acceptable
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement performance test")
+
+
+# ============================================================================
+# PARAMETRIZED TESTS (Advanced)
+# ============================================================================
+
+@pytest.mark.parametrize("input_value,expected_output", [
+    ("input1", "output1"),
+    ("input2", "output2"),
+    ("input3", "output3"),
+    # TODO: Add more test cases
+])
+def test_{FUNCTION_NAME}_parametrized(input_value, expected_output):
+    """
+    SAMPLE: Parametrized test for multiple inputs
+    
+    This demonstrates:
+    - Testing multiple scenarios with one test
+    - Using pytest.mark.parametrize
+    - Reducing code duplication
+    """
+    # Act
+    result = {FUNCTION_NAME}(input_value)
+    
+    # Assert
+    assert result == expected_output
+
+
+# ============================================================================
+# HELPER FUNCTIONS (Optional)
+# ============================================================================
+
+def create_mock_{CLASS_NAME}(**kwargs):
+    """
+    Helper function to create mock {CLASS_NAME} instance
+    
+    Usage:
+        mock_instance = create_mock_{CLASS_NAME}(attribute="value")
+    """
+    mock = Mock(spec={CLASS_NAME})
+    for key, value in kwargs.items():
+        setattr(mock, key, value)
+    return mock
+

@@ -1,0 +1,98 @@
+# Slice Consistency Validation for GitLab CI
+#
+# Include this in your .gitlab-ci.yml:
+#   include:
+#     - local: '.gobuildme/templates/gitlab-ci/slice-validation.yml'
+#
+# Or copy the job definition directly into your pipeline.
+
+slice-validation:
+  stage: validate
+  image: alpine:latest
+  before_script:
+    # Note: 'grep' package provides GNU grep with -P (Perl regex) support
+    # Required for constitution principle extraction (grep -oP)
+    - apk add --no-cache bash jq git python3 grep
+  script:
+    - |
+      # Detect feature branch
+      FEATURE="${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME:-$CI_COMMIT_REF_NAME}"
+      echo "Validating slice for branch: $FEATURE"
+
+      # Check if validation script exists
+      if [ ! -f ".gobuildme/scripts/bash/validate-slice-consistency.sh" ]; then
+        echo "Slice validation script not found - skipping validation"
+        exit 0
+      fi
+
+      chmod +x .gobuildme/scripts/bash/validate-slice-consistency.sh
+      chmod +x .gobuildme/scripts/bash/common.sh 2>/dev/null || true
+
+      # Run validation with JSON output
+      .gobuildme/scripts/bash/validate-slice-consistency.sh \
+        --feature "$FEATURE" \
+        --json > validation-results.json 2>&1 || true
+
+      # Check if JSON is valid
+      if ! jq empty validation-results.json 2>/dev/null; then
+        echo "WARNING: Validation produced invalid JSON output"
+        echo '{"overall_status": "skip", "violations": []}' > validation-results.json
+      fi
+
+      # Extract results
+      OVERALL_STATUS=$(jq -r '.overall_status // "skip"' validation-results.json)
+      VIOLATIONS=$(jq '.violations | length' validation-results.json)
+      SCOPE_STATUS=$(jq -r '.scope_check.status // "skip"' validation-results.json)
+      CONSTITUTION_STATUS=$(jq -r '.constitution_check.status // "skip"' validation-results.json)
+
+      echo ""
+      echo "=== Slice Consistency Validation Results ==="
+      echo "Overall Status: $OVERALL_STATUS"
+      echo "Scope Check: $SCOPE_STATUS"
+      echo "Constitution Check: $CONSTITUTION_STATUS"
+      echo "Violations: $VIOLATIONS"
+      echo ""
+
+      # Check enforcement mode from constitution
+      STRICT_MODE=false
+      if [ -f ".gobuildme/memory/constitution.md" ]; then
+        if grep -q '<!-- scope_enforcement: strict -->' .gobuildme/memory/constitution.md 2>/dev/null; then
+          STRICT_MODE=true
+        fi
+      fi
+
+      echo "Enforcement mode: $([ "$STRICT_MODE" = true ] && echo 'strict' || echo 'warn')"
+
+      # Display violations if any
+      if [ "$VIOLATIONS" -gt 0 ]; then
+        echo ""
+        echo "=== Violations ==="
+        jq '.violations' validation-results.json
+        echo ""
+      fi
+
+      # In strict mode, fail the pipeline if violations detected
+      if [ "$STRICT_MODE" = true ] && [ "$VIOLATIONS" -gt 0 ]; then
+        echo "ERROR: Slice scope violations detected and enforcement mode is strict"
+        echo "Fix scope violations before merging, or update scope.json if changes are intentional."
+        exit 1
+      fi
+
+      # In warn mode, just report (pipeline passes)
+      if [ "$VIOLATIONS" -gt 0 ]; then
+        echo "WARNING: $VIOLATIONS scope/constitution issues detected (advisory)"
+      fi
+
+  artifacts:
+    when: always
+    paths:
+      - validation-results.json
+    expire_in: 1 week
+
+  rules:
+    # Run on merge requests
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    # Also run on pushes to feature branches (optional)
+    - if: $CI_COMMIT_BRANCH && $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
+      when: manual
+      allow_failure: true

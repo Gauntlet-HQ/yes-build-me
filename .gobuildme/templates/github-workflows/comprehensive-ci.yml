@@ -1,0 +1,273 @@
+name: Comprehensive CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  detect-project-type:
+    runs-on: ubuntu-latest
+    outputs:
+      is-python: ${{ steps.detect.outputs.is-python }}
+      python-version: ${{ steps.detect.outputs.python-version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Detect project type
+        id: detect
+        run: |
+          # Detect Python project
+          if [[ -f "pyproject.toml" || -f "requirements.txt" || -f "setup.py" ]]; then
+            echo "is-python=true" >> $GITHUB_OUTPUT
+            # Extract Python version from pyproject.toml if available
+            if [[ -f "pyproject.toml" ]] && grep -q "requires-python" pyproject.toml; then
+              PYTHON_VERSION=$(grep "requires-python" pyproject.toml | sed 's/.*>=\s*"\([^"]*\)".*/\1/' | head -1)
+              echo "python-version=${PYTHON_VERSION:-3.11}" >> $GITHUB_OUTPUT
+            else
+              echo "python-version=3.11" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "is-python=false" >> $GITHUB_OUTPUT
+            echo "python-version=" >> $GITHUB_OUTPUT
+          fi
+
+  python-ci:
+    needs: detect-project-type
+    if: needs.detect-project-type.outputs.is-python == 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.11', '3.12']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          version: "latest"
+
+      - name: Set up Python
+        run: uv python install ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          if [[ -f "pyproject.toml" ]]; then
+            uv sync --dev
+          elif [[ -f "requirements.txt" ]]; then
+            uv pip install -r requirements.txt
+            # Install common dev dependencies
+            uv pip install pytest ruff mypy
+          fi
+
+      - name: Run linting (ruff)
+        run: |
+          if command -v ruff &> /dev/null; then
+            ruff check .
+          else
+            echo "⚠️ Ruff not found, skipping linting"
+          fi
+
+      - name: Run type checking (mypy)
+        run: |
+          if command -v mypy &> /dev/null; then
+            mypy src/ || echo "⚠️ Type checking failed or not configured"
+          else
+            echo "⚠️ MyPy not found, skipping type checking"
+          fi
+
+      - name: Run tests
+        run: |
+          if command -v pytest &> /dev/null; then
+            pytest --cov=src --cov-report=xml --cov-report=term-missing
+          else
+            echo "⚠️ Pytest not found, skipping tests"
+          fi
+
+      - name: Upload coverage to Codecov
+        if: success() && matrix.python-version == '3.11'
+        uses: codecov/codecov-action@v4
+        with:
+          file: ./coverage.xml
+          fail_ci_if_error: false
+
+      - name: DevSpace config check (advisory)
+        if: ${{ !cancelled() && (hashFiles('devspace.yaml','devspace.yml','.devspace/devspace.yaml') != '') }}
+        continue-on-error: true
+        run: |
+          if command -v devspace >/dev/null 2>&1; then
+            echo "DevSpace detected; validating configuration (no cluster actions)"
+            devspace print config >/dev/null || echo "⚠️ DevSpace config parse failed"
+          else
+            echo "DevSpace CLI not installed on runner; skipping"
+          fi
+
+      - name: SLO synthetic (advisory)
+        if: always()
+        continue-on-error: true
+        run: |
+          if [[ -x ".gobuildme/scripts/bash/slo-synthetic.sh" ]]; then
+            .gobuildme/scripts/bash/slo-synthetic.sh || true
+          else
+            echo "No SLO synthetic script found; skipping"
+          fi
+
+      - name: Upload SLO report artifact
+        if: always() && hashFiles('.gobuildme/self-driving/logs/slo-report.json') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: slo-report
+          path: .gobuildme/self-driving/logs/slo-report.json
+          if-no-files-found: ignore
+
+  security-scan:
+    runs-on: ubuntu-latest
+    needs: detect-project-type
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        continue-on-error: true
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+      - name: Python security scan
+        if: needs.detect-project-type.outputs.is-python == 'true'
+        run: |
+          pip install safety bandit
+          # Check for known security vulnerabilities
+          safety check || echo "⚠️ Security vulnerabilities found"
+          # Run bandit for Python security issues
+          bandit -r src/ -f json -o bandit-report.json || echo "⚠️ Bandit found security issues"
+
+  gobuildme-specific-tests:
+    runs-on: ubuntu-latest
+    needs: detect-project-type
+    if: needs.detect-project-type.outputs.is-python == 'true'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          version: "latest"
+
+      - name: Set up Python
+        run: uv python install 3.11
+
+      - name: Install dependencies
+        run: uv sync --dev
+
+      - name: Test CLI functionality
+        run: |
+          echo "🧪 Testing GoBuildMe CLI functionality..."
+          # Test CLI help
+          uv run python -m gobuildme_cli --help || echo "⚠️ CLI help failed"
+          
+          # Test CLI check command
+          uv run python -m gobuildme_cli check || echo "⚠️ CLI check failed"
+
+      - name: Validate agent support
+        run: |
+          echo "🤖 Validating agent support consistency..."
+          # Check that all agents in AI_CHOICES are documented
+          uv run python -c "
+          import sys
+          sys.path.insert(0, 'src')
+          from gobuildme_cli import AI_CHOICES
+          
+          print('Supported agents:', list(AI_CHOICES.keys()))
+          print('Total agents:', len(AI_CHOICES))
+          
+          # Validate we have 12 agents as documented
+          if len(AI_CHOICES) != 12:
+              print(f'ERROR: Expected 12 agents, found {len(AI_CHOICES)}')
+              sys.exit(1)
+          
+          print('✅ Agent count validation passed')
+          "
+
+      - name: Validate template structure
+        run: |
+          echo "📝 Validating template structure..."
+          # Check that essential templates exist
+          for template in templates/commands/*.md; do
+            if [[ -f "$template" ]]; then
+              echo "✅ Template exists: $template"
+            else
+              echo "❌ Template missing: $template"
+            fi
+          done
+          
+          # Check that agent templates exist
+          for agent_template in templates/AGENTS-template.md templates/CLAUDE-template.md; do
+            if [[ -f "$agent_template" ]]; then
+              echo "✅ Agent template exists: $agent_template"
+            else
+              echo "❌ Agent template missing: $agent_template"
+            fi
+          done
+
+      - name: Test TOML conversion functionality
+        run: |
+          echo "🔧 Testing TOML conversion functionality..."
+          # Run the TOML conversion test we created earlier
+          if [[ -f "test_toml_conversion.py" ]]; then
+            python test_toml_conversion.py
+          else
+            echo "⚠️ TOML conversion test not found"
+          fi
+
+  template-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate workflow templates
+        run: |
+          echo "🔍 Validating workflow templates..."
+          # Check that all workflow files are valid YAML
+          for workflow in .github/workflows/*.yml; do
+            if [[ -f "$workflow" ]]; then
+              echo "Validating $workflow..."
+              python -c "import yaml; yaml.safe_load(open('$workflow'))" || echo "❌ Invalid YAML: $workflow"
+            fi
+          done
+
+      - name: Validate command templates
+        run: |
+          echo "📋 Validating command templates..."
+          # Check that all command templates have proper frontmatter
+          for template in templates/commands/*.md; do
+            if [[ -f "$template" ]]; then
+              if head -1 "$template" | grep -q "^---$"; then
+                echo "✅ Valid frontmatter: $template"
+              else
+                echo "⚠️ Missing frontmatter: $template"
+              fi
+            fi
+          done
+
+      - name: Check for placeholder consistency
+        run: |
+          echo "🔍 Checking placeholder consistency..."
+          # Check that templates use consistent placeholder syntax
+          grep -r "\$ARGUMENTS" templates/commands/ || echo "No \$ARGUMENTS placeholders found"
+          grep -r "{{args}}" templates/commands/ || echo "No {{args}} placeholders found"
+          grep -r "{SCRIPT}" templates/commands/ || echo "No {SCRIPT} placeholders found"

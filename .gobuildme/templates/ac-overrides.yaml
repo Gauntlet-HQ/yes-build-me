@@ -1,0 +1,39 @@
+# AC Overrides - Manual Review Configuration
+# Purpose: Mark acceptance criteria that cannot be automated or require manual review
+# Location: Copy to .gobuildme/test-results/ac-overrides.yaml in target project
+#
+# Use this file to document ACs that are:
+# - Subjective (UX, "looks professional", "feels intuitive")
+# - Non-functional without clear metrics
+# - Requiring human judgment
+# - Integration tests that need external systems
+#
+# These ACs will be excluded from automated traceability calculation
+
+manual_review_required:
+  # Example: UX-related AC that requires manual testing
+  - ac_id: AC3
+    reason: "Subjective UX requirement - requires manual usability testing"
+    reviewer: "UX team"
+    status: "manual_test_planned"
+
+  # Example: Performance AC without specific threshold
+  - ac_id: AC7
+    reason: "Performance requirement is vague ('should be fast')"
+    reviewer: "Performance team"
+    status: "needs_clarification"
+
+  # Example: External service integration
+  # - ac_id: AC12
+  #   reason: "Requires external payment gateway (not available in test env)"
+  #   reviewer: "Integration team"
+  #   status: "manual_verification"
+
+# Valid status values:
+#   - manual_test_planned: Manual test planned
+#   - manual_test_complete: Manual test completed
+#   - needs_clarification: AC needs more specific criteria
+#   - deferred: Testing deferred to later phase
+#   - external_dependency: Blocked by external system
+
+# Note: Document all overrides clearly to maintain audit trail

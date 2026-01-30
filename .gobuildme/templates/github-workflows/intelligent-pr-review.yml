@@ -1,0 +1,164 @@
+# Comprehensive PR Review and Analysis
+# Combines multiple review types with intelligent triggering
+
+name: PR Review and Analysis
+on:
+  pull_request:
+    types: [opened, synchronize, ready_for_review]
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  # Determine what type of review is needed
+  review-strategy:
+    runs-on: ubuntu-latest
+    outputs:
+      needs-basic-review: ${{ steps.strategy.outputs.needs-basic-review }}
+      needs-augment-review: ${{ steps.strategy.outputs.needs-augment-review }}
+      needs-description: ${{ steps.strategy.outputs.needs-description }}
+      is-draft: ${{ github.event.pull_request.draft }}
+    steps:
+      - name: Determine review strategy
+        id: strategy
+        run: |
+          # Basic review for all new PRs
+          if [[ "${{ github.event.action }}" == "opened" ]]; then
+            echo "needs-basic-review=true" >> $GITHUB_OUTPUT
+            echo "needs-description=true" >> $GITHUB_OUTPUT
+          fi
+
+          # Augment review for ready PRs or when requested
+          if [[ "${{ github.event.action }}" == "ready_for_review" ]] || \
+             [[ "${{ contains(github.event.pull_request.labels.*.name, 'augment_review') }}" == "true" ]]; then
+            echo "needs-augment-review=true" >> $GITHUB_OUTPUT
+          fi
+
+  # Generate PR description if needed
+  generate-description:
+    needs: review-strategy
+    if: needs.review-strategy.outputs.needs-description == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate PR Description
+        uses: augmentcode/describe-pr@v0
+        continue-on-error: true
+        with:
+          augment_session_auth: ${{ secrets.AUGMENT_SESSION_AUTH }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pull_number: ${{ github.event.pull_request.number }}
+          repo_name: ${{ github.repository }}
+
+  # Basic review for all PRs
+  basic-review:
+    needs: review-strategy
+    if: needs.review-strategy.outputs.needs-basic-review == 'true' && needs.review-strategy.outputs.is-draft == 'false'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate Basic PR Review
+        id: review
+        uses: augmentcode/review-pr@v0
+        continue-on-error: true
+        with:
+          augment_session_auth: ${{ secrets.AUGMENT_SESSION_AUTH }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pull_number: ${{ github.event.pull_request.number }}
+          repo_name: ${{ github.repository }}
+
+      - name: Notify on review failure
+        if: steps.review.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '⚠️ Automated review failed. Please request manual review or add the `augment_review` label to retry with enhanced analysis.'
+            })
+
+  # Enhanced Augment Code review
+  augment-review:
+    needs: review-strategy
+    if: needs.review-strategy.outputs.needs-augment-review == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Enhanced Augment Code Review
+        id: augment-review
+        uses: augmentcode/review-pr-augment@v0
+        continue-on-error: true
+        with:
+          augment_session_auth: ${{ secrets.AUGMENT_SESSION_AUTH }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pull_number: ${{ github.event.pull_request.number }}
+          repo_name: ${{ github.repository }}
+          analysis_depth: "comprehensive"
+          include_architecture: true
+          include_conventions: true
+
+      - name: Architecture Analysis
+        if: steps.augment-review.outcome == 'success'
+        uses: augmentcode/analyze-architecture@v0
+        continue-on-error: true
+        with:
+          augment_session_auth: ${{ secrets.AUGMENT_SESSION_AUTH }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pull_number: ${{ github.event.pull_request.number }}
+          repo_name: ${{ github.repository }}
+
+  # Draft PR handling
+  draft-review:
+    needs: review-strategy
+    if: needs.review-strategy.outputs.is-draft == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Draft PR Guidance
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `## 📝 Draft PR Detected
+
+              This PR is marked as draft. Here's what you can do:
+
+              ### ✅ **Ready for Review?**
+              - Mark as "Ready for review" to trigger comprehensive analysis
+              - Add \`augment_review\` label for enhanced Augment Code review
+
+              ### 🔧 **Development Tips**
+              - Run \`make pre-commit\` before pushing
+              - Use conventional commit messages
+              - Check \`make branch-status\` for current state
+
+              ### 📚 **Resources**
+              - [Development Guidelines](../AGENTS.md)
+              - [Feature Branch Workflow](../.augment/README.md#feature-branch-workflow)
+              `
+            })

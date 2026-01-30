@@ -1,0 +1,358 @@
+"""
+Integration tests for {ENDPOINT_NAME} API
+
+This file contains:
+- 2 SAMPLE tests demonstrating best practices
+- TODO tests for remaining scenarios
+
+Testing Pattern:
+1. Setup: Create test data and fixtures
+2. Execute: Make API request
+3. Verify: Assert response and side effects
+4. Cleanup: Remove test data (handled by fixtures)
+"""
+
+import pytest
+from fastapi.testclient import TestClient
+from app.main import app
+from tests.fixtures.api_fixtures import (
+    test_client,
+    auth_headers,
+    sample_{RESOURCE}_data,
+)
+from tests.fixtures.database_fixtures import (
+    db_session,
+    clean_database,
+)
+
+# ============================================================================
+# SAMPLE TESTS - Demonstrating Best Practices
+# ============================================================================
+
+def test_list_{RESOURCE}_success(test_client, auth_headers, db_session):
+    """
+    SAMPLE TEST: List {RESOURCE} with valid authentication
+    
+    This demonstrates:
+    - Using fixtures for client and auth
+    - Testing successful response
+    - Validating response structure
+    - Checking pagination
+    """
+    # Setup: Create test data
+    # (In real test, use fixtures to create test {RESOURCE})
+    
+    # Execute: Make GET request
+    response = test_client.get(
+        "/api/{RESOURCE}",
+        headers=auth_headers
+    )
+    
+    # Verify: Response is successful
+    assert response.status_code == 200
+    
+    # Verify: Response structure
+    data = response.json()
+    assert "items" in data
+    assert "total" in data
+    assert "page" in data
+    assert "page_size" in data
+    
+    # Verify: Items are in correct format
+    assert isinstance(data["items"], list)
+    if len(data["items"]) > 0:
+        item = data["items"][0]
+        assert "id" in item
+        assert "created_at" in item
+        # TODO: Add more field validations
+
+
+def test_create_{RESOURCE}_with_valid_data(test_client, auth_headers, db_session, sample_{RESOURCE}_data):
+    """
+    SAMPLE TEST: Create {RESOURCE} with valid data
+    
+    This demonstrates:
+    - Using fixtures for test data
+    - Testing POST request
+    - Validating created resource
+    - Checking database side effects
+    """
+    # Execute: Create {RESOURCE}
+    response = test_client.post(
+        "/api/{RESOURCE}",
+        headers=auth_headers,
+        json=sample_{RESOURCE}_data
+    )
+    
+    # Verify: Response is successful
+    assert response.status_code == 201
+    
+    # Verify: Response contains created resource
+    data = response.json()
+    assert data["id"] is not None
+    assert data["name"] == sample_{RESOURCE}_data["name"]
+    assert "created_at" in data
+    
+    # Verify: Resource exists in database
+    from app.models import {RESOURCE_MODEL}
+    db_{RESOURCE} = db_session.query({RESOURCE_MODEL}).filter_by(id=data["id"]).first()
+    assert db_{RESOURCE} is not None
+    assert db_{RESOURCE}.name == sample_{RESOURCE}_data["name"]
+    
+    # TODO: Add more field validations
+    # TODO: Verify any side effects (emails, events, etc.)
+
+
+# ============================================================================
+# TODO TESTS - Fill in the implementation
+# ============================================================================
+
+def test_list_{RESOURCE}_with_pagination(test_client, auth_headers):
+    """
+    TODO: Test pagination parameters
+    
+    Test scenarios:
+    - page=1, page_size=10
+    - page=2, page_size=10
+    - Invalid page number (0, -1)
+    - Invalid page_size (0, -1, > max)
+    
+    Assertions:
+    - Correct number of items returned
+    - Correct total count
+    - Correct page metadata
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement pagination test")
+
+
+def test_list_{RESOURCE}_with_filtering(test_client, auth_headers):
+    """
+    TODO: Test filtering parameters
+    
+    Test scenarios:
+    - Filter by status
+    - Filter by date range
+    - Filter by search term
+    - Multiple filters combined
+    
+    Assertions:
+    - Only matching items returned
+    - Correct total count
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement filtering test")
+
+
+def test_list_{RESOURCE}_with_sorting(test_client, auth_headers):
+    """
+    TODO: Test sorting parameters
+    
+    Test scenarios:
+    - Sort by created_at (asc/desc)
+    - Sort by name (asc/desc)
+    - Invalid sort field
+    
+    Assertions:
+    - Items in correct order
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement sorting test")
+
+
+def test_get_{RESOURCE}_by_id_success(test_client, auth_headers):
+    """
+    TODO: Test getting single {RESOURCE} by ID
+    
+    Test scenarios:
+    - Valid ID
+    - Resource exists
+    - User has permission
+    
+    Assertions:
+    - Correct resource returned
+    - All fields present
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement get by ID test")
+
+
+def test_get_{RESOURCE}_by_id_not_found(test_client, auth_headers):
+    """
+    TODO: Test getting non-existent {RESOURCE}
+    
+    Test scenarios:
+    - ID doesn't exist
+    
+    Assertions:
+    - 404 status code
+    - Error message
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement not found test")
+
+
+def test_create_{RESOURCE}_with_missing_required_fields(test_client, auth_headers):
+    """
+    TODO: Test validation of required fields
+    
+    Test scenarios:
+    - Missing name
+    - Missing email
+    - Missing other required fields
+    
+    Assertions:
+    - 400 status code
+    - Error message lists missing fields
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement validation test")
+
+
+def test_create_{RESOURCE}_with_invalid_data(test_client, auth_headers):
+    """
+    TODO: Test validation of field formats
+    
+    Test scenarios:
+    - Invalid email format
+    - Invalid phone format
+    - Invalid date format
+    - String too long
+    - Number out of range
+    
+    Assertions:
+    - 400 status code
+    - Error message describes validation error
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement invalid data test")
+
+
+def test_create_{RESOURCE}_duplicate(test_client, auth_headers):
+    """
+    TODO: Test duplicate resource creation
+    
+    Test scenarios:
+    - Create resource with duplicate unique field (email, etc.)
+    
+    Assertions:
+    - 409 status code
+    - Error message indicates duplicate
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement duplicate test")
+
+
+def test_update_{RESOURCE}_success(test_client, auth_headers):
+    """
+    TODO: Test updating {RESOURCE}
+    
+    Test scenarios:
+    - Update single field
+    - Update multiple fields
+    - Partial update (PATCH)
+    
+    Assertions:
+    - 200 status code
+    - Updated resource returned
+    - Database updated
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement update test")
+
+
+def test_update_{RESOURCE}_not_found(test_client, auth_headers):
+    """
+    TODO: Test updating non-existent {RESOURCE}
+    
+    Assertions:
+    - 404 status code
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement update not found test")
+
+
+def test_delete_{RESOURCE}_success(test_client, auth_headers):
+    """
+    TODO: Test deleting {RESOURCE}
+    
+    Test scenarios:
+    - Soft delete (if applicable)
+    - Hard delete (if applicable)
+    
+    Assertions:
+    - 204 status code
+    - Resource removed from database (or marked deleted)
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement delete test")
+
+
+def test_delete_{RESOURCE}_not_found(test_client, auth_headers):
+    """
+    TODO: Test deleting non-existent {RESOURCE}
+    
+    Assertions:
+    - 404 status code
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement delete not found test")
+
+
+def test_{RESOURCE}_unauthorized(test_client):
+    """
+    TODO: Test endpoints without authentication
+    
+    Test scenarios:
+    - No auth header
+    - Invalid token
+    - Expired token
+    
+    Assertions:
+    - 401 status code
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement unauthorized test")
+
+
+def test_{RESOURCE}_forbidden(test_client, auth_headers):
+    """
+    TODO: Test endpoints without proper permissions
+    
+    Test scenarios:
+    - User doesn't have required role
+    - User doesn't own resource
+    
+    Assertions:
+    - 403 status code
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement forbidden test")
+
+
+# ============================================================================
+# HELPER FUNCTIONS (Optional)
+# ============================================================================
+
+def create_test_{RESOURCE}(db_session, **kwargs):
+    """
+    Helper function to create test {RESOURCE}
+    
+    Usage:
+        {RESOURCE} = create_test_{RESOURCE}(db_session, name="Test")
+    """
+    from app.models import {RESOURCE_MODEL}
+    
+    defaults = {
+        "name": "Test {RESOURCE}",
+        # TODO: Add default values for required fields
+    }
+    defaults.update(kwargs)
+    
+    {RESOURCE} = {RESOURCE_MODEL}(**defaults)
+    db_session.add({RESOURCE})
+    db_session.commit()
+    db_session.refresh({RESOURCE})
+    
+    return {RESOURCE}
+

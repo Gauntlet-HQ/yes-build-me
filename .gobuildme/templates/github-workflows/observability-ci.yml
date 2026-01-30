@@ -1,0 +1,79 @@
+name: Observability Sanity Check
+
+on:
+  pull_request:
+    paths:
+      - '.gobuildme/observability/**'
+      - '.gobuildme/specs/**/slo.yaml'
+      - '.gobuildme/scripts/**'
+  push:
+    branches: [ main, master ]
+    paths:
+      - '.gobuildme/observability/**'
+      - '.gobuildme/specs/**/slo.yaml'
+      - '.gobuildme/scripts/**'
+
+jobs:
+  observability-sanity:
+    name: Validate Observability Config (Advisory)
+    runs-on: ubuntu-latest
+    continue-on-error: true  # Advisory-only; do not fail builds
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Observability Sanity Check
+        shell: bash
+        run: |
+          if [[ -x .gobuildme/scripts/bash/observability-sanity.sh ]]; then
+            bash .gobuildme/scripts/bash/observability-sanity.sh --repo "${{ github.workspace }}"
+          else
+            echo "⚠️  observability-sanity.sh not found; skipping"
+          fi
+
+      - name: Lint SLO Definitions
+        shell: bash
+        run: |
+          if [[ -x .gobuildme/scripts/bash/slo-lint.sh ]]; then
+            mapfile -t files < <(find .gobuildme/specs -name 'slo.yaml' 2>/dev/null || true)
+            if [[ ${#files[@]} -eq 0 ]]; then
+              echo "⚠️  No SLO files found under .gobuildme/specs"
+            else
+              for f in "${files[@]}"; do
+                echo "Linting: $f"
+                bash .gobuildme/scripts/bash/slo-lint.sh "$f" || true
+              done
+            fi
+          else
+            echo "⚠️  slo-lint.sh not found; skipping"
+          fi
+
+      - name: Validate OTel Collector YAML (optional)
+        shell: bash
+        run: |
+          CFG='.gobuildme/observability/collector/otel-collector.yaml'
+          if [[ -f "$CFG" ]]; then
+            echo "Found $CFG; performing basic YAML syntax check"
+            python -m pip install --user pyyaml >/dev/null 2>&1 || true
+            python - <<'PYEOF'
+          import sys, os
+          try:
+              import yaml
+          except Exception as e:
+              print('⚠️  PyYAML not available; skipping syntax check')
+              sys.exit(0)
+          path = os.environ.get('CFG_PATH', '.gobuildme/observability/collector/otel-collector.yaml')
+          try:
+              with open(path, 'r', encoding='utf-8') as f:
+                  yaml.safe_load(f)
+              print('✓ YAML syntax OK')
+          except Exception as e:
+              print('⚠️  YAML parse warning:', e)
+          PYEOF
+          else
+            echo "⚠️  Collector config not found; skipping YAML check"
+          fi
+        env:
+          CFG_PATH: .gobuildme/observability/collector/otel-collector.yaml
+

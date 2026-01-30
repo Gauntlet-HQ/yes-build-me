@@ -1,0 +1,23 @@
+{
+  "chat.promptFilesRecommendations": {
+    "gobuildme.constitution": true,
+    "gobuildme.specify": true,
+    "gobuildme.plan": true,
+    "gobuildme.tasks": true,
+    "gobuildme.implement": true
+  },
+  "chat.tools.terminal.autoApprove": {
+    ".gobuildme/scripts/bash/": true,
+    ".gobuildme/scripts/powershell/": true
+  },
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": true,
+    "markdown": true,
+    "yaml": true
+  },
+  "github.copilot.editor.enableAutoCompletions": true,
+  "github.copilot.advanced": {
+    "inlineSuggestEnable": true
+  }
+}

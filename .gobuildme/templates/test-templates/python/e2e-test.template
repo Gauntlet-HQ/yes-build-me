@@ -1,0 +1,330 @@
+"""
+End-to-end tests for {FLOW_NAME}
+
+This file contains:
+- 2 SAMPLE tests demonstrating best practices
+- TODO tests for remaining scenarios
+
+Testing Pattern:
+1. Setup: Start application and dependencies
+2. Execute: Simulate real user interactions
+3. Verify: Assert complete flow works end-to-end
+4. Cleanup: Reset application state
+
+E2E Test Principles:
+- Test complete user flows (not individual functions)
+- Use real database, real services (or staging equivalents)
+- Simulate actual user behavior
+- Slower execution (acceptable: 5-30s per test)
+- Test critical paths and happy paths
+"""
+
+import pytest
+from playwright.sync_api import Page, expect
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+# ============================================================================
+# SAMPLE TESTS - Demonstrating Best Practices
+# ============================================================================
+
+def test_{FLOW_NAME}_happy_path(page: Page):
+    """
+    SAMPLE TEST: Complete {FLOW_NAME} flow (happy path)
+    
+    This demonstrates:
+    - Testing complete user flow
+    - Using Playwright for browser automation
+    - Verifying each step of the flow
+    - Checking final outcome
+    
+    User Flow:
+    1. Navigate to landing page
+    2. Fill in form
+    3. Submit form
+    4. Verify success message
+    5. Verify data persisted
+    """
+    # Step 1: Navigate to page
+    page.goto("http://localhost:3000/{FLOW_PATH}")
+    expect(page).to_have_title(/{EXPECTED_TITLE}/)
+    
+    # Step 2: Fill in form
+    page.fill('input[name="name"]', "Test User")
+    page.fill('input[name="email"]', "test@example.com")
+    page.fill('input[name="password"]', "SecurePassword123!")
+    
+    # Step 3: Submit form
+    page.click('button[type="submit"]')
+    
+    # Step 4: Verify success
+    expect(page.locator('.success-message')).to_be_visible()
+    expect(page.locator('.success-message')).to_contain_text("Success")
+    
+    # Step 5: Verify redirect
+    expect(page).to_have_url(/.*\/dashboard/)
+    
+    # TODO: Verify data in database
+    # TODO: Verify email sent
+    # TODO: Verify analytics event
+
+
+def test_{FLOW_NAME}_with_api_verification(page: Page):
+    """
+    SAMPLE TEST: {FLOW_NAME} with API verification
+    
+    This demonstrates:
+    - Testing UI flow
+    - Verifying backend state via API
+    - Checking data consistency
+    - End-to-end validation
+    """
+    # Step 1: Perform UI actions
+    page.goto("http://localhost:3000/{FLOW_PATH}")
+    page.fill('input[name="username"]', "testuser")
+    page.click('button[type="submit"]')
+    
+    # Step 2: Wait for completion
+    expect(page.locator('.confirmation')).to_be_visible()
+    
+    # Step 3: Verify via API
+    import requests
+    response = requests.get(
+        "http://localhost:3000/api/users/testuser",
+        headers={"Authorization": "Bearer test_token"}
+    )
+    
+    assert response.status_code == 200
+    data = response.json()
+    assert data["username"] == "testuser"
+    assert data["status"] == "active"
+    
+    # TODO: Add more API verifications
+
+
+# ============================================================================
+# TODO TESTS - Fill in the implementation
+# ============================================================================
+
+def test_{FLOW_NAME}_validation_errors(page: Page):
+    """
+    TODO: Test form validation errors
+    
+    Test scenarios:
+    - Submit empty form
+    - Submit with invalid email
+    - Submit with weak password
+    - Submit with missing required fields
+    
+    Assertions:
+    - Error messages displayed
+    - Form not submitted
+    - User stays on same page
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement validation errors test")
+
+
+def test_{FLOW_NAME}_network_error_handling(page: Page):
+    """
+    TODO: Test network error handling
+    
+    Test scenarios:
+    - Simulate network failure
+    - Simulate timeout
+    - Simulate 500 error
+    
+    Assertions:
+    - Error message displayed
+    - User can retry
+    - Data not lost
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement network error test")
+
+
+def test_{FLOW_NAME}_authentication_required(page: Page):
+    """
+    TODO: Test authentication requirement
+    
+    Test scenarios:
+    - Access protected page without login
+    - Session expires during flow
+    - Invalid credentials
+    
+    Assertions:
+    - Redirected to login
+    - Can complete flow after login
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement authentication test")
+
+
+def test_{FLOW_NAME}_mobile_responsive(page: Page):
+    """
+    TODO: Test mobile responsiveness
+    
+    Test scenarios:
+    - Complete flow on mobile viewport
+    - Complete flow on tablet viewport
+    - Touch interactions work
+    
+    Assertions:
+    - Flow works on all viewports
+    - UI is usable
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement mobile test")
+
+
+def test_{FLOW_NAME}_accessibility(page: Page):
+    """
+    TODO: Test accessibility
+    
+    Test scenarios:
+    - Keyboard navigation
+    - Screen reader compatibility
+    - ARIA labels present
+    - Color contrast
+    
+    Assertions:
+    - WCAG 2.1 AA compliance
+    - All interactive elements accessible
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement accessibility test")
+
+
+def test_{FLOW_NAME}_concurrent_users(page: Page):
+    """
+    TODO: Test concurrent user scenario
+    
+    Test scenarios:
+    - Multiple users performing same flow
+    - Race conditions
+    - Data consistency
+    
+    Assertions:
+    - No conflicts
+    - All users succeed
+    - Data integrity maintained
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement concurrent users test")
+
+
+def test_{FLOW_NAME}_performance(page: Page):
+    """
+    TODO: Test flow performance
+    
+    Test scenarios:
+    - Measure page load time
+    - Measure interaction response time
+    - Measure total flow completion time
+    
+    Assertions:
+    - Page loads < 2s
+    - Interactions respond < 500ms
+    - Total flow < 10s
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement performance test")
+
+
+# ============================================================================
+# SELENIUM EXAMPLES (Alternative to Playwright)
+# ============================================================================
+
+@pytest.fixture
+def selenium_driver():
+    """
+    Fixture for Selenium WebDriver
+    
+    Usage:
+        def test_example(selenium_driver):
+            selenium_driver.get("http://localhost:3000")
+    """
+    driver = webdriver.Chrome()
+    yield driver
+    driver.quit()
+
+
+def test_{FLOW_NAME}_selenium_example(selenium_driver):
+    """
+    SAMPLE: E2E test using Selenium
+    
+    This demonstrates:
+    - Using Selenium instead of Playwright
+    - Explicit waits
+    - Element interactions
+    """
+    driver = selenium_driver
+    
+    # Navigate
+    driver.get("http://localhost:3000/{FLOW_PATH}")
+    
+    # Wait for element
+    wait = WebDriverWait(driver, 10)
+    name_input = wait.until(
+        EC.presence_of_element_located((By.NAME, "name"))
+    )
+    
+    # Fill form
+    name_input.send_keys("Test User")
+    driver.find_element(By.NAME, "email").send_keys("test@example.com")
+    
+    # Submit
+    driver.find_element(By.CSS_SELECTOR, 'button[type="submit"]').click()
+    
+    # Verify
+    success_msg = wait.until(
+        EC.visibility_of_element_located((By.CLASS_NAME, "success-message"))
+    )
+    assert "Success" in success_msg.text
+
+
+# ============================================================================
+# HELPER FUNCTIONS
+# ============================================================================
+
+def login_user(page: Page, username: str, password: str):
+    """
+    Helper function to log in a user
+    
+    Usage:
+        login_user(page, "testuser", "password123")
+    """
+    page.goto("http://localhost:3000/login")
+    page.fill('input[name="username"]', username)
+    page.fill('input[name="password"]', password)
+    page.click('button[type="submit"]')
+    expect(page).to_have_url(/.*\/dashboard/)
+
+
+def create_test_data():
+    """
+    Helper function to create test data
+    
+    Usage:
+        user_id = create_test_data()
+    """
+    import requests
+    response = requests.post(
+        "http://localhost:3000/api/test/setup",
+        json={"type": "user", "data": {"name": "Test User"}}
+    )
+    return response.json()["id"]
+
+
+def cleanup_test_data(resource_id: str):
+    """
+    Helper function to cleanup test data
+    
+    Usage:
+        cleanup_test_data(user_id)
+    """
+    import requests
+    requests.delete(f"http://localhost:3000/api/test/cleanup/{resource_id}")
+

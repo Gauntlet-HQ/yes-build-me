@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GoBuildMe SLO Definition",
+  "type": "object",
+  "required": ["service", "owner", "journeys", "slis", "slos"],
+  "properties": {
+    "service": {"type": "string", "minLength": 1},
+    "owner": {
+      "type": "object",
+      "required": ["team", "on_call"],
+      "properties": {
+        "team": {"type": "string"},
+        "on_call": {"type": "string"}
+      }
+    },
+    "journeys": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "minItems": 1
+    },
+    "slis": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "type", "source"],
+        "properties": {
+          "name": {"type": "string"},
+          "type": {"type": "string", "enum": ["availability", "latency", "correctness", "saturation"]},
+          "journey": {"type": "string"},
+          "source": {
+            "type": "object",
+            "required": ["backend", "query"],
+            "properties": {
+              "backend": {"type": "string", "enum": ["promql", "logql", "datadog", "newrelic", "opensearch", "coralogix", "other"]},
+              "query": {"type": "string"},
+              "unit": {"type": "string"}
+            }
+          }
+        }
+      },
+      "minItems": 1
+    },
+    "slos": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["sli", "target", "window"],
+        "properties": {
+          "sli": {"type": "string"},
+          "target": {"type": "number", "minimum": 0, "maximum": 1},
+          "window": {"type": "string"},
+          "notes": {"type": "string"}
+        }
+      },
+      "minItems": 1
+    },
+    "alerts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["slo", "burn_rate"],
+        "properties": {
+          "slo": {"type": "string"},
+          "burn_rate": {"type": "number", "minimum": 1},
+          "window": {"type": "string"},
+          "severity": {"type": "string", "enum": ["info", "warn", "page"]}
+        }
+      }
+    },
+    "dashboards": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "runbooks": {
+      "type": "array",
+      "items": {"type": "string"}
+    }
+  }
+}
+

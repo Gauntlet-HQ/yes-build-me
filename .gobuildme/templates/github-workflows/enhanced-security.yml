@@ -1,0 +1,286 @@
+name: Enhanced Security Scanning
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  schedule:
+    # Run security scans daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  detect-languages:
+    runs-on: ubuntu-latest
+    outputs:
+      has-python: ${{ steps.detect.outputs.has-python }}
+      has-node: ${{ steps.detect.outputs.has-node }}
+      has-go: ${{ steps.detect.outputs.has-go }}
+      has-rust: ${{ steps.detect.outputs.has-rust }}
+      has-java: ${{ steps.detect.outputs.has-java }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Detect project languages
+        id: detect
+        run: |
+          echo "has-python=$(test -f pyproject.toml -o -f requirements.txt -o -f setup.py && echo true || echo false)" >> $GITHUB_OUTPUT
+          echo "has-node=$(test -f package.json && echo true || echo false)" >> $GITHUB_OUTPUT
+          echo "has-go=$(test -f go.mod && echo true || echo false)" >> $GITHUB_OUTPUT
+          echo "has-rust=$(test -f Cargo.toml && echo true || echo false)" >> $GITHUB_OUTPUT
+          echo "has-java=$(test -f pom.xml -o -f build.gradle -o -f build.gradle.kts && echo true || echo false)" >> $GITHUB_OUTPUT
+
+  trivy-scan:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Trivy vulnerability scanner (filesystem)
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-fs-results.sarif'
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: 'trivy-fs-results.sarif'
+
+      - name: Run Trivy vulnerability scanner (config)
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'config'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-config-results.sarif'
+
+      - name: Upload Trivy config scan results
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: 'trivy-config-results.sarif'
+
+  codeql-analysis:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+      actions: read
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ['python']  # Add other languages as detected
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          queries: security-extended,security-and-quality
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{matrix.language}}"
+
+  python-security:
+    needs: detect-languages
+    if: needs.detect-languages.outputs.has-python == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install security tools
+        run: |
+          pip install safety bandit semgrep
+
+      - name: Run Safety check
+        run: |
+          safety check --json --output safety-report.json || true
+          safety check || echo "::warning::Safety found security vulnerabilities"
+
+      - name: Run Bandit security linter
+        run: |
+          bandit -r src/ -f json -o bandit-report.json || true
+          bandit -r src/ || echo "::warning::Bandit found security issues"
+
+      - name: Run Semgrep security analysis
+        run: |
+          semgrep --config=auto --json --output=semgrep-report.json src/ || true
+          semgrep --config=auto src/ || echo "::warning::Semgrep found security issues"
+
+      - name: Upload security reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: python-security-reports
+          path: |
+            safety-report.json
+            bandit-report.json
+            semgrep-report.json
+
+  node-security:
+    needs: detect-languages
+    if: needs.detect-languages.outputs.has-node == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: |
+          if command -v pnpm >/dev/null 2>&1; then pnpm i
+          elif command -v yarn >/dev/null 2>&1; then yarn
+          else npm i; fi
+
+      - name: Run npm audit
+        run: |
+          npm audit --audit-level=moderate --json > npm-audit-report.json || true
+          npm audit --audit-level=moderate || echo "::warning::npm audit found vulnerabilities"
+
+      - name: Run ESLint security rules
+        run: |
+          if [ -f .eslintrc.js ] || [ -f .eslintrc.json ] || [ -f eslint.config.js ]; then
+            npx eslint . --ext .js,.ts,.jsx,.tsx --format json --output-file eslint-security-report.json || true
+            npx eslint . --ext .js,.ts,.jsx,.tsx || echo "::warning::ESLint found security issues"
+          else
+            echo "No ESLint configuration found"
+          fi
+
+      - name: Upload Node.js security reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: node-security-reports
+          path: |
+            npm-audit-report.json
+            eslint-security-report.json
+
+  go-security:
+    needs: detect-languages
+    if: needs.detect-languages.outputs.has-go == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+
+      - name: Install gosec
+        run: go install github.com/securecodewarrior/gosec/v2/cmd/gosec@latest
+
+      - name: Run gosec security scanner
+        run: |
+          gosec -fmt json -out gosec-report.json ./... || true
+          gosec ./... || echo "::warning::gosec found security issues"
+
+      - name: Run Go vulnerability check
+        run: |
+          go install golang.org/x/vuln/cmd/govulncheck@latest
+          govulncheck -json ./... > govulncheck-report.json || true
+          govulncheck ./... || echo "::warning::govulncheck found vulnerabilities"
+
+      - name: Upload Go security reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: go-security-reports
+          path: |
+            gosec-report.json
+            govulncheck-report.json
+
+  rust-security:
+    needs: detect-languages
+    if: needs.detect-languages.outputs.has-rust == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      - name: Install cargo-audit
+        run: cargo install cargo-audit
+
+      - name: Run cargo audit
+        run: |
+          cargo audit --json > cargo-audit-report.json || true
+          cargo audit || echo "::warning::cargo audit found vulnerabilities"
+
+      - name: Upload Rust security reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rust-security-reports
+          path: cargo-audit-report.json
+
+  dependency-review:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: moderate
+          comment-summary-in-pr: true
+
+  security-summary:
+    needs: [trivy-scan, codeql-analysis, python-security, node-security, go-security, rust-security]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Security Scan Summary
+        run: |
+          echo "## 🔒 Security Scan Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Scan Results:" >> $GITHUB_STEP_SUMMARY
+          echo "- **Trivy Filesystem Scan**: ${{ needs.trivy-scan.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **CodeQL Analysis**: ${{ needs.codeql-analysis.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Python Security**: ${{ needs.python-security.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Node.js Security**: ${{ needs.node-security.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Go Security**: ${{ needs.go-security.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Rust Security**: ${{ needs.rust-security.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📋 Recommendations:" >> $GITHUB_STEP_SUMMARY
+          echo "- Review any security findings in the Security tab" >> $GITHUB_STEP_SUMMARY
+          echo "- Check uploaded security reports for detailed analysis" >> $GITHUB_STEP_SUMMARY
+          echo "- Run \`make security\` locally for quick security checks" >> $GITHUB_STEP_SUMMARY
+          echo "- Consider using Augment Code for security-focused code review" >> $GITHUB_STEP_SUMMARY

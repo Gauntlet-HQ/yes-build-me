@@ -1,0 +1,59 @@
+# QA Workflow Configuration
+# Purpose: Configure quality gates, coverage thresholds, and test validation rules
+# Location: Copy to .gobuildme/config/qa-config.yaml in target project
+
+quality_gates:
+  # Gate mode: strict (block), advisory (warn), or disabled (info only)
+  # NOTE: "strict" mode blocks /gbm.qa.review-tests if coverage targets are not met
+  # Set to "strict" for production projects; "advisory" for development/learning
+  mode: advisory
+
+  # Coverage thresholds (percentage) - aligned with QA workflow documentation
+  # These targets match /gbm.qa.plan and /gbm.qa.review-tests requirements
+  coverage:
+    unit: 90           # Unit test coverage minimum (90% - functions, classes, utilities)
+    integration: 95    # Integration test coverage minimum (95% - API, database, external)
+    e2e: 80            # End-to-end test coverage minimum (80% - critical user flows)
+    overall: 85        # Overall coverage minimum (85% - combined)
+
+  # Acceptance Criteria traceability
+  ac_traceability:
+    minimum: 95                    # Minimum percentage of ACs with tests (realistic goal)
+    allow_manual_review: true      # Allow marking ACs as manual-review-required
+
+  # TODO test handling
+  todo_tests:
+    max_percentage: 10     # Maximum percentage of tests that can be TODOs
+    block_on_todos: false  # Whether to block if TODOs exceed threshold
+
+# Persona Integration
+# Note: If a persona is configured in .gobuildme/config/personas.yaml,
+# persona-specific thresholds from .gobuildme/personas/<id>.yaml will
+# override these defaults (e.g., QA Engineer persona has higher thresholds).
+
+# Examples:
+#
+# Strict mode (block on any failure):
+#   quality_gates:
+#     mode: strict
+#     coverage:
+#       unit: 90
+#       integration: 95
+#       overall: 85
+#     ac_traceability:
+#       minimum: 100
+#       allow_manual_review: false
+#
+# Lenient mode (advisory warnings only):
+#   quality_gates:
+#     mode: advisory
+#     coverage:
+#       unit: 70
+#       integration: 80
+#       overall: 75
+#     ac_traceability:
+#       minimum: 90
+#
+# Disabled (no gates):
+#   quality_gates:
+#     mode: disabled

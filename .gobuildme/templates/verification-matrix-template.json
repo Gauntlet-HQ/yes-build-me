@@ -1,0 +1,52 @@
+{
+  "$schema": "https://gobuildme.dev/schemas/verification-matrix.json",
+  "version": "1.0",
+  "feature": "{{FEATURE_NAME}}",
+  "pr_slice": "PR-{{PR_NUMBER}}: {{PR_DESCRIPTION}}",
+  "epic": "{{EPIC_NAME}}",
+  "persona": "{{PERSONA_ID}}",
+  "created_at": "{{ISO_TIMESTAMP}}",
+  "verification_items": [
+    {
+      "id": "V1",
+      "type": "acceptance_criteria",
+      "description": "{{AC_DESCRIPTION}}",
+      "source": "spec.md AC-001",
+      "verification_method": {
+        "type": "builtin",
+        "ref": "run_tests",
+        "args": ["--filter", "test_ac_001"],
+        "manual_steps": null
+      },
+      "passes": false,
+      "verified_at": null,
+      "verified_in_session": null,
+      "verification_evidence": null
+    }
+  ],
+  "_documentation": {
+    "verification_method_types": {
+      "script": "Reference to a script in .gobuildme/scripts/ (safe, cross-platform)",
+      "builtin": "Enum of allowed actions: run_tests, run_lint, run_e2e, run_typecheck",
+      "manual": "Human-readable verification steps for AI agent to perform"
+    },
+    "immutable_fields": [
+      "id",
+      "type",
+      "description",
+      "source",
+      "verification_method"
+    ],
+    "mutable_fields": [
+      "passes",
+      "verified_at",
+      "verified_in_session",
+      "verification_evidence"
+    ],
+    "item_types": {
+      "acceptance_criteria": "Derived from spec.md AC-XXX items",
+      "style_invariant": "Code style/quality requirements that must remain true",
+      "e2e_invariant": "End-to-end behaviors that must remain true"
+    }
+  }
+}

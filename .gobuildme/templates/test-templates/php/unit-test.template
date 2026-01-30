@@ -1,0 +1,290 @@
+<?php
+
+/**
+ * Unit tests for {CLASS_NAME}
+ *
+ * This file contains:
+ * - 2 SAMPLE tests demonstrating best practices
+ * - TODO tests for remaining scenarios
+ *
+ * Testing Pattern:
+ * 1. Setup: Create test data (no external dependencies)
+ * 2. Execute: Call the function/method
+ * 3. Verify: Assert the output
+ * 4. Cleanup: Not needed (unit tests are isolated)
+ *
+ * Unit Test Principles:
+ * - Test ONE function/method at a time
+ * - No database, no network, no file system
+ * - Use mocks for all dependencies
+ * - Fast execution (< 100ms per test)
+ * - Deterministic (same input = same output)
+ */
+
+namespace Tests\Unit;
+
+use PHPUnit\Framework\TestCase;
+use App\{NAMESPACE}\{CLASS_NAME};
+use Mockery;
+
+class {CLASS_NAME}Test extends TestCase
+{
+    // ========================================================================
+    // SAMPLE TESTS - Demonstrating Best Practices
+    // ========================================================================
+
+    public function test_{FUNCTION_NAME}_with_valid_input(): void
+    {
+        // SAMPLE TEST: Test function with valid input
+        //
+        // This demonstrates:
+        // - Testing a single function
+        // - Using simple, predictable inputs
+        // - Clear assertions
+        // - No external dependencies
+
+        // Arrange
+        $input = 'test_input';
+        $expectedOutput = 'expected_result';
+
+        // Act
+        $result = {FUNCTION_NAME}($input);
+
+        // Assert
+        $this->assertEquals($expectedOutput, $result);
+        // TODO: Add more specific assertions
+    }
+
+    public function test_{CLASS_NAME}_method_with_mocked_dependency(): void
+    {
+        // SAMPLE TEST: Test class method with mocked dependency
+        //
+        // This demonstrates:
+        // - Testing a class method
+        // - Mocking external dependencies
+        // - Verifying method calls
+        // - Isolating the unit under test
+
+        // Arrange: Create mock dependency
+        $mockDependency = Mockery::mock(DependencyInterface::class);
+        $mockDependency->shouldReceive('getData')
+            ->once()
+            ->andReturn(['key' => 'value']);
+
+        $instance = new {CLASS_NAME}($mockDependency);
+
+        // Act
+        $result = $instance->process();
+
+        // Assert
+        $this->assertNotNull($result);
+        // TODO: Add more specific assertions
+    }
+
+    // ========================================================================
+    // TODO TESTS - Fill in the implementation
+    // ========================================================================
+
+    public function test_{FUNCTION_NAME}_with_empty_input(): void
+    {
+        // TODO: Test function with empty input
+        //
+        // Test scenarios:
+        // - Empty string
+        // - Empty array
+        // - Null value
+        //
+        // Assertions:
+        // - Returns default value
+        // - Throws exception
+        // - Returns empty result
+
+        $this->markTestIncomplete('TODO: Implement empty input test');
+    }
+
+    public function test_{FUNCTION_NAME}_with_invalid_input(): void
+    {
+        // TODO: Test function with invalid input
+        //
+        // Test scenarios:
+        // - Wrong type
+        // - Invalid format
+        // - Out of range values
+        //
+        // Assertions:
+        // - Throws TypeError
+        // - Throws InvalidArgumentException
+        // - Returns error result
+
+        $this->markTestIncomplete('TODO: Implement invalid input test');
+    }
+
+    public function test_{FUNCTION_NAME}_edge_cases(): void
+    {
+        // TODO: Test edge cases
+        //
+        // Test scenarios:
+        // - Maximum values
+        // - Minimum values
+        // - Boundary conditions
+        //
+        // Assertions:
+        // - Handles edge cases correctly
+        // - No overflow/underflow
+
+        $this->markTestIncomplete('TODO: Implement edge cases test');
+    }
+
+    public function test_{CLASS_NAME}_initialization(): void
+    {
+        // TODO: Test class initialization
+        //
+        // Test scenarios:
+        // - Default initialization
+        // - Initialization with parameters
+        // - Invalid initialization parameters
+        //
+        // Assertions:
+        // - Instance created correctly
+        // - Properties set properly
+        // - Throws errors for invalid params
+
+        $this->markTestIncomplete('TODO: Implement initialization test');
+    }
+
+    public function test_{CLASS_NAME}_method_error_handling(): void
+    {
+        // TODO: Test method error handling
+        //
+        // Test scenarios:
+        // - Dependency throws exception
+        // - Invalid state
+        // - Resource not available
+        //
+        // Assertions:
+        // - Exception handled gracefully
+        // - Error message is clear
+        // - State remains consistent
+
+        $this->markTestIncomplete('TODO: Implement error handling test');
+    }
+
+    public function test_{FUNCTION_NAME}_idempotency(): void
+    {
+        // TODO: Test function idempotency
+        //
+        // Test scenarios:
+        // - Call function multiple times with same input
+        // - Verify same output each time
+        //
+        // Assertions:
+        // - Function is idempotent
+        // - No side effects
+
+        $this->markTestIncomplete('TODO: Implement idempotency test');
+    }
+
+    // ========================================================================
+    // DATA PROVIDERS (Parametrized Tests)
+    // ========================================================================
+
+    /**
+     * @dataProvider validInputProvider
+     */
+    public function test_{FUNCTION_NAME}_with_data_provider($input, $expectedOutput): void
+    {
+        // SAMPLE: Parametrized test using data provider
+        //
+        // This demonstrates:
+        // - Testing multiple scenarios with one test
+        // - Using data providers
+        // - Reducing code duplication
+
+        $result = {FUNCTION_NAME}($input);
+        $this->assertEquals($expectedOutput, $result);
+    }
+
+    public function validInputProvider(): array
+    {
+        return [
+            'case 1' => ['input1', 'output1'],
+            'case 2' => ['input2', 'output2'],
+            'case 3' => ['input3', 'output3'],
+            // TODO: Add more test cases
+        ];
+    }
+
+    // ========================================================================
+    // EXCEPTION TESTS
+    // ========================================================================
+
+    public function test_{FUNCTION_NAME}_throws_exception_on_invalid_input(): void
+    {
+        // SAMPLE: Test exception throwing
+        //
+        // This demonstrates:
+        // - Testing exceptions
+        // - Using expectException
+        // - Verifying exception message
+
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid input');
+
+        {FUNCTION_NAME}('invalid_input');
+    }
+
+    // ========================================================================
+    // SETUP AND TEARDOWN
+    // ========================================================================
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        // Setup before each test
+        // TODO: Add setup logic
+    }
+
+    protected function tearDown(): void
+    {
+        // Cleanup after each test
+        Mockery::close();
+        parent::tearDown();
+    }
+
+    // ========================================================================
+    // HELPER METHODS
+    // ========================================================================
+
+    private function createMock{CLASS_NAME}(array $overrides = []): {CLASS_NAME}
+    {
+        /**
+         * Helper method to create mock {CLASS_NAME} instance
+         *
+         * Usage:
+         *   $mock = $this->createMock{CLASS_NAME}(['attribute' => 'value']);
+         */
+        $mock = Mockery::mock({CLASS_NAME}::class);
+
+        foreach ($overrides as $method => $returnValue) {
+            $mock->shouldReceive($method)->andReturn($returnValue);
+        }
+
+        return $mock;
+    }
+
+    private function createTestData(array $overrides = []): array
+    {
+        /**
+         * Helper method to create test data
+         *
+         * Usage:
+         *   $data = $this->createTestData(['name' => 'Custom Name']);
+         */
+        return array_merge([
+            'id' => 1,
+            'name' => 'Test',
+            'email' => 'test@example.com',
+        ], $overrides);
+    }
+}
+

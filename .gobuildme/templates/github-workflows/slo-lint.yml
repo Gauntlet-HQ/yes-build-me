@@ -1,0 +1,60 @@
+name: SLO Lint
+
+on:
+  pull_request:
+    paths:
+      - '.gobuildme/specs/**/slo.yaml'
+      - '.gobuildme/templates/config/slo.schema.json'
+  push:
+    branches: [ main ]
+    paths:
+      - '.gobuildme/specs/**/slo.yaml'
+      - '.gobuildme/templates/config/slo.schema.json'
+
+jobs:
+  slo-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install tools
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y jq > /dev/null
+          sudo snap install yq || true
+      - name: Determine strict mode
+        id: strict
+        run: |
+          STRICT=false
+          # PR label gate
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            echo '${{ toJson(github.event.pull_request.labels) }}' | jq -e '.[]|select(.name=="reliability-required")' >/dev/null && STRICT=true || true
+          fi
+          # Repo marker gate
+          if [[ -f ".gobuildme/config/reliability-required" ]]; then
+            STRICT=true
+          fi
+          echo "strict=$STRICT" >> "$GITHUB_OUTPUT"
+
+      - name: Lint SLO files (advisory)
+        run: |
+          chmod +x .gobuildme/scripts/bash/slo-lint.sh || true
+          find .gobuildme/specs -maxdepth 2 -name slo.yaml -print0 | xargs -0 -I{} bash -c '.gobuildme/scripts/bash/slo-lint.sh "{}" || true'
+        continue-on-error: true
+
+      - name: Lint SLO files (strict)
+        if: steps.strict.outputs.strict == 'true'
+        run: |
+          chmod +x .gobuildme/scripts/bash/slo-lint.sh || true
+          # Fail if any slo.yaml missing or invalid when strict
+          set -e
+          # If none found, force failure in strict mode
+          cnt=$(find .gobuildme/specs -maxdepth 2 -name slo.yaml | wc -l | tr -d ' ')
+          if [[ "$cnt" -eq 0 ]]; then
+            echo "No slo.yaml files found but reliability-required is set" >&2
+            .gobuildme/scripts/bash/slo-lint.sh --strict /nonexistent || true
+            exit 1
+          fi
+          # Validate all
+          while IFS= read -r -d '' f; do
+            .gobuildme/scripts/bash/slo-lint.sh --strict "$f"
+          done < <(find .gobuildme/specs -maxdepth 2 -name slo.yaml -print0)
