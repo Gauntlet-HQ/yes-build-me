@@ -168,7 +168,7 @@ export default function CampaignDetail() {
 
               <div className="border-t border-gray-200 pt-6">
                 <h3 className="font-semibold text-gray-900 mb-4">Make a Donation</h3>
-                <DonationForm campaignId={campaign.id} onSuccess={handleDonationSuccess} />
+                <DonationForm campaignId={campaign.id} campaignName={campaign.title} onSuccess={handleDonationSuccess} />
               </div>
             </div>
           </div>
