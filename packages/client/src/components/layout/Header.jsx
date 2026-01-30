@@ -6,10 +6,6 @@ export default function Header() {
   const { user, logout } = useAuth()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-  const handleLinkClick = () => {
-    setMobileMenuOpen(false)
-  }
-
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-4">
@@ -84,7 +80,6 @@ export default function Header() {
             <nav className="flex flex-col gap-4">
               <Link
                 to="/campaigns"
-                onClick={handleLinkClick}
                 className="text-gray-600 hover:text-gray-900"
               >
                 Browse
@@ -93,30 +88,24 @@ export default function Header() {
                 <>
                   <Link
                     to="/campaigns/new"
-                    onClick={handleLinkClick}
                     className="text-gray-600 hover:text-gray-900"
                   >
                     Create Campaign
                   </Link>
                   <Link
                     to="/dashboard"
-                    onClick={handleLinkClick}
                     className="text-gray-600 hover:text-gray-900"
                   >
                     Dashboard
                   </Link>
                   <Link
                     to="/profile"
-                    onClick={handleLinkClick}
                     className="text-gray-600 hover:text-gray-900"
                   >
                     Profile
                   </Link>
                   <button
-                    onClick={() => {
-                      logout()
-                      handleLinkClick()
-                    }}
+                    onClick={logout}
                     className="text-left text-gray-600 hover:text-gray-900"
                   >
                     Logout
@@ -126,14 +115,12 @@ export default function Header() {
                 <>
                   <Link
                     to="/login"
-                    onClick={handleLinkClick}
                     className="text-gray-600 hover:text-gray-900"
                   >
                     Login
                   </Link>
                   <Link
                     to="/register"
-                    onClick={handleLinkClick}
                     className="text-green-600 hover:text-green-700 font-medium"
                   >
                     Sign Up

@@ -12,7 +12,7 @@ export default function ProgressBar({ currentAmount, goalAmount, showText = true
     <div>
       <div className={`w-full bg-gray-200 rounded-full ${heightClasses[size] || heightClasses.md}`}>
         <div
-          className={`bg-green-600 ${heightClasses[size] || heightClasses.md} rounded-full transition-all duration-500`}
+          className={`bg-blue-500 ${heightClasses[size] || heightClasses.md} rounded-full transition-all duration-500`}
           style={{ width: `${percentage}%` }}
         />
       </div>
