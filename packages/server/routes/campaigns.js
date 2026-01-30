@@ -47,7 +47,7 @@ router.get('/:id', optionalAuth, (req, res) => {
     res.json({
       ...campaign,
       donations,
-      isOwner: req.user?.id === campaign.user_id
+      isOwner: Number(req.user?.id) === Number(campaign.user_id)
     })
   } catch (err) {
     console.error('Get campaign error:', err)
@@ -94,7 +94,7 @@ router.put('/:id', authenticateToken, (req, res) => {
       return res.status(404).json({ error: 'Campaign not found' })
     }
 
-    if (campaign.user_id !== req.user.id) {
+    if (Number(campaign.user_id) !== Number(req.user.id)) {
       return res.status(403).json({ error: 'Not authorized to edit this campaign' })
     }
 
@@ -125,7 +125,7 @@ router.delete('/:id', authenticateToken, (req, res) => {
       return res.status(404).json({ error: 'Campaign not found' })
     }
 
-    if (campaign.user_id !== req.user.id) {
+    if (Number(campaign.user_id) !== Number(req.user.id)) {
       return res.status(403).json({ error: 'Not authorized to delete this campaign' })
     }
 
