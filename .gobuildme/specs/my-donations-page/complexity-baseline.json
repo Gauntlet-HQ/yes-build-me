@@ -1,0 +1,25 @@
+{
+  "feature": "my-donations-page",
+  "estimated_loc": 120,
+  "estimated_files": 4,
+  "estimated_effort_hours": 2.5,
+  "complexity_factors": {
+    "new_components": 1,
+    "modified_components": 3,
+    "new_routes": 1,
+    "api_integration": 1,
+    "state_management": "local",
+    "ui_states": 4
+  },
+  "similar_implementations": [
+    "Dashboard.jsx - similar data fetching pattern",
+    "Profile.jsx - similar page structure",
+    "BrowseCampaigns.jsx - similar list display"
+  ],
+  "risk_factors": [
+    "Protected route configuration",
+    "Mobile responsive layout",
+    "Empty/error state handling"
+  ],
+  "baseline_date": "2026-01-30"
+}

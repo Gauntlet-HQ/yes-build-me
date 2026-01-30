@@ -34,6 +34,9 @@ export default function Header() {
                 <Link to="/dashboard" className="text-gray-600 hover:text-gray-900">
                   Dashboard
                 </Link>
+                <Link to="/donations" className="text-gray-600 hover:text-gray-900">
+                  My Donations
+                </Link>
                 <Link to="/profile" className="text-gray-600 hover:text-gray-900">
                   Profile
                 </Link>
@@ -97,6 +100,12 @@ export default function Header() {
                     className="text-gray-600 hover:text-gray-900"
                   >
                     Dashboard
+                  </Link>
+                  <Link
+                    to="/donations"
+                    className="text-gray-600 hover:text-gray-900"
+                  >
+                    My Donations
                   </Link>
                   <Link
                     to="/profile"

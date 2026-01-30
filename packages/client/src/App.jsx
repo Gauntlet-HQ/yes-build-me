@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
+import MyDonations from './pages/MyDonations'
 import Profile from './pages/Profile'
 import BrowseCampaigns from './pages/BrowseCampaigns'
 import CampaignDetail from './pages/CampaignDetail'
@@ -45,6 +46,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/donations"
+              element={
+                <ProtectedRoute>
+                  <MyDonations />
                 </ProtectedRoute>
               }
             />
