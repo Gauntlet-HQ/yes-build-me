@@ -1,19 +1,23 @@
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 const categoryColors = {
-  community: 'bg-blue-100 text-blue-800',
-  animals: 'bg-orange-100 text-orange-800',
-  creative: 'bg-purple-100 text-purple-800',
-  education: 'bg-green-100 text-green-800',
-  medical: 'bg-red-100 text-red-800',
-  business: 'bg-yellow-100 text-yellow-800',
-  sports: 'bg-indigo-100 text-indigo-800',
-  emergency: 'bg-pink-100 text-pink-800',
-}
+  community: "bg-blue-100 text-blue-800",
+  animals: "bg-orange-100 text-orange-800",
+  creative: "bg-purple-100 text-purple-800",
+  education: "bg-green-100 text-green-800",
+  medical: "bg-red-100 text-red-800",
+  business: "bg-yellow-100 text-yellow-800",
+  sports: "bg-indigo-100 text-indigo-800",
+  emergency: "bg-pink-100 text-pink-800",
+};
 
 export default function CampaignCard({ campaign }) {
-  const progress = Math.min((campaign.current_amount / campaign.goal_amount) * 100, 100)
-  const categoryColor = categoryColors[campaign.category] || 'bg-gray-100 text-gray-800'
+  const progress = Math.min(
+    (campaign.current_amount / campaign.goal_amount) * 100,
+    100,
+  );
+  const categoryColor =
+    categoryColors[campaign.category] || "bg-gray-100 text-gray-800";
 
   return (
     <Link to={`/campaigns/${campaign.id}`} className="block">
@@ -24,6 +28,11 @@ export default function CampaignCard({ campaign }) {
               src={campaign.image_url}
               alt={campaign.title}
               className="w-full h-full object-cover"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src =
+                  "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80"; // Fallback architecture/city image
+              }}
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-gray-400">
@@ -33,7 +42,9 @@ export default function CampaignCard({ campaign }) {
         </div>
 
         <div className="p-4">
-          <span className={`inline-block px-2 py-1 text-xs font-medium rounded-full ${categoryColor}`}>
+          <span
+            className={`inline-block px-2 py-1 text-xs font-medium rounded-full ${categoryColor}`}
+          >
             {campaign.category}
           </span>
 
@@ -41,9 +52,7 @@ export default function CampaignCard({ campaign }) {
             {campaign.title}
           </h3>
 
-          <p className="mt-1 text-sm text-gray-600">
-            {campaign.description}
-          </p>
+          <p className="mt-1 text-sm text-gray-600">{campaign.description}</p>
 
           <div className="mt-4">
             <div className="w-full bg-gray-200 rounded-full h-2">
@@ -64,5 +73,5 @@ export default function CampaignCard({ campaign }) {
         </div>
       </div>
     </Link>
-  )
+  );
 }

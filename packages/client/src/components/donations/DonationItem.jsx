@@ -1,24 +1,23 @@
 function getRelativeTime(dateString) {
-  const date = new Date(dateString)
-  const now = new Date()
-  const diffMs = now - date
-  const diffSecs = Math.floor(diffMs / 1000)
-  const diffMins = Math.floor(diffSecs / 60)
-  const diffHours = Math.floor(diffMins / 60)
-  const diffDays = Math.floor(diffHours / 24)
+  const date = new Date(dateString);
+  const now = new Date();
+  const diffMs = now - date;
+  const diffSecs = Math.floor(diffMs / 1000);
+  const diffMins = Math.floor(diffSecs / 60);
+  const diffHours = Math.floor(diffMins / 60);
+  const diffDays = Math.floor(diffHours / 24);
 
-  if (diffSecs < 60) return 'just now'
-  if (diffMins < 60) return `${diffMins} minute${diffMins > 1 ? 's' : ''} ago`
-  if (diffHours < 24) return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`
-  if (diffDays < 30) return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`
-  return date.toLocaleDateString()
+  if (diffSecs < 60) return "just now";
+  if (diffMins < 60) return `${diffMins} minute${diffMins > 1 ? "s" : ""} ago`;
+  if (diffHours < 24) return `${diffHours} hour${diffHours > 1 ? "s" : ""} ago`;
+  if (diffDays < 30) return `${diffDays} day${diffDays > 1 ? "s" : ""} ago`;
+  return date.toLocaleDateString();
 }
 
 export default function DonationItem({ donation }) {
-  // Bug: Doesn't handle case when user_display_name is null
   const donorName = donation.is_anonymous
-    ? 'Anonymous Donor'
-    : donation.user_display_name
+    ? "Anonymous Donor"
+    : donation.user_display_name || donation.donor_name || "Kind Donor";
 
   return (
     <div className="border-b border-gray-100 pb-4 last:border-0 last:pb-0">
@@ -39,5 +38,5 @@ export default function DonationItem({ donation }) {
         </span>
       </div>
     </div>
-  )
+  );
 }
