@@ -1,55 +1,81 @@
-import { useState } from 'react'
-import { useAuth } from '../context/AuthContext'
+import { useState, useEffect } from "react";
+import { useAuth } from "../context/AuthContext";
 
 export default function Profile() {
-  const { user, updateProfile } = useAuth()
+  const { user, updateProfile } = useAuth();
   const [formData, setFormData] = useState({
-    displayName: user?.displayName || '',
-    avatarUrl: user?.avatarUrl || ''
-  })
-  const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
-  const [error, setError] = useState('')
+    displayName: user?.displayName || "",
+    avatarUrl: user?.avatarUrl || "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
+
+  // Sync state when user loads
+  useEffect(() => {
+    if (user) {
+      setFormData({
+        displayName: user.displayName || user.display_name || "",
+        avatarUrl: user.avatarUrl || user.avatar_url || "",
+      });
+    }
+  }, [user]);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-    setSuccess(false)
-  }
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setSuccess(false);
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setLoading(true)
-    setError('')
-    setSuccess(false)
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+    setSuccess(false);
 
     try {
-      await updateProfile(formData)
-      setSuccess(true)
+      // Trim inputs to prevent whitespace issues
+      const updates = {
+        displayName: formData.displayName.trim(),
+        avatarUrl: formData.avatarUrl.trim() || null,
+      };
+      await updateProfile(updates);
+      setSuccess(true);
     } catch (err) {
-      setError(err.message)
+      setError(err.message);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-2xl mx-auto px-4">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Profile Settings</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-8">
+          Profile Settings
+        </h1>
 
         <div className="bg-white rounded-lg shadow-md p-6">
           {/* Current User Info */}
           <div className="flex items-center mb-8 pb-8 border-b border-gray-200">
             <div className="w-20 h-20 rounded-full bg-gray-200 overflow-hidden">
-              {user?.avatarUrl ? (
+              {user?.avatarUrl || user?.avatar_url ? (
                 <img
-                  src={user.avatarUrl}
-                  alt={user.displayName}
+                  src={user.avatarUrl || user.avatar_url}
+                  alt={user.displayName || user.display_name}
                   className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src =
+                      "https://api.dicebear.com/7.x/initials/svg?seed=" +
+                      (user.displayName || user.username);
+                  }}
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-2xl font-bold text-gray-400">
-                  {user?.displayName?.charAt(0) || user?.username?.charAt(0) || '?'}
+                  {user?.displayName?.charAt(0) ||
+                    user?.display_name?.charAt(0) ||
+                    user?.username?.charAt(0) ||
+                    "?"}
                 </div>
               )}
             </div>
@@ -77,7 +103,10 @@ export default function Profile() {
             )}
 
             <div>
-              <label htmlFor="displayName" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="displayName"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Display Name
               </label>
               <input
@@ -91,7 +120,10 @@ export default function Profile() {
             </div>
 
             <div>
-              <label htmlFor="avatarUrl" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="avatarUrl"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Avatar URL
               </label>
               <input
@@ -113,11 +145,11 @@ export default function Profile() {
               disabled={loading}
               className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50"
             >
-              {loading ? 'Saving...' : 'Save Changes'}
+              {loading ? "Saving..." : "Save Changes"}
             </button>
           </form>
         </div>
       </div>
     </div>
-  )
+  );
 }

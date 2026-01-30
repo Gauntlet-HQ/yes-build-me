@@ -1,32 +1,33 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import api from '../api/client'
-import CampaignForm from '../components/campaigns/CampaignForm'
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "../api/client";
+import CampaignForm from "../components/campaigns/CampaignForm";
 
 export default function CreateCampaign() {
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
-  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (data) => {
-    setLoading(true)
-    setError('')
+    setLoading(true);
+    setError("");
 
     try {
-      const campaign = await api.post('/campaigns', data)
-      navigate(`/campaigns/${campaign.id}`)
+      const campaign = await api.post("/campaigns", data);
+      navigate(`/campaigns/${campaign.id}`);
     } catch (err) {
-      // Bug: Error not being displayed to user
-      console.log(err)
+      setError(err.message);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-2xl mx-auto px-4">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Create a Campaign</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-8">
+          Create a Campaign
+        </h1>
 
         {error && (
           <div className="mb-6 bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded">
@@ -39,5 +40,5 @@ export default function CreateCampaign() {
         </div>
       </div>
     </div>
-  )
+  );
 }
