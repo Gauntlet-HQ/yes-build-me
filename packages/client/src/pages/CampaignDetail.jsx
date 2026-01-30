@@ -82,7 +82,7 @@ export default function CampaignDetail() {
 
   const progress = Math.min((campaign.current_amount / campaign.goal_amount) * 100, 100)
   const categoryColor = categoryColors[campaign.category] || 'bg-gray-100 text-gray-800'
-  const isOwner = user?.id === campaign.user_id
+  const isOwner = Number(user?.id) === Number(campaign.user_id)
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
