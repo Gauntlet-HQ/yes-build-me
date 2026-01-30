@@ -1,96 +1,106 @@
 # Technology Stack - YesFundMe
 
-## Overview
+## Stack Overview
 
 | Layer | Technology | Version | Purpose |
 |-------|------------|---------|---------|
-| Frontend Framework | React | 19.x | UI components and state management |
-| Build Tool | Vite | 7.x | Fast development server and bundling |
-| Styling | Tailwind CSS | 4.x | Utility-first CSS framework |
-| Routing (Client) | React Router | 7.x | Client-side navigation |
-| Backend Framework | Express.js | 4.x | REST API server |
-| Database | SQLite | 3.x | Relational database |
-| Database Driver | better-sqlite3 | 12.x | Synchronous SQLite bindings |
-| Authentication | JWT | - | Token-based auth |
-| Password Hashing | bcrypt | 6.x | Secure password storage |
+| **Frontend** | | | |
+| Framework | React | 19.2.0 | UI components, state management |
+| Routing | React Router DOM | 7.13.0 | Client-side navigation |
+| Build Tool | Vite | 7.2.4 | Development server, bundling |
+| Styling | Tailwind CSS | 4.1.18 | Utility-first CSS |
+| Compiler | SWC (via plugin) | - | Fast JSX transformation |
+| **Backend** | | | |
 | Runtime | Node.js | 22.x | JavaScript runtime |
+| Framework | Express.js | 4.21.0 | HTTP server, routing |
+| Auth | jsonwebtoken | 9.0.3 | JWT generation/verification |
+| Password | bcrypt | 6.0.0 | Password hashing |
+| **Database** | | | |
+| Engine | SQLite | 3.x | Relational database |
+| Driver | better-sqlite3 | 12.6.2 | Synchronous bindings |
+| **DevOps** | | | |
 | Package Manager | npm | 10.x | Dependency management |
+| Monorepo | npm workspaces | - | Multi-package management |
+| Server Reload | nodemon | 3.1.0 | Auto-restart on changes |
+| Concurrency | concurrently | 9.2.1 | Run client + server |
+| Linting | ESLint | 9.39.1 | Code quality |
 
-## Frontend Dependencies
+## Frontend Architecture
 
-### Production
-- `react` - UI library
-- `react-dom` - React DOM bindings
-- `react-router-dom` - Client-side routing
+```
+packages/client/
+├── src/
+│   ├── api/           # API client wrapper
+│   │   └── client.js  # Fetch wrapper with auth
+│   ├── components/    # Reusable UI components
+│   │   ├── auth/      # ProtectedRoute
+│   │   ├── campaigns/ # Campaign cards, forms, filters
+│   │   ├── common/    # Button, Input, Modal, Card
+│   │   ├── donations/ # Donation forms, lists
+│   │   └── layout/    # Header, Footer, Layout
+│   ├── context/       # React Context providers
+│   │   └── AuthContext.jsx
+│   ├── pages/         # Route-level components
+│   └── main.jsx       # Entry point
+├── index.html         # SPA shell
+└── vite.config.js     # Build configuration
+```
 
-### Development
-- `vite` - Build tool
-- `@vitejs/plugin-react-swc` - Fast React compilation
-- `tailwindcss` - CSS framework
-- `eslint` - Code linting
-- `postcss` - CSS processing
+## Backend Architecture
 
-## Backend Dependencies
-
-### Production
-- `express` - Web framework
-- `better-sqlite3` - Database driver
-- `jsonwebtoken` - JWT implementation
-- `bcrypt` - Password hashing
-
-### Development
-- `nodemon` - Auto-restart on changes
+```
+packages/server/
+├── db/
+│   ├── index.js       # Database connection
+│   └── init.js        # Schema initialization
+├── middleware/
+│   └── auth.js        # JWT verification
+├── models/
+│   ├── user.js        # User CRUD operations
+│   ├── campaign.js    # Campaign CRUD operations
+│   └── donation.js    # Donation operations
+├── routes/
+│   ├── auth.js        # /api/auth/*
+│   ├── campaigns.js   # /api/campaigns/*
+│   ├── donations.js   # /api/campaigns/:id/donations
+│   └── dashboard.js   # /api/dashboard
+└── index.js           # Express app entry
+```
 
 ## Database Schema
 
-```sql
--- Users
-CREATE TABLE users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT UNIQUE NOT NULL,
-    email TEXT UNIQUE NOT NULL,
-    password_hash TEXT NOT NULL,
-    display_name TEXT,
-    avatar_url TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-);
-
--- Campaigns
-CREATE TABLE campaigns (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER NOT NULL,
-    title TEXT NOT NULL,
-    description TEXT NOT NULL,
-    goal_amount REAL NOT NULL,
-    current_amount REAL DEFAULT 0,
-    image_url TEXT,
-    category TEXT NOT NULL,
-    status TEXT DEFAULT 'active',
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id)
-);
-
--- Donations
-CREATE TABLE donations (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    campaign_id INTEGER NOT NULL,
-    user_id INTEGER,
-    amount REAL NOT NULL,
-    message TEXT,
-    is_anonymous INTEGER DEFAULT 0,
-    donor_name TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (campaign_id) REFERENCES campaigns(id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
-);
+```
+packages/database/
+├── schema.sql         # Table definitions
+└── seed.js            # Test data seeding
 ```
 
-## Development Tools
+## Dependency Graph
 
-| Tool | Purpose |
-|------|---------|
-| concurrently | Run client and server simultaneously |
-| nodemon | Auto-restart server on changes |
-| ESLint | JavaScript linting |
-| Vite Dev Server | Hot module replacement |
+```mermaid
+graph LR
+    subgraph Client
+        R[React] --> RR[React Router]
+        R --> TC[Tailwind CSS]
+    end
+
+    subgraph Server
+        EX[Express] --> JWT[jsonwebtoken]
+        EX --> BC[bcrypt]
+        EX --> BS[better-sqlite3]
+    end
+
+    subgraph Root
+        CC[concurrently]
+    end
+
+    CC --> Client
+    CC --> Server
+```
+
+## Version Constraints
+
+| Requirement | Minimum | Reason |
+|-------------|---------|--------|
+| Node.js | 22.0.0 | ES Modules, native fetch |
+| npm | 10.0.0 | Workspaces support |

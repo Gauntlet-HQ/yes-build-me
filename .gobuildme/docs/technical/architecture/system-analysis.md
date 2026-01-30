@@ -2,73 +2,91 @@
 
 ## Architectural Style
 
-**Pattern**: Monorepo with Client-Server Architecture
+**Classification**: Monorepo Client-Server Architecture (3-Tier)
 
-YesFundMe follows a classic three-tier architecture:
-1. **Presentation Layer**: React SPA (Single Page Application)
-2. **Application Layer**: Express.js REST API
-3. **Data Layer**: SQLite database
+```mermaid
+graph TB
+    subgraph "Presentation Tier"
+        RC[React SPA]
+        RR[React Router]
+        AC[AuthContext]
+    end
+
+    subgraph "Application Tier"
+        EX[Express.js]
+        RT[Routes]
+        MW[Middleware]
+        MD[Models]
+    end
+
+    subgraph "Data Tier"
+        SQ[SQLite]
+        BS[better-sqlite3]
+    end
+
+    RC --> |REST API| EX
+    RR --> RC
+    AC --> RC
+    EX --> RT
+    RT --> MW
+    RT --> MD
+    MD --> BS
+    BS --> SQ
+```
+
+## Architectural Patterns
+
+- **SPA + REST API**: React frontend communicates via JSON REST endpoints
+- **Repository Pattern**: Models encapsulate all database operations
+- **Context Pattern**: React Context for global auth state
+- **Protected Routes**: HOC pattern for authenticated routes
+- **Middleware Chain**: Express middleware for auth validation
 
 ## Design Decisions
 
-### Why Monorepo?
-- Shared configuration and tooling
-- Atomic commits across frontend/backend
-- Simplified dependency management for learning projects
+| Decision | Rationale | Trade-off |
+|----------|-----------|-----------|
+| Monorepo (npm workspaces) | Simplified dependency management, atomic commits | Larger repo size |
+| SQLite + better-sqlite3 | Zero-config, synchronous API, file-based | Not suited for concurrent writes at scale |
+| JWT Authentication | Stateless, no session storage needed | Token revocation requires extra logic |
+| Vite for bundling | Fast HMR, modern ES modules | Newer tool, less ecosystem maturity |
+| Tailwind CSS | Rapid UI development, no CSS files | Verbose class names in JSX |
+| ES Modules throughout | Modern syntax, tree-shaking | Requires Node 22+ |
 
-### Why SQLite?
-- Zero configuration database
-- File-based, easy to reset/seed
-- Sufficient for learning and demo purposes
+## Component Interaction
 
-### Why JWT Authentication?
-- Stateless authentication
-- Easy to implement and understand
-- Standard industry practice
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant C as React Client
+    participant A as API Client
+    participant S as Express Server
+    participant M as Models
+    participant D as SQLite
 
-## Component Boundaries
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                     packages/client                          │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │
-│  │   Pages     │  │ Components  │  │   Context/State     │  │
-│  │             │  │             │  │                     │  │
-│  │ - Home      │  │ - Campaign  │  │ - AuthContext       │  │
-│  │ - Campaigns │  │ - Donation  │  │ - API Client        │  │
-│  │ - Dashboard │  │ - Layout    │  │                     │  │
-│  └─────────────┘  └─────────────┘  └─────────────────────┘  │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              │ REST API (JSON)
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│                     packages/server                          │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │
-│  │   Routes    │  │   Models    │  │    Middleware       │  │
-│  │             │  │             │  │                     │  │
-│  │ - auth      │  │ - user      │  │ - authenticateToken │  │
-│  │ - campaigns │  │ - campaign  │  │ - optionalAuth      │  │
-│  │ - donations │  │ - donation  │  │                     │  │
-│  └─────────────┘  └─────────────┘  └─────────────────────┘  │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              │ better-sqlite3
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│                    packages/database                         │
-│  ┌─────────────────────────────────────────────────────────┐│
-│  │  SQLite: yesfundme.db                                   ││
-│  │  - users, campaigns, donations tables                   ││
-│  └─────────────────────────────────────────────────────────┘│
-└─────────────────────────────────────────────────────────────┘
+    U->>C: Action (e.g., Login)
+    C->>A: api.post('/auth/login')
+    A->>S: POST /api/auth/login + JSON
+    S->>M: findByUsername()
+    M->>D: SELECT query
+    D-->>M: User row
+    M-->>S: User object
+    S-->>A: JWT + User JSON
+    A-->>C: Store token, update context
+    C-->>U: Redirect to Dashboard
 ```
 
-## Data Flow
+## Module Boundaries
 
-1. **User Action** → React Component
-2. **API Call** → api/client.js (with JWT if authenticated)
-3. **Route Handler** → packages/server/routes/
-4. **Business Logic** → packages/server/models/
-5. **Database Query** → SQLite via better-sqlite3
-6. **Response** → JSON back through the chain
+| Module | Responsibility | Dependencies |
+|--------|---------------|--------------|
+| `packages/client` | UI rendering, routing, state | React, React Router, Tailwind |
+| `packages/server` | API endpoints, business logic | Express, JWT, bcrypt |
+| `packages/database` | Schema definition, seeding | better-sqlite3 |
+
+## Cross-Cutting Concerns
+
+- **Error Handling**: Try-catch in routes, error boundaries in React (not implemented)
+- **Logging**: Console.log/error (basic)
+- **Validation**: Manual validation in routes and forms
+- **Configuration**: Environment variables via `.env`
