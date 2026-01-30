@@ -47,7 +47,9 @@ router.get('/:id', optionalAuth, (req, res) => {
     res.json({
       ...campaign,
       donations,
-      isOwner: req.user?.id === campaign.user_id
+      // Convert both IDs to numbers to handle type mismatches (string vs number vs BigInt)
+      // Use Boolean() to ensure we always return true/false, never null/undefined
+      isOwner: Boolean(req.user && Number(req.user.id) === Number(campaign.user_id))
     })
   } catch (err) {
     console.error('Get campaign error:', err)
