@@ -123,6 +123,14 @@ export default function Dashboard() {
           <div className="bg-white rounded-lg shadow-md p-6">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-bold text-gray-900">My Donations</h2>
+              {data?.donations?.length > 0 && (
+                <Link
+                  to="/donations"
+                  className="text-green-600 hover:text-green-700 text-sm font-medium"
+                >
+                  View All →
+                </Link>
+              )}
             </div>
             {data?.donations?.length > 0 ? (
               <div className="space-y-4">

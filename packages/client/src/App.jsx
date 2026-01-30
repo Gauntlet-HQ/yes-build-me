@@ -11,6 +11,7 @@ import BrowseCampaigns from './pages/BrowseCampaigns'
 import CampaignDetail from './pages/CampaignDetail'
 import CreateCampaign from './pages/CreateCampaign'
 import EditCampaign from './pages/EditCampaign'
+import MyDonations from './pages/MyDonations'
 import NotFound from './pages/NotFound'
 
 function App() {
@@ -53,6 +54,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Profile />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/donations"
+              element={
+                <ProtectedRoute>
+                  <MyDonations />
                 </ProtectedRoute>
               }
             />
