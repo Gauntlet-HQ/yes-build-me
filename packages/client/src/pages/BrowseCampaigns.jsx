@@ -14,11 +14,18 @@ const categories = [
   { value: 'emergency', label: 'Emergency' },
 ]
 
+const sortOptions = [
+  { value: 'newest', label: 'Newest', sort: 'createdAt', order: 'desc' },
+  { value: 'most_funded', label: 'Most Funded', sort: 'currentAmount', order: 'desc' },
+  { value: 'ending_soon', label: 'Ending Soon', sort: 'endDate', order: 'asc' },
+]
+
 export default function BrowseCampaigns() {
   const [campaigns, setCampaigns] = useState([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('all')
+  const [sortBy, setSortBy] = useState('newest')
   const [pagination, setPagination] = useState({ page: 1, totalPages: 1 })
 
   const fetchCampaigns = async (page = 1) => {
@@ -32,6 +39,12 @@ export default function BrowseCampaigns() {
       if (search) params.append('search', search)
       if (category !== 'all') params.append('category', category)
 
+      const selectedSort = sortOptions.find(opt => opt.value === sortBy)
+      if (selectedSort) {
+        params.append('sort', selectedSort.sort)
+        params.append('order', selectedSort.order)
+      }
+
       const data = await api.get(`/campaigns?${params}`)
       setCampaigns(data.campaigns)
       setPagination(data.pagination)
@@ -44,7 +57,7 @@ export default function BrowseCampaigns() {
 
   useEffect(() => {
     fetchCampaigns(1)
-  }, [search, category])
+  }, [search, category, sortBy])
 
   const handleSearch = (e) => {
     e.preventDefault()
@@ -75,6 +88,18 @@ export default function BrowseCampaigns() {
             {categories.map((cat) => (
               <option key={cat.value} value={cat.value}>
                 {cat.label}
+              </option>
+            ))}
+          </select>
+
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+          >
+            {sortOptions.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
               </option>
             ))}
           </select>
