@@ -1,0 +1,11 @@
+feature: quickfix-campaign-card-truncation
+stages:
+  request:
+    created_at: '2026-01-30T19:06:58.860198Z'
+    created_by: Vicky Kieu
+    artifact: /Users/vkieu/workspace/yes-build-me/.gobuildme/specs/quickfix-campaign-card-truncation/request.md
+    input_summary_source: parameter
+    input_summary: &id001
+    - '[Goal 1]'
+    - '[Goal 2]'
+input_summary: *id001
