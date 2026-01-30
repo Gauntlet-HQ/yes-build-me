@@ -80,6 +80,7 @@ export default function Header() {
             <nav className="flex flex-col gap-4">
               <Link
                 to="/campaigns"
+                onClick={() => setMobileMenuOpen(false)}
                 className="text-gray-600 hover:text-gray-900"
               >
                 Browse
@@ -88,24 +89,27 @@ export default function Header() {
                 <>
                   <Link
                     to="/campaigns/new"
+                    onClick={() => setMobileMenuOpen(false)}
                     className="text-gray-600 hover:text-gray-900"
                   >
                     Create Campaign
                   </Link>
                   <Link
                     to="/dashboard"
+                    onClick={() => setMobileMenuOpen(false)}
                     className="text-gray-600 hover:text-gray-900"
                   >
                     Dashboard
                   </Link>
                   <Link
                     to="/profile"
+                    onClick={() => setMobileMenuOpen(false)}
                     className="text-gray-600 hover:text-gray-900"
                   >
                     Profile
                   </Link>
                   <button
-                    onClick={logout}
+                    onClick={() => { logout(); setMobileMenuOpen(false); }}
                     className="text-left text-gray-600 hover:text-gray-900"
                   >
                     Logout
@@ -115,12 +119,14 @@ export default function Header() {
                 <>
                   <Link
                     to="/login"
+                    onClick={() => setMobileMenuOpen(false)}
                     className="text-gray-600 hover:text-gray-900"
                   >
                     Login
                   </Link>
                   <Link
                     to="/register"
+                    onClick={() => setMobileMenuOpen(false)}
                     className="text-green-600 hover:text-green-700 font-medium"
                   >
                     Sign Up
