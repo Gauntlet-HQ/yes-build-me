@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { useAuth } from '../../context/AuthContext'
 import api from '../../api/client'
+import ConfirmationModal from './ConfirmationModal'
 
-export default function DonationForm({ campaignId, onSuccess }) {
+export default function DonationForm({ campaignId, campaignName, onSuccess }) {
   const { user } = useAuth()
   const [amount, setAmount] = useState('')
   const [message, setMessage] = useState('')
@@ -10,10 +11,11 @@ export default function DonationForm({ campaignId, onSuccess }) {
   const [donorName, setDonorName] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [showModal, setShowModal] = useState(false)
 
   const presetAmounts = [10, 25, 50, 100, 250]
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     setError('')
 
@@ -27,6 +29,11 @@ export default function DonationForm({ campaignId, onSuccess }) {
       return
     }
 
+    setShowModal(true)
+  }
+
+  const handleConfirm = async () => {
+    setShowModal(false)
     setLoading(true)
 
     try {
@@ -48,6 +55,10 @@ export default function DonationForm({ campaignId, onSuccess }) {
     } finally {
       setLoading(false)
     }
+  }
+
+  const handleCancel = () => {
+    setShowModal(false)
   }
 
   return (
@@ -138,6 +149,17 @@ export default function DonationForm({ campaignId, onSuccess }) {
       >
         {loading ? 'Processing...' : 'Donate Now'}
       </button>
+
+      <ConfirmationModal
+        isOpen={showModal}
+        onConfirm={handleConfirm}
+        onCancel={handleCancel}
+        campaignName={campaignName}
+        amount={amount}
+        donorName={user?.name || donorName}
+        message={message}
+        isAnonymous={isAnonymous}
+      />
     </form>
   )
 }

@@ -1,0 +1,40 @@
+{
+  "feature": "donation-confirmation-dialog",
+  "created_at": "2026-01-30T19:05:00Z",
+  "updated_at": "2026-01-30T19:05:00Z",
+
+  "allowed_files": [
+    "packages/client/src/components/donations/ConfirmationModal.jsx",
+    "packages/client/src/components/donations/DonationForm.jsx",
+    "packages/client/src/pages/CampaignDetail.jsx",
+    "packages/client/src/components/donations/__tests__/ConfirmationModal.test.jsx",
+    "packages/client/src/components/donations/__tests__/DonationForm.integration.test.jsx"
+  ],
+  "allowed_patterns": [],
+  "excludes": [
+    "**/*.lock",
+    "**/.env*",
+    "**/secrets/**"
+  ],
+  "touched_files": [],
+
+  "scope_source": "tasks",
+  "scope_precision": "refined",
+
+  "slice_name": null,
+  "epic_slug": null,
+  "registry_mode": "local",
+  "module_path": null,
+  "repo_path": null,
+
+  "rationale": {
+    "packages/client/src/components/donations/ConfirmationModal.jsx": "T004: Create new modal component",
+    "packages/client/src/components/donations/DonationForm.jsx": "T005: Integrate modal with form",
+    "packages/client/src/pages/CampaignDetail.jsx": "T001, T006: Pass campaignName prop",
+    "packages/client/src/components/donations/__tests__/ConfirmationModal.test.jsx": "T002: Unit tests for modal",
+    "packages/client/src/components/donations/__tests__/DonationForm.integration.test.jsx": "T003: Integration tests"
+  },
+
+  "violations": [],
+  "last_validated": null
+}
