@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import api from '../api/client'
 import { useAuth } from '../context/AuthContext'
 import DonationForm from '../components/donations/DonationForm'
 import DonationList from '../components/donations/DonationList'
+import Modal from '../components/common/Modal'
+import Button from '../components/common/Button'
 
 const categoryColors = {
   community: 'bg-blue-100 text-blue-800',
@@ -18,10 +20,13 @@ const categoryColors = {
 
 export default function CampaignDetail() {
   const { id } = useParams()
+  const navigate = useNavigate()
   const { user } = useAuth()
   const [campaign, setCampaign] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [showCloseModal, setShowCloseModal] = useState(false)
+  const [closing, setClosing] = useState(false)
 
   useEffect(() => {
     fetchCampaign()
@@ -40,6 +45,18 @@ export default function CampaignDetail() {
 
   const handleDonationSuccess = () => {
     fetchCampaign()
+  }
+
+  const handleCloseCampaign = async () => {
+    setClosing(true)
+    try {
+      await api.delete(`/campaigns/${id}`)
+      navigate('/campaigns')
+    } catch (err) {
+      setError('Failed to close campaign')
+      setClosing(false)
+      setShowCloseModal(false)
+    }
   }
 
   if (loading) {
@@ -88,12 +105,20 @@ export default function CampaignDetail() {
                     {campaign.category}
                   </span>
                   {isOwner && (
-                    <Link
-                      to={`/campaigns/${campaign.id}/edit`}
-                      className="px-4 py-2 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200"
-                    >
-                      Edit Campaign
-                    </Link>
+                    <div className="flex gap-2">
+                      <Link
+                        to={`/campaigns/${campaign.id}/edit`}
+                        className="px-4 py-2 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200"
+                      >
+                        Edit Campaign
+                      </Link>
+                      <button
+                        onClick={() => setShowCloseModal(true)}
+                        className="px-4 py-2 text-sm bg-red-100 text-red-700 rounded-lg hover:bg-red-200"
+                      >
+                        Close Campaign
+                      </button>
+                    </div>
                   )}
                 </div>
 
@@ -149,6 +174,32 @@ export default function CampaignDetail() {
           </div>
         </div>
       </div>
+
+      <Modal
+        isOpen={showCloseModal}
+        onClose={() => setShowCloseModal(false)}
+        title="Close Campaign"
+      >
+        <p className="text-gray-600 mb-6">
+          Are you sure you want to close this campaign? This action cannot be undone and the campaign will no longer accept donations.
+        </p>
+        <div className="flex gap-3 justify-end">
+          <Button
+            variant="secondary"
+            onClick={() => setShowCloseModal(false)}
+            disabled={closing}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="danger"
+            onClick={handleCloseCampaign}
+            loading={closing}
+          >
+            Close Campaign
+          </Button>
+        </div>
+      </Modal>
     </div>
   )
 }
