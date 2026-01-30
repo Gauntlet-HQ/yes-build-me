@@ -33,7 +33,6 @@ yesfundme/
 1. Clone the repository:
 ```bash
 git clone git@github.com:Gauntlet-HQ/yes-build-me.git
-cd yes-build-me
 ```
 
 2. Install dependencies:
