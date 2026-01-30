@@ -1,9 +1,11 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import ProtectedRoute from './components/auth/ProtectedRoute'
+import NavBar from './components/common/NavBar'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
+import Profile from './pages/Profile'
 import BrowseCampaigns from './pages/BrowseCampaigns'
 import CampaignDetail from './pages/CampaignDetail'
 import CreateCampaign from './pages/CreateCampaign'
@@ -13,6 +15,7 @@ function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+        <NavBar />
         <Routes>
           <Route path="/" element={<Navigate to="/campaigns" replace />} />
           <Route path="/login" element={<Login />} />
@@ -40,6 +43,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
               </ProtectedRoute>
             }
           />
