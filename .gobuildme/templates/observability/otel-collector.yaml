@@ -1,0 +1,101 @@
+# OpenTelemetry Collector Configuration for Coralogix (US)
+#
+# This template is parametric: ALL secrets and environment-specific values
+# are injected via environment variables at runtime. Do not hardcode secrets
+# or endpoints here.
+#
+# Required environment variables (per environment):
+#   CORALOGIX_PRIVATE_KEY   - Coralogix API key (secret)
+#   CORALOGIX_DOMAIN        - US region domain (e.g., cx498.coralogix.com)
+#   CORALOGIX_APP           - Application (environment): production|staging|dev|lab|ops
+#   CORALOGIX_SUBSYSTEM     - Subsystem (service/domain name, lowercase)
+#
+# Recommended app-side resource attributes (set in app exporters):
+#   service.name, deployment.environment, cx.application.name, cx.subsystem.name
+#
+# Usage:
+#   1) Copy into your target repo at:
+#      .gobuildme/observability/collector/otel-collector.yaml
+#   2) Configure environment variables in CI/deployment
+#   3) Run the collector:
+#      otelcol --config=.gobuildme/observability/collector/otel-collector.yaml
+
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317   # OTLP gRPC
+      http:
+        endpoint: 0.0.0.0:4318   # OTLP HTTP
+
+  # Optional: file-based log ingestion. Prefer OTLP from existing shippers where possible.
+  # filelog:
+  #   include:
+  #     - /var/log/app/*.log
+  #   start_at: beginning
+  #   operators:
+  #     - type: json_parser
+  #       timestamp:
+  #         parse_from: attributes.time
+  #         layout: '%Y-%m-%dT%H:%M:%S.%LZ'
+
+processors:
+  # Batches data for efficiency
+  batch:
+    timeout: 10s
+    send_batch_size: 1024
+    send_batch_max_size: 2048
+
+  # Prevents OOM in constrained environments
+  memory_limiter:
+    check_interval: 1s
+    limit_mib: 512
+    spike_limit_mib: 128
+
+  # Resource enrichment (optional) — use when apps don't set attributes.
+  # resource:
+  #   attributes:
+  #     - key: cx.application.name
+  #       value: ${env:DEPLOYMENT_ENV}
+  #       action: upsert
+  #     - key: cx.subsystem.name
+  #       value: ${env:SERVICE_NAME}
+  #       action: upsert
+  #     - key: deployment.environment
+  #       value: ${env:DEPLOYMENT_ENV}
+  #       action: upsert
+
+exporters:
+  # Coralogix exporter — configure via environment variables
+  coralogix:
+    domain: ${env:CORALOGIX_DOMAIN}
+    private_key: ${env:CORALOGIX_PRIVATE_KEY}
+    application_name: ${env:CORALOGIX_APP}
+    subsystem_name: ${env:CORALOGIX_SUBSYSTEM}
+    timeout: 30s
+
+  # Debug exporter for local troubleshooting (disable in production)
+  # logging:
+  #   loglevel: debug
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [coralogix]
+
+    metrics:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [coralogix]
+
+    logs:
+      receivers: [otlp]  # add filelog here if enabled above
+      processors: [memory_limiter, batch]
+      exporters: [coralogix]
+
+  telemetry:
+    logs:
+      level: info
+

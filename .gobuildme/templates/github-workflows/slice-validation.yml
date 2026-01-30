@@ -1,0 +1,133 @@
+name: Slice Consistency Validation
+
+on:
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  validate-slice:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for git diff against base branch
+
+      - name: Detect Feature Branch
+        id: feature
+        env:
+          BRANCH_NAME: ${{ github.head_ref }}
+        run: |
+          echo "feature=$BRANCH_NAME" >> $GITHUB_OUTPUT
+          echo "Validating slice for branch: $BRANCH_NAME"
+
+      - name: Check for Slice Validation Script
+        id: check-script
+        run: |
+          if [[ -f ".gobuildme/scripts/bash/validate-slice-consistency.sh" ]]; then
+            echo "script_exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "script_exists=false" >> $GITHUB_OUTPUT
+            echo "Slice validation script not found - skipping validation"
+          fi
+
+      - name: Run Slice Consistency Validation
+        if: steps.check-script.outputs.script_exists == 'true'
+        id: validate
+        run: |
+          chmod +x .gobuildme/scripts/bash/validate-slice-consistency.sh
+          chmod +x .gobuildme/scripts/bash/common.sh 2>/dev/null || true
+
+          # Run validation with JSON output
+          .gobuildme/scripts/bash/validate-slice-consistency.sh \
+            --feature "${{ steps.feature.outputs.feature }}" \
+            --json > validation-results.json 2>&1 || true
+
+          # Check if JSON is valid
+          if ! jq empty validation-results.json 2>/dev/null; then
+            echo "::warning::Validation produced invalid JSON output"
+            echo '{"overall_status": "skip", "violations": []}' > validation-results.json
+          fi
+
+          # Extract status for summary
+          OVERALL_STATUS=$(jq -r '.overall_status // "skip"' validation-results.json)
+          VIOLATIONS=$(jq '.violations | length' validation-results.json)
+          SCOPE_STATUS=$(jq -r '.scope_check.status // "skip"' validation-results.json)
+          CONSTITUTION_STATUS=$(jq -r '.constitution_check.status // "skip"' validation-results.json)
+
+          echo "overall_status=$OVERALL_STATUS" >> $GITHUB_OUTPUT
+          echo "violations=$VIOLATIONS" >> $GITHUB_OUTPUT
+          echo "scope_status=$SCOPE_STATUS" >> $GITHUB_OUTPUT
+          echo "constitution_status=$CONSTITUTION_STATUS" >> $GITHUB_OUTPUT
+
+      - name: Generate Validation Summary
+        if: steps.check-script.outputs.script_exists == 'true'
+        run: |
+          echo "## Slice Consistency Validation" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          OVERALL="${{ steps.validate.outputs.overall_status }}"
+          VIOLATIONS="${{ steps.validate.outputs.violations }}"
+          SCOPE="${{ steps.validate.outputs.scope_status }}"
+          CONSTITUTION="${{ steps.validate.outputs.constitution_status }}"
+
+          if [[ "$OVERALL" == "pass" ]]; then
+            echo "✅ **Status: PASS**" >> $GITHUB_STEP_SUMMARY
+          elif [[ "$OVERALL" == "warn" ]]; then
+            echo "⚠️ **Status: WARN** ($VIOLATIONS advisory issues)" >> $GITHUB_STEP_SUMMARY
+          elif [[ "$OVERALL" == "fail" ]]; then
+            echo "❌ **Status: FAIL** ($VIOLATIONS violations)" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⏭️ **Status: SKIPPED**" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Check | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Scope | $SCOPE |" >> $GITHUB_STEP_SUMMARY
+          echo "| Constitution | $CONSTITUTION |" >> $GITHUB_STEP_SUMMARY
+
+          if [[ "$VIOLATIONS" -gt 0 ]]; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### Violations" >> $GITHUB_STEP_SUMMARY
+            echo '```json' >> $GITHUB_STEP_SUMMARY
+            jq '.violations' validation-results.json >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Check Enforcement Mode
+        if: steps.check-script.outputs.script_exists == 'true'
+        run: |
+          OVERALL="${{ steps.validate.outputs.overall_status }}"
+          VIOLATIONS="${{ steps.validate.outputs.violations }}"
+
+          # Check if strict mode is enabled in constitution
+          STRICT_MODE=false
+          if [[ -f ".gobuildme/memory/constitution.md" ]]; then
+            if grep -q '<!-- scope_enforcement: strict -->' .gobuildme/memory/constitution.md 2>/dev/null; then
+              STRICT_MODE=true
+            fi
+          fi
+
+          echo "Enforcement mode: $([ "$STRICT_MODE" = true ] && echo 'strict' || echo 'warn')"
+          echo "Overall status: $OVERALL"
+          echo "Violations: $VIOLATIONS"
+
+          # In strict mode, fail the workflow if violations detected
+          if [[ "$STRICT_MODE" == "true" ]] && [[ "$VIOLATIONS" -gt 0 ]]; then
+            echo "::error::Slice scope violations detected and enforcement mode is strict"
+            echo "Fix scope violations before merging, or update scope.json if changes are intentional."
+            exit 1
+          fi
+
+          # In warn mode, just report (workflow passes)
+          if [[ "$VIOLATIONS" -gt 0 ]]; then
+            echo "::warning::$VIOLATIONS scope/constitution issues detected (advisory)"
+          fi
+
+      - name: Upload Validation Results
+        if: always() && steps.check-script.outputs.script_exists == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: slice-validation-results
+          path: validation-results.json
+          if-no-files-found: ignore

@@ -1,0 +1,77 @@
+# SLO definition scaffold for a feature (edit per feature)
+service: your-service
+owner:
+  team: your-team
+  on_call: your-oncall-rotation
+journeys:
+  - critical-user-journey-1
+
+slis:
+  - name: availability-cuj1
+    type: availability
+    journey: critical-user-journey-1
+    source:
+      backend: promql
+      query: |
+        sum(rate(http_requests_total{service="your-service",status=~"2..|3.."}[5m]))
+        /
+        sum(rate(http_requests_total{service="your-service"}[5m]))
+
+  - name: latency-p95-cuj1
+    type: latency
+    journey: critical-user-journey-1
+    source:
+      backend: promql
+      query: |
+        histogram_quantile(0.95, sum by (le) (rate(http_request_duration_seconds_bucket{service="your-service"}[5m])))
+      unit: seconds
+
+slos:
+  - sli: availability-cuj1
+    target: 0.999
+    window: 30d
+  - sli: latency-p95-cuj1
+    target: 0.95
+    window: 30d
+
+alerts:
+  - slo: availability-cuj1
+    burn_rate: 14
+    window: 1h
+    severity: page
+  - slo: availability-cuj1
+    burn_rate: 6
+    window: 6h
+    severity: warn
+
+dashboards:
+  - https://your-observability/d/...
+runbooks:
+  - https://your-runbook/wiki/...
+
+
+
+# ---
+# Coralogix logs-based SLI examples (commented by default)
+# Uncomment and adapt when using Coralogix for logs-based SLIs
+#
+# slis:
+#   - name: availability-logs-cuj1
+#     type: availability
+#     journey: critical-user-journey-1
+#     source:
+#       backend: coralogix
+#       query: |
+#         # Lucene query for success rate from logs
+#         subsystem:"your-service" AND (status:[200 TO 399])
+#     # notes: "Logs-based availability using Coralogix Lucene queries"
+#
+#   - name: error-rate-logs
+#     type: availability
+#     journey: critical-user-journey-1
+#     source:
+#       backend: coralogix
+#       query: |
+#         # Error rate from structured logs
+#         subsystem:"your-service" AND severity:error
+#     # notes: "Track error log volume as inverse availability signal"

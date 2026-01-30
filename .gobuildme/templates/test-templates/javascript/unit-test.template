@@ -1,0 +1,268 @@
+/**
+ * Unit tests for {MODULE_NAME}
+ *
+ * This file contains:
+ * - 2 SAMPLE tests demonstrating best practices
+ * - TODO tests for remaining scenarios
+ *
+ * Testing Pattern:
+ * 1. Setup: Create test data (no external dependencies)
+ * 2. Execute: Call the function/method
+ * 3. Verify: Assert the output
+ * 4. Cleanup: Not needed (unit tests are isolated)
+ *
+ * Unit Test Principles:
+ * - Test ONE function/method at a time
+ * - No database, no network, no file system
+ * - Use mocks for all dependencies
+ * - Fast execution (< 100ms per test)
+ * - Deterministic (same input = same output)
+ */
+
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+// OR: import { describe, it, expect, jest, beforeEach, afterEach } from '@jest/globals';
+
+import { {FUNCTION_NAME}, {CLASS_NAME} } from '../src/{MODULE_PATH}';
+
+// ============================================================================
+// SAMPLE TESTS - Demonstrating Best Practices
+// ============================================================================
+
+describe('{FUNCTION_NAME}', () => {
+  it('should return correct output with valid input', () => {
+    // SAMPLE TEST: Test function with valid input
+    //
+    // This demonstrates:
+    // - Testing a single function
+    // - Using simple, predictable inputs
+    // - Clear assertions
+    // - No external dependencies
+
+    // Arrange
+    const input = 'test_input';
+    const expectedOutput = 'expected_result';
+
+    // Act
+    const result = {FUNCTION_NAME}(input);
+
+    // Assert
+    expect(result).toBe(expectedOutput);
+    // TODO: Add more specific assertions
+  });
+
+  it('should handle edge cases correctly', () => {
+    // SAMPLE TEST: Test edge cases
+    //
+    // This demonstrates:
+    // - Testing boundary conditions
+    // - Multiple assertions
+    // - Clear test structure
+
+    // Arrange & Act & Assert
+    expect({FUNCTION_NAME}('')).toBe('');
+    expect({FUNCTION_NAME}(null)).toBeNull();
+    expect({FUNCTION_NAME}(undefined)).toBeUndefined();
+    // TODO: Add more edge cases
+  });
+});
+
+describe('{CLASS_NAME}', () => {
+  let instance: {CLASS_NAME};
+  let mockDependency: any;
+
+  beforeEach(() => {
+    // SAMPLE: Setup before each test
+    mockDependency = {
+      getData: vi.fn().mockReturnValue({ key: 'value' }),
+      // OR for Jest: getData: jest.fn().mockReturnValue({ key: 'value' }),
+    };
+
+    instance = new {CLASS_NAME}(mockDependency);
+  });
+
+  afterEach(() => {
+    // Cleanup after each test
+    vi.clearAllMocks();
+    // OR for Jest: jest.clearAllMocks();
+  });
+
+  it('should process data correctly with mocked dependency', () => {
+    // SAMPLE TEST: Test class method with mocked dependency
+    //
+    // This demonstrates:
+    // - Testing a class method
+    // - Mocking external dependencies
+    // - Verifying method calls
+    // - Isolating the unit under test
+
+    // Act
+    const result = instance.process();
+
+    // Assert
+    expect(result).toBeDefined();
+    expect(mockDependency.getData).toHaveBeenCalledTimes(1);
+    // TODO: Add more specific assertions
+  });
+
+  // ============================================================================
+  // TODO TESTS - Fill in the implementation
+  // ============================================================================
+
+  it.todo('should handle empty input correctly');
+  // TODO: Test scenarios:
+  // - Empty string
+  // - Empty array
+  // - Empty object
+  // - Null/undefined
+  //
+  // Assertions:
+  // - Returns default value
+  // - Throws error
+  // - Returns empty result
+
+  it.todo('should validate input types');
+  // TODO: Test scenarios:
+  // - Wrong type (string instead of number)
+  // - Invalid format
+  // - Out of range values
+  //
+  // Assertions:
+  // - Throws TypeError
+  // - Throws ValueError
+  // - Returns error result
+
+  it.todo('should handle errors gracefully');
+  // TODO: Test scenarios:
+  // - Dependency throws exception
+  // - Invalid state
+  // - Resource not available
+  //
+  // Assertions:
+  // - Exception handled
+  // - Error message is clear
+  // - State remains consistent
+
+  it.todo('should be idempotent');
+  // TODO: Test scenarios:
+  // - Call function multiple times with same input
+  // - Verify same output each time
+  //
+  // Assertions:
+  // - Function is idempotent
+  // - No side effects
+
+  it.todo('should perform within acceptable time');
+  // TODO: Test scenarios:
+  // - Large input data
+  // - Many iterations
+  //
+  // Assertions:
+  // - Completes within time limit
+  // - Memory usage is acceptable
+});
+
+// ============================================================================
+// PARAMETRIZED TESTS (Advanced)
+// ============================================================================
+
+describe('{FUNCTION_NAME} - parametrized tests', () => {
+  it.each([
+    ['input1', 'output1'],
+    ['input2', 'output2'],
+    ['input3', 'output3'],
+    // TODO: Add more test cases
+  ])('should return %s when given %s', (input, expectedOutput) => {
+    // SAMPLE: Parametrized test for multiple inputs
+    //
+    // This demonstrates:
+    // - Testing multiple scenarios with one test
+    // - Using it.each for parametrization
+    // - Reducing code duplication
+
+    const result = {FUNCTION_NAME}(input);
+    expect(result).toBe(expectedOutput);
+  });
+});
+
+// ============================================================================
+// ASYNC TESTS
+// ============================================================================
+
+describe('{FUNCTION_NAME} - async operations', () => {
+  it('should handle async operations correctly', async () => {
+    // SAMPLE: Test async function
+    //
+    // This demonstrates:
+    // - Testing async/await
+    // - Mocking async dependencies
+    // - Verifying async results
+
+    // Arrange
+    const mockAsyncDep = {
+      fetchData: vi.fn().mockResolvedValue({ data: 'test' }),
+    };
+
+    // Act
+    const result = await {FUNCTION_NAME}Async(mockAsyncDep);
+
+    // Assert
+    expect(result).toBeDefined();
+    expect(mockAsyncDep.fetchData).toHaveBeenCalled();
+  });
+
+  it.todo('should handle async errors');
+  // TODO: Test scenarios:
+  // - Promise rejection
+  // - Timeout
+  // - Network error
+  //
+  // Assertions:
+  // - Error caught
+  // - Error message correct
+  // - Cleanup performed
+
+  it.todo('should handle concurrent async operations');
+  // TODO: Test scenarios:
+  // - Multiple promises
+  // - Promise.all
+  // - Race conditions
+  //
+  // Assertions:
+  // - All promises resolve
+  // - Results are correct
+  // - No race conditions
+});
+
+// ============================================================================
+// HELPER FUNCTIONS
+// ============================================================================
+
+function createMock{CLASS_NAME}(overrides = {}) {
+  /**
+   * Helper function to create mock {CLASS_NAME} instance
+   *
+   * Usage:
+   *   const mock = createMock{CLASS_NAME}({ attribute: 'value' });
+   */
+  return {
+    process: vi.fn(),
+    getData: vi.fn(),
+    ...overrides,
+  };
+}
+
+function createTestData(overrides = {}) {
+  /**
+   * Helper function to create test data
+   *
+   * Usage:
+   *   const data = createTestData({ name: 'Custom Name' });
+   */
+  return {
+    id: 1,
+    name: 'Test',
+    email: 'test@example.com',
+    ...overrides,
+  };
+}
+

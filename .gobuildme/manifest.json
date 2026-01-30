@@ -1,0 +1,2771 @@
+{
+  "version": "0.10.1",
+  "channel": "stable",
+  "agent": "claude",
+  "script_type": "sh",
+  "min_cli_version": "0.10.1",
+  "files": [
+    {
+      "path": ".claude/commands/gbm.docs.md",
+      "sha256": "4b2d4ab4f4bd3402f1c27cd3a901b3af8b901cc579060ca18772da4016f016c7",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.ci-matrix.md",
+      "sha256": "a67d159789ae3c3ad0c41e72224d701e96c8741b3d0072bce005af78f7075f13",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.preflight.md",
+      "sha256": "cc0500da3113fca0f203011cc994da750e8fba66828f8f112aae65a585a73449",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.telemetry-check.md",
+      "sha256": "1bcb07705fa3ff976aad5f0f280bc621dd8740aa443c0bd78f97cefbb0416f66",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.constitution.md",
+      "sha256": "5a07921b9226c78bd767bf0bed5cea6f6408fefeb02ec9119ba02c861cefbf67",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.request.md",
+      "sha256": "987e34e6ea1448c3d27c4e232e0545cee1df2ebdc4269bdedc3c74a861056d7a",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.specify.md",
+      "sha256": "ca08e3b1120836ea784aeee5138b5d27f653e2c55ecee3a017a8ddef1dae739d",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.architecture.md",
+      "sha256": "7326b8d88803e38235d8bd1c96d7ee3ef81f878217a2d6b899164b854e904248",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.lite.plan.md",
+      "sha256": "92ddc01d41133277e445e015e9358ce7a54fb5c44c768f227b7e4e4245c86f3a",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.quickfix.md",
+      "sha256": "529f0c91ae8a0ceb2bd11c100949b7209e136f156fc55b21db5a7227d95f5d38",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.ready-to-push.md",
+      "sha256": "ea8a2d549754d0936493f1b4f01e0d35a2a84cca8e54c8d1afa4c769d544ba05",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.pm.validate-problem.md",
+      "sha256": "4749ed9b894056e21bc81589de9672aa517ef86ce5840e70ea784887f11c0845",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.persona.md",
+      "sha256": "b91fbbf85efe7fa5e1f22556fb85311b3d8aab4f96cff4a922d7b6cecdb21475",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.implement.md",
+      "sha256": "840a33b166108c3362e06e9afbfa00586fc3da68b655414078eae2cb74d61d61",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.ci-setup.md",
+      "sha256": "16ea617596ad953372befc18ae7f9fba1931ffcaa4df489dae93b371168989c0",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.pm.stories.md",
+      "sha256": "cc468d8104192bdd923d7fb4a878364dc9e33f6dd4c76a19cc1e1069118954a3",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.security-setup.md",
+      "sha256": "6408c6c8c15220935cb35a2ca553a3395002f22e5acecab0f5fde952de5ba00d",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.validate-conventions.md",
+      "sha256": "15414ec40bd18c87bf1134de881f7c0013bb0dac2fec7dd2331287dc358849d3",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.md",
+      "sha256": "e8fb9e8a700d245a88a632796d98a347e8e00e4d377b4becd36012f7338398e2",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.tasks.md",
+      "sha256": "af47ce0cf46982ace31e284a5593e857787e730c0e487e6fe0f3d311c2efb486",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.pm.align.md",
+      "sha256": "b9fee717b7439ab147019a31bb05236a72ec1d18c998b61d5386c688dadcab0d",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.fact-check.md",
+      "sha256": "2cfd5649958b34443668ae0bc655349c66701111bcf44ddc8b578e504af34d16",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.pm.handoff.md",
+      "sha256": "1fac1d27f377c771540189edd2a21d38914eaefe11bbe1bb8390668da0ae0153",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.qa.tasks.md",
+      "sha256": "bc6fd187799932c0e72a7c5bd3d4ea9c4fd4b178752f1efcd4c7fdd2825444ef",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.clarify.md",
+      "sha256": "f3e336eef33c0f014fe6e81a05502c2009f80cf1c0d61e745d4c26a298816c47",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.branch-status.md",
+      "sha256": "88ef75c9ce3c64326190ab4fcdbc8be78ad4ba463dd3280e5142fce53b082900",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.validate-architecture.md",
+      "sha256": "19bf76dbcba96bf98b4733ce2feb7104799ba17837faf5107cb85b397ebae81f",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.plan.md",
+      "sha256": "2ea5956e8860e439b7493a02739c9076a5804b02299380c3104d42467eecb5f3",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/help.md",
+      "sha256": "dd2a78e734d1476f50ee7a5b5eddd19c222bf83a8b813cfc65520fcf1ba58ae1",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.validate-constitution.md",
+      "sha256": "3242bdfe1f545cfc03800ef9b3e01736b2ac3a56e87b458942aa659d81ddfa06",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.qa.generate-fixtures.md",
+      "sha256": "f3832f3afb3b21959ffebabc638417470d141d9f985dd2da03417ef285e921a2",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.lite.implement.md",
+      "sha256": "e2511430bcd711655e37d679197d9d49e122cf6912b3d68ffdad50aef99d318e",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.pm.prd.md",
+      "sha256": "2b58506e2853657cb1401232f09b4724151dec3b212233d7181077c650f5c713",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.design.md",
+      "sha256": "62cdd8893943c7002d6bed2a47a15c018adccf2ff48208e5ae99c1d9f02c9454",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.pm.interview.md",
+      "sha256": "bcbfc5d0e7dc72148f4b766ed032bc592703fc3add217f3726acc7e1013bc74e",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.review.md",
+      "sha256": "51f2477aadc6f2d9a083a0eff2861637586f9b6f3dffc902d139d5c56be62b37",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.push.md",
+      "sha256": "2fab76b4683156a7044447d8f4c46e30bea130555a28c86a227ae56fad89d1fe",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.lite.request.md",
+      "sha256": "867072483c31b99d2658be88fb5f0802832b8218e2d9a3034ef6308cb33a7d43",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.qa.review-tests.md",
+      "sha256": "41472f3a64c966b6a013e0e7481c78d7e7efefe403271693ec6e1e4688681190",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.tests.md",
+      "sha256": "92341eb1747e69b2ca805464ecab01e263d31e4b1f7d9318eb56421a6a3f40bd",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.pm.research.md",
+      "sha256": "e951e16f56c72e16d9633360fd2b3d492bfa43cd20708e288f82c932b1c59e71",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.qa.implement.md",
+      "sha256": "d122cf3c3ba566ff36911ab218582fa30d95cf7aa585d397ea4267338d75a702",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.upload-spec.md",
+      "sha256": "80f8118f9f99968274100a6f76fbefe5205c4e81ff8a0a4648fe3e28fc4fc301",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.analyze.md",
+      "sha256": "67cdd50a00466f878061fb77a8a3edeb8c4bd8ced107c0156f72e99f9cbfd21c",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.pm.discover.md",
+      "sha256": "8e7d99d4aa581e853ca81792b9e0ba86d8868b83637047e6aa6a46e69e35226c",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.lite.push.md",
+      "sha256": "e034c477a2a5bff6ec276d342b8d0405f85dee89b17b9dadb5c7be6ef5395e68",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.qa.scaffold-tests.md",
+      "sha256": "0954a2f711768245cddc3a88a28aa87cfd2997ff7784e3d03829ad49391e4002",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.document.md",
+      "sha256": "fe49eac91834987abe1e2b4fa017ceb4234cfdd4411ac79013fcae53d96110d9",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.qa.plan.md",
+      "sha256": "972c8bb12fb7b0040c6ccb55fce956e08b45ff694af216932abd62f0ce22f18f",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.setup.md",
+      "sha256": "84b3d61acffeca4a8684854d5fbe092416afa0b2cc950944e483801fad9c689e",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".claude/commands/gbm.checklist.md",
+      "sha256": "4adee85994f56e39168a78b2b87020142aed841422e697083d5cb62bce1923c2",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/memory/constitution.md",
+      "sha256": "946d02817ed0d1bda69d0978823d85e529736e96fd1a1b6f6b189fa602f8aae0",
+      "strategy": "preserve",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/config/personas.yaml",
+      "sha256": "40d080dc8bed5f55b1dcfe98b3f1597ebf2b5f5595ce47f5e283be3e99de1b0c",
+      "strategy": "replace",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/personas/product_manager.yaml",
+      "sha256": "d1570a897fd83060a82d3a69b99f2b51fa5e1bdd2102d7a25c6105cca466d105",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/personas/architect.yaml",
+      "sha256": "0cb73a3919550b0fd11a829f889ad62746f732ac303b81e6b73a862a694d4fbf",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/personas/data_scientist.yaml",
+      "sha256": "a10ac52cc66d24f97423c71667eb36bf47ccc2c9b3b6fc34e155ee193799b23b",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/personas/sre.yaml",
+      "sha256": "9496112b116dc21325f23afc5f7de22c67b3a0ee36530ed86a5d965492e55cd1",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/personas/fullstack_engineer.yaml",
+      "sha256": "e0ffd419889812f392c19372f677c35a8680dfc6fff435506cb1ef4704b9ab07",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/personas/security_compliance.yaml",
+      "sha256": "763a98a0ce3ebd12cdaeab5ecef73bc29ee67df303af78c696c12defcd28955b",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/personas/ml_engineer.yaml",
+      "sha256": "021b11218e74b41f815ba11f436aeb742501937995ef45dcccce0d8d94dab528",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/personas/data_engineer.yaml",
+      "sha256": "6931b66965c2ce6e6ee41be53856b9fb2fa6a274f43f0e72ce0e8ab817129b28",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/personas/frontend_engineer.yaml",
+      "sha256": "0efcfb630bfe8f72c322eaa91bbf053cdc10c2b627d527d03e76bc607b6bde28",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/personas/maintainer.yaml",
+      "sha256": "02c62ef6c7e59c275f046d3c26ce2b2b9223a060628b4b1474f0dabb14e6ec6c",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/personas/qa_engineer.yaml",
+      "sha256": "5754c3de300dbd238e33fb267adb2ec037ee79cad639857d9bc6fcbdc44a7428",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/personas/backend_engineer.yaml",
+      "sha256": "b4a30c0e0f9ed9842ab72db315195552c74c965e3d1bee91cc2a8025b3a11ef4",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/scripts/validate-persona-gates.py",
+      "sha256": "1172a30e55c80bbb79f84b0a5da3b15fff8a1e1030db3ef043f9fc917ff717f2",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/verify-docs-distribution.sh",
+      "sha256": "b6a2fce1851ce6ba0a3c2a4ab5504ac9336662aaf37e6c9314e8b5783103ca84",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/upload-presigned-urls.py",
+      "sha256": "fc844c467331d4364a8d429fe6994601489a0b3982743c6a6d949ec7732e5aaf",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/cleanup-next-steps-duplicates.py",
+      "sha256": "774a9eb95f41c978c7c0b732623fd764fd60aa0f7e09f12a93176463d0eba9a5",
+      "strategy": "replace",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/scripts/generate-audit-report.sh",
+      "sha256": "5bfcad1ee7010a2e95c09d8d81b297eb4743bac7a81b33bda2706baa0eda1752",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/condense-next-steps.py",
+      "sha256": "aaa05b58f70fcd4dfd82f4e352ef4ce26f0872f01aed59e085b9c6b5ede652ec",
+      "strategy": "replace",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/scripts/setup-gfm-pypi.sh",
+      "sha256": "ab0f39e9237b154d679a98a3b26c5c66ce501996b1ecb919b6d88a3d0b69eeda",
+      "strategy": "replace",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/scripts/update-next-steps.py",
+      "sha256": "4ffccbab78b82918f1d471c59388064455a9703ebde7cdd71bf151794ac1f847",
+      "strategy": "replace",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/scripts/install-git-hooks.sh",
+      "sha256": "6ac35d95dc1c285d301cb5f6ff1c83b249c7d0480508be6378ad575d0d21131d",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/verify-ignore-files.sh",
+      "sha256": "e9631095e574667f86d91f6e50407818ae7442e3f931e3cc1820a0f65adb7fe1",
+      "strategy": "replace",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/render-png-assets.sh",
+      "sha256": "74f403645d5e35b13e524ada690d5d053aeaeb2de1060c99510dd092a3ff7087",
+      "strategy": "replace",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/verify-url-accessibility.sh",
+      "sha256": "8dfc2a3c1fc63505fe3fe629c839dd0f8cffafda550c0237e540f5d16a946ccc",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/validate-architecture-docs.sh",
+      "sha256": "8c64f3e72f0e9a8af8f55a5023805941c38e3d9eab296b2af4948574e1ca1b22",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/setup-ci-matrix.sh",
+      "sha256": "dcf76e54f11180ee8c735b5db8a4bff9aa8196fcbc363abcf57438553ac03729",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/common.sh",
+      "sha256": "999deab181090225a7458cd312a32c0167ce8834f66e39eec51374147bb1116b",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/devspace-detect.sh",
+      "sha256": "02263f9914abd54fbfe2941ce08ba6c2b9f16f56ca266c1f526b2a6c42cd9d86",
+      "strategy": "replace",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/create-design.sh",
+      "sha256": "0f13abc924e13f08568e2e39eb4a6b135d63a0152059993322d0f0d32be1aa65",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/setup-specify.sh",
+      "sha256": "5458277609061a793e2ceb903381c129c8e4525528d381210cd9d1be72a7eef8",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/security-scan.sh",
+      "sha256": "cbb1d52382ab66d3920d7e1b519976e931abbb6ab9482d4e059a63a3d91ab9ba",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/run-format.sh",
+      "sha256": "20988be5cb1b90a8951c21687f95798955bae26be0ab24a17b478404ee5a1b59",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/validate-architecture.sh",
+      "sha256": "d7995e27fa9c958b0b9738df3a91036d6d2d100ac67bb6208b89d2cf98e1898f",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/pm-discover.sh",
+      "sha256": "981e5e08a38200977bde6e1fa7993c1699e1fd7ef94d90eb40e7080eca7e65b3",
+      "strategy": "replace",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/validate-constitution.sh",
+      "sha256": "f05b4e508296186ba44f5061daf108cefc79bc38c0fb7733203586f1020dfed9",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/run-tests.sh",
+      "sha256": "ff523f77494211fe73de3c79f73ca4643d2f246244fbf4679a0f1206426b8b61",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/generate-web-archive-link.sh",
+      "sha256": "5e283b2dc6574eb86e689d795639582b48d130ff3c680cba691c5339a17eb192",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/pm-research.sh",
+      "sha256": "379fd425f3d3bc7e23781dde8cba371c3606bf712d841ae85b53d27ab80257df",
+      "strategy": "replace",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/fact-check.sh",
+      "sha256": "cd29a2db352901aa947117d28f4ca1a76c1561ae3d42e5f697da1fbebd677e71",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/install-codex-prompts.sh",
+      "sha256": "b6f5cc13885c8c9f28d5e6a13aefd77eb397f77172b1d3bab00b44de7ce7aa41",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/setup-plan.sh",
+      "sha256": "be601c944a6610a97bddb350b22d5c654fd08b40f473de3ac88a0b215a158e24",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/ready-to-push-lite.sh",
+      "sha256": "ea5e2ff1fbad5564e09803d94e081d6773619616687d0b484d78189ce79c1198",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/setup-ci.sh",
+      "sha256": "9471eb36f9920c6147bea2421d0632af0edc17229b747369ca6aaf231ccaaeb2",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/push.sh",
+      "sha256": "71912c3403b5615f709492ce3825c7b1d8f808ba59bb06369c4206a0788ebafe",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/setup-security.sh",
+      "sha256": "3da3f0b633053b5a013a3d8d7be4182194f32d84a2b108743f00b7f94fb6cf55",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/measure-template-verbosity.sh",
+      "sha256": "8492896455715f466772cb4c3df44c7b3854be9506f75133ec74dd600a144abb",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/get-feature-mode.sh",
+      "sha256": "e51e354c4bf65f1dc059299a4799abb03f8e6cb158efba0517a48ccc196afdae",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/validate-quickfix.sh",
+      "sha256": "ff3ff6f9cac52c392e8f2b73165641754ac8c3076f429dfe91b21a8d2a9093c9",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/loc-analysis.sh",
+      "sha256": "9f6ca644586a97962e6e9e6a93f28191a5432cd0d134721a9f9e30fe8933abc3",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/offline-init.sh",
+      "sha256": "649701b3d7f30553a5eba9373169a38074c2db87feb452ed06df451fb57428b9",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/create-docs.sh",
+      "sha256": "e410adba4f9727370d13079c41ddccbcba23cf3beb5c1029c5d8f560e32f2fc0",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/observability-sanity.sh",
+      "sha256": "aa64c55329ccf138c6aaa8fb0a28167670a3e387131c79965a31c5cd60300080",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/qa-plan.sh",
+      "sha256": "e71c12a384e88482f60321339c4da339f3d0859bbde2bc5e06592eee8081cf42",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/guard-protected-branch.sh",
+      "sha256": "bc0acd58c3947c2740452cc716adcc9937703f191614879d814c7001591aa85d",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/scaffold-tests.sh",
+      "sha256": "88e85a289dd8718278d41b1a7009619b3ae04335f5a90117430911aae45a3e4c",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/check-prerequisites.sh",
+      "sha256": "184e2fd24447ff8ca01c96beaab730189ecc7dfdbc51f65a366ec1cbdba17e30",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/pm-stories.sh",
+      "sha256": "4ed0c97108c6a25bbb559817cb73a4d0f69e83a42a63747618c9da869a30e869",
+      "strategy": "replace",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/persona-lint.sh",
+      "sha256": "9f90a58590835b15500d67343bb0ef6d3256abfd4c4e00ad242a2e9a6d4cd2b8",
+      "strategy": "replace",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/validate-coverage.sh",
+      "sha256": "eeaf434f119fc5a2913ee28cf4df32d683515f6cbfe6e75044a7d908f34c299d",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/update-agent-context.sh",
+      "sha256": "4dde8d705026dda9011d560f1ad841573bc412819aaf3503ff99e079457c2e69",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/upload-spec.sh",
+      "sha256": "9083d692e55a92180e9d06a4e7c5031b7716a52b08aadc638cecbe5d3f145f83",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/pm-validate-problem.sh",
+      "sha256": "d9d180927185f2118138f317d0f6fd4a2c0beef5b6dd8f71489434b56982086b",
+      "strategy": "replace",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/gbm-harness.sh",
+      "sha256": "2824361d3fad9a39e6a571b5b22ad68284b13d2a9215abd3ca748adc9b3e4118",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/setup-pr-review.sh",
+      "sha256": "05edf45c56ca55e17215ca020d39f0b618ac4b2399bfa43f3a079911dd04c088",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/run-type-check.sh",
+      "sha256": "d750066a2e239eb50bdf065168c59d2e02331f163a6528c326fd75c75f014e25",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/qa-common.sh",
+      "sha256": "2c3b4325df4a9b8ca49b883257d9c3b26a146ecd35fe64d508dcfea551d3053d",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/branch-status.sh",
+      "sha256": "b9282ab18bb5b0ba734056b6f9e5911fb7b7302a622fa51508b02b14c73ec1b7",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/run-integration-tests.sh",
+      "sha256": "a4014fffe884450f053d2ff70cc6b75a1b3fc7c4217ef5738b6775c45809100b",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/pm-handoff.sh",
+      "sha256": "db408b5514af4fb392c31d04436df5f12f3cfb74da5bd875dcc5254f2cec9239",
+      "strategy": "replace",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/format-check.sh",
+      "sha256": "8aadb72953e7d317cde5ac5ef8d6e28a961658dd4a74c18015c898adeb52fc7a",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/pm-prd.sh",
+      "sha256": "cdf860da36d72adbd65e76d5dfd329c445fd204ed233ffc145f678935fe56b7d",
+      "strategy": "replace",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/validate-template-style.sh",
+      "sha256": "6e7a92d2a401590cd15e67f994bede1ded60106211a1cf653a35d7841f67e934",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/review-tests.sh",
+      "sha256": "22f6c49d2c4d42f0a4470e68254daeeae8f6e181e08258a034d3dfb8dad31cfb",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/gbm-verification-status.sh",
+      "sha256": "e58a9f15d78eb5a7e877e5de26a24c649e2a24621a1d6a72d706ecda07aa9901",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/setup-format-check.sh",
+      "sha256": "6c405b88fc8082a34a8355fd4e1c2b2bb9785007ee86d7dbb769df659bd53ab9",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/check-architecture-freshness.sh",
+      "sha256": "32a4a6e682794079f3a6f6f6ed6f2b069cd45fe41b6be38f5f38ac67d81c8738",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/run-lint.sh",
+      "sha256": "10986cfcbdeff9a85c524ea5ae97c1ce82458f08a0dc2d17913861e0ea891fe7",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/comprehensive-review.sh",
+      "sha256": "84f46a77f7457f6fd07fb53233913f7ebdbefbb603d45453493260c7e29d5379",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/validate-slice-consistency.sh",
+      "sha256": "aacd130b8c5ad7a9b81a8beb8ac7b3d4eeb4ec975ecba19762388db13f900795",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/validate-conventions.sh",
+      "sha256": "0836b823aa36ae6f79b00b3506c36eaeab7321e36b84dd318b9f6a8bf6d5b753",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/scan-codebase.sh",
+      "sha256": "72ba777629817a9fd739fc8885dda10e1999d26f611667d7f7c705eed646e078",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/qa-implement.sh",
+      "sha256": "c73cc082e43d993dbc16933c606342e48d13ab21acb08067b29ec643240dfb86",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/generate-fixtures.sh",
+      "sha256": "f65ae89772cd265f5809d10613edb6bdec111bb6ba3d650ff8285725db4945c9",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/qa-tasks.sh",
+      "sha256": "74a94864b408a3cb181965fd9d180b61ef8329141d245c91f089a299aad738ad",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/implement-tests.sh",
+      "sha256": "454b65814c63d7b816d31adb738f0688c1bdd4f64121ed46148bf3a65b4fb599",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/slo-synthetic.sh",
+      "sha256": "6aab4ad8dcbbc9a3df8b19e3eded2b786e1bfaa2295ce212790f0c5db760b263",
+      "strategy": "replace",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/slo-lint.sh",
+      "sha256": "1e95121e1bbb21406a8bf25c117a163a4b62b9fdd078458a55f139725ca0a663",
+      "strategy": "replace",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/ready-to-push.sh",
+      "sha256": "28441c8830ad54c79b53c1e2259ec7359103e05a042df48e1194179abb023b23",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/gbm-verification-validate.sh",
+      "sha256": "d8afa1a23eb7dbbec50eed419476cca2a13487342a9a0aa9b33cb699324fa467",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/scaffold-observability.sh",
+      "sha256": "5f2d1ad62baf2e222e46a87459c9b26293a509b1c04566cbaa6ebde0c31bc05d",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/analyze-architecture.sh",
+      "sha256": "5bd4a64e1173ea29164bdb358528efdcd30e5ddd6f866931ce6a151e7d74178c",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/devspace-sanity.sh",
+      "sha256": "9374e55cdf2fff22cf53c3d935177c88ffd0993502f168b32857cc530815f053",
+      "strategy": "replace",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/pm-align.sh",
+      "sha256": "eb93efa9832a5a163a55714caa8bbdbef67a0229c52570343e5190f1bdbecf13",
+      "strategy": "replace",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/create-request.sh",
+      "sha256": "4fc8367fdb63742bb63845bc1c73f2cdedefc9a999c1c9edfce6bc9a7f636bba",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/pm-interview.sh",
+      "sha256": "4a419568b824e5410eab22d1ad473e798bd52385fd87fb7453575961cdabe3a2",
+      "strategy": "replace",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/restore-tests.sh",
+      "sha256": "83abd929369b509d516bb460a2fb1065cee94e1e8e8814223adccc919493cfcd",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/post-command-hook.sh",
+      "sha256": "cc671af9045a3636cb32262602caee9a510098c711eb56f99435a900904cd287",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/run-self-driving.sh",
+      "sha256": "a892f8d5ace8106afc0628c3250cb433a682182323be369acc2947af4eb3276d",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/create-new-feature.sh",
+      "sha256": "0b8c85737d11b6cb6d085e472f13ec298f0956c4da8f3ba13ee27803bb9e7f4b",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/bash/get-telemetry-context.sh",
+      "sha256": "d12b5d7ffdf7ce9b763f5ed953f84e95b3fee97be8c2315554bcb733c2149d01",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/generate-spec-presigned-urls.py",
+      "sha256": "6ba32fd4709e861bf404f14c978d0662ab4789df41f1d39a12ccc6c5190933ca",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/generate-missing-persona-partials.py",
+      "sha256": "de77dfce9f9bb06fc5919b5f0797871c2b1117c358516d75a70d36937d8da913",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/apply-condensed-next-steps-all.py",
+      "sha256": "4324a6477bf6801ae1f7fa04e70ee7472f273695c8c68d4ad05dc955d9b1c49b",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/extract-artifacts.py",
+      "sha256": "c3b93e99b1b3d41709df61284c43655ed83e4054730fdac5a8ba419e25a5d54a",
+      "strategy": "replace",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/scripts/add-artifact-declarations.py",
+      "sha256": "4dc2449a787b582bbfb6b53c71ca0bce0efb7c4fbae09f5cf8a0c2d67d53c421",
+      "strategy": "replace",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/scripts/show-target-structure.sh",
+      "sha256": "3c65c75dcca7a2e0719c51e451d041c6494d7d4674235868a82168097a3ddc69",
+      "strategy": "replace",
+      "mode": "755"
+    },
+    {
+      "path": ".gobuildme/scripts/record-metadata.py",
+      "sha256": "54d2c1b7370d0a1511db27b97262c722218a40087ab5347fe3f09094195e73db",
+      "strategy": "replace",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/manifest.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "strategy": "replace",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/CLAUDE-template.md",
+      "sha256": "d431870ee136bc12ba157fa379fb56d82d7ad1fe5b30a4f5d6398cbb2f80daa0",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/agent-file-template.md",
+      "sha256": "2f548d20f004521559a6b095b7df633d45897278afe1e571fbffeae8cbe2f0c9",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/pm-analytics-report-template.md",
+      "sha256": "5d56ea393fb5d67452ca1b637eeed4376574a90e8395a0bf3f766db9476afc0a",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/test-templates/python/e2e-test.template",
+      "sha256": "c461483bb6d6cd6ef9ca44cf900eda90045c0d176b24800ff2a1a79a70a9421c",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/test-templates/python/database-test.template",
+      "sha256": "5e80d605155dfdbb9921cb6106e426480c73ac084337585dada9c60964e88de4",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/test-templates/python/external-service-test.template",
+      "sha256": "879e32098e2d458aa583a5612e50f80c77bbe3cfbf8993f201d9efbedead09cc",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/test-templates/python/queue-test.template",
+      "sha256": "9a9bcb1727d7dc5d1155b9ea0d55a910073cadcf31b5aa16e9a2ad8362975226",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/test-templates/python/api-rest-test.template",
+      "sha256": "17fe49c70fee6bf6f310d0a4e796ad01330bf855732a6ba5db23645a939be4fe",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/test-templates/python/unit-test.template",
+      "sha256": "cf5fb14f952586e3b88efa42704b54cf86ca149d61dab0ccaf266ae392e346e4",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/test-templates/java/e2e-test.template",
+      "sha256": "39061524e3655ad080ab4c5405f6dff12fa2994450f289b0e880a73c9e0aba07",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/test-templates/java/database-test.template",
+      "sha256": "c8fd6a9fd7958ff416fda2b8a4827acbd9171c37d22c8236e9606e4acd025a0a",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/test-templates/java/api-rest-test.template",
+      "sha256": "d894219f513d7153040a8c62548e525aa92cf53bd248d0ad9cf32f9eee30cf3a",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/test-templates/java/unit-test.template",
+      "sha256": "4a776037d3289760082fbd0feae2ce63eac4c5cb496eb85a38add9b7f4dad362",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/test-templates/php/e2e-test.template",
+      "sha256": "6692f6b8b1a18f3a1c4094cc31c122c2b5e6391d6e9f430e92b67c66c4d10e2b",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/test-templates/php/database-test.template",
+      "sha256": "c4b9b04c2fba540bbced69fb67fd8591c3312047b4b6f7ea6598568aaed5364f",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/test-templates/php/api-rest-test.template",
+      "sha256": "6475b063cc95995e3b32eed27645a5cf38a1f7ffcf02df21fa73e80dd7f5d91e",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/test-templates/php/unit-test.template",
+      "sha256": "4405f5bf93d28abab69ecb699d1fea8c7720418879426b3d35d65f2760f8e32c",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/test-templates/fixtures/api_fixtures.py",
+      "sha256": "6723bfed18d69cc305fc5c9d6d0c3eba0ee34915e10e4060ce90dc7d5e39764e",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/test-templates/fixtures/mock_services.py",
+      "sha256": "06517f39d76220b25586fc28af5fd3754e6f4d7b5fe34bc64de0f013dd8c0c2d",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/test-templates/fixtures/database_fixtures.py",
+      "sha256": "8494b8dad68f6bf02a10870cc97ebb3d9222c01784cd784f2dd4b2fe608e47b3",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/test-templates/javascript/e2e-test.template",
+      "sha256": "72fbe7f4adc31d47a95be25ada32fc2ce3411af49d2ccd4b0a1d9a62d1861ca1",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/test-templates/javascript/database-test.template",
+      "sha256": "98e63523996b294f26c141ebfeb11d11c1df6383fdf68b0eae1fb5c7b2763a9f",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/test-templates/javascript/api-rest-test.template",
+      "sha256": "950484ae651d31f2dd3f8222c8ed790fa1fc1ef7bfcbd871825ede3d937101d7",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/test-templates/javascript/unit-test.template",
+      "sha256": "f99d103229793d93f2e19b2e285086eb16d071b3254ca4b1315d7a1b3adb639e",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/memory/constitution.md",
+      "sha256": "946d02817ed0d1bda69d0978823d85e529736e96fd1a1b6f6b189fa602f8aae0",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/pm-prd-template.md",
+      "sha256": "52fcbce012f1a2825682e798539b42ec31fdcbca15847ace12d3fab4a80cc059",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/vscode-settings.json",
+      "sha256": "9344b12718b5e08550ea9f1bf17bfc879ec04d445efe93c3fda007cb119de34e",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/design-template.md",
+      "sha256": "1246c9aba10f56b611c06094db64ed227ead52de55a25abb09ae20aa9bb60a69",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/config/slo.schema.json",
+      "sha256": "89785f761a17e4597a8edcf18fb3ba16907ae862940e48c5e4780048a26769a7",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/quickstart-template.md",
+      "sha256": "17668435d3699cc8b3f3647075adac5ddee4d4215073e9d0d2f21367b3fbc1be",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/qa-test-tasks-template.md",
+      "sha256": "5590578cab664d0f371bbb6eb8eca0a0c5d96e55b9906c3406e6b9750cf323c1",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/verification-matrix-template.json",
+      "sha256": "5d84f2bd6ee840b5d28315475cde376234d834ee130f7c0691c34ffd561d573f",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/gitlab-ci/slice-validation.yml",
+      "sha256": "9306e4110dfecd73a049e87e7931d7dbc9f5a4e485521448010282587c2f7462",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/pm-technical-feasibility-template.md",
+      "sha256": "c621b5edb1c99ec0ad2288b92a49785bc57a00125155825ddc9834ccb671d04c",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/slo-template.yaml",
+      "sha256": "15ab94d2b08874d188cfcead7169db118106640ad92e61fb865963f0074501eb",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/pm-competitive-analysis-template.md",
+      "sha256": "41b25a0beec30f2df0dae7dd51bb28dffa9cda266a6d33889f9b26b3c54c53b0",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/pm-market-research-template.md",
+      "sha256": "fd55b0fda52b527b2492c52c2701928384db136a699760f6ba6e444c054deef1",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/.gitignore.template",
+      "sha256": "38fa90c418e4f3e604005ee2b8a513870e710b77bcd89b110d31ce036a153f2c",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/observability/otel-collector.yaml",
+      "sha256": "6bed0124008a5ed4ca58c50c9c185b95c7ced946070141e30c5f1cad9097fb15",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/qa-config.yaml",
+      "sha256": "840a0104628a4fe53c2afc8f317ad168cfa8d1255a05d7a3fa2a9e56831c8413",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/config/personas.yaml",
+      "sha256": "40d080dc8bed5f55b1dcfe98b3f1597ebf2b5f5595ce47f5e283be3e99de1b0c",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/definitions/product_manager.yaml",
+      "sha256": "d1570a897fd83060a82d3a69b99f2b51fa5e1bdd2102d7a25c6105cca466d105",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/definitions/architect.yaml",
+      "sha256": "0cb73a3919550b0fd11a829f889ad62746f732ac303b81e6b73a862a694d4fbf",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/definitions/data_scientist.yaml",
+      "sha256": "a10ac52cc66d24f97423c71667eb36bf47ccc2c9b3b6fc34e155ee193799b23b",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/definitions/sre.yaml",
+      "sha256": "9496112b116dc21325f23afc5f7de22c67b3a0ee36530ed86a5d965492e55cd1",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/definitions/fullstack_engineer.yaml",
+      "sha256": "e0ffd419889812f392c19372f677c35a8680dfc6fff435506cb1ef4704b9ab07",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/definitions/security_compliance.yaml",
+      "sha256": "763a98a0ce3ebd12cdaeab5ecef73bc29ee67df303af78c696c12defcd28955b",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/definitions/ml_engineer.yaml",
+      "sha256": "021b11218e74b41f815ba11f436aeb742501937995ef45dcccce0d8d94dab528",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/definitions/data_engineer.yaml",
+      "sha256": "6931b66965c2ce6e6ee41be53856b9fb2fa6a274f43f0e72ce0e8ab817129b28",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/definitions/frontend_engineer.yaml",
+      "sha256": "0efcfb630bfe8f72c322eaa91bbf053cdc10c2b627d527d03e76bc607b6bde28",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/definitions/maintainer.yaml",
+      "sha256": "02c62ef6c7e59c275f046d3c26ce2b2b9223a060628b4b1474f0dabb14e6ec6c",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/definitions/qa_engineer.yaml",
+      "sha256": "5754c3de300dbd238e33fb267adb2ec037ee79cad639857d9bc6fcbdc44a7428",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/definitions/backend_engineer.yaml",
+      "sha256": "b4a30c0e0f9ed9842ab72db315195552c74c965e3d1bee91cc2a8025b3a11ef4",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/qa_engineer/constitution.md",
+      "sha256": "f13913a4fea7349e9acde41bbd6301f786af6b6c03fa95bc6f360f79cf79f2c4",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/qa_engineer/architecture.md",
+      "sha256": "32b48d6d27868708cd58d1ee0cffbb4ee05c8117b571b9851f7ccac27e124afe",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/qa_engineer/push.md",
+      "sha256": "f3a5fb6851caa9772053d0a3baddad9f295c74041e90f5dab08ff99add047745",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/qa_engineer/analyze.md",
+      "sha256": "242062c3b91067d6d4876ea0bbc062c0e8f5db65ff660c3054801a98f33a802e",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/qa_engineer/fact-check.md",
+      "sha256": "a2c9c552317309349c379729a24667c84dab744404caa26326df392e0a3eef77",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/qa_engineer/tests.md",
+      "sha256": "5f5115a66be7926eff11b1d99c3e5014ecbc6b280c4220a6c9f62348996a5e44",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/qa_engineer/tasks.md",
+      "sha256": "c65f9d8b2c7d4512d8a76e9acdc98aa3c35cece633e18cb71d025298e24fe18d",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/qa_engineer/clarify.md",
+      "sha256": "8b1445d4c7aaa4ab175e95923e6ec8d77fa2d3158a1b048c0137f4d5d355bf42",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/qa_engineer/checklist.md",
+      "sha256": "219b0620f4e49bfb6f6f3c660270b50a9f83e95d4122342e9685c2e74283f28d",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/qa_engineer/scaffold-tests.md",
+      "sha256": "e634f6c63b0d2913c5c67a635d68d241b1aae2e7856c6882f353518f666389c4",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/qa_engineer/request.md",
+      "sha256": "aaf390cd05afe0c3958e913cbb82d1a726306778ecd8641ec126cf14e5203aa7",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/qa_engineer/review.md",
+      "sha256": "0d0d4a61eb1733818e09f8acf5645ee4bef854acaf656fa5e5d734926032a91c",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/backend_engineer/constitution.md",
+      "sha256": "d15ed10481f09b2e54faa78788d9c260dd75eb51467f5f2c97a3924034de5fa3",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/backend_engineer/implement.md",
+      "sha256": "578a9f47fe6c8991eeeba472a8ec1103a29ff540a99dd996330e224d370bb103",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/backend_engineer/architecture.md",
+      "sha256": "f25c9696e92432d58ed7164de289036d07dccc5819156ed79a29da43b4fd858a",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/backend_engineer/push.md",
+      "sha256": "e6aa2348986468893bad4aba7a0bc385aa2de0175dea1a223d62e8e4377ca533",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/backend_engineer/analyze.md",
+      "sha256": "b3914ab815b41f18af56ede02e52fa9adbe82c469149f80f4d506904d561e312",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/backend_engineer/fact-check.md",
+      "sha256": "dfcffad9e8e4e7b15b537c4a935b9722332ca8e6484ac24816888d56e58888b9",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/backend_engineer/tests.md",
+      "sha256": "a6e8cc9217e4e1aa31f2f44c6382e91a7c6a08328c1459ff190b1fb549fb6164",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/backend_engineer/tasks.md",
+      "sha256": "cbe9122d095324ddc0efc40212ca8b113a56bcc02f1a5f3da70f7b68081f3c70",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/backend_engineer/clarify.md",
+      "sha256": "dc0c1d0d314c697aaad55aa3219710077cd1ce9d405053e9f0e900e60976f32b",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/backend_engineer/checklist.md",
+      "sha256": "f10cec763ffc7ca26e93a5a7e8fe24b2e46e7b9c4e3d663d0c9d387baf475cd9",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/backend_engineer/plan.md",
+      "sha256": "58b08acb88484dad51327f6c6385c65bc75df11038098ad55c1ca2932bacdb38",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/backend_engineer/request.md",
+      "sha256": "bba7be5ee3953bbeeae259518b473426aa6cc4ec4aa5696c92c3789ec630a737",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/backend_engineer/review.md",
+      "sha256": "b5aaf170fd23a0eb47b111c3876519aca8064660dbd1335e8eda17be031fdf07",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/product_manager/constitution.md",
+      "sha256": "6cb8e902ab20660ad5e7ae619c6ea1c7229af656caa761a1288c40a05c1fa07e",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/product_manager/prd.md",
+      "sha256": "8acbcbd2b0d0c6e6cbe9204eaa8acf7b051c475b6502b719bfbed92883bcc2f3",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/product_manager/architecture.md",
+      "sha256": "e2179d9002e3d5096ea6cd9e7bc09f598f9c4d9b7caf421ed09f4a17d86104ae",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/product_manager/push.md",
+      "sha256": "803ad33471837e9c362a82d74df0c385e01cfe3eb006db3fafeb32782f35b53b",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/product_manager/analyze.md",
+      "sha256": "7a2d4c967ec76e1b62c6e8986ee0e7a2b30919f21746dd722ed35f7e53bc2abe",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/product_manager/fact-check.md",
+      "sha256": "972d0cdd99ae6b53b1587a58bc5713aca380deeb8425b7f0f35c0da509e2bff9",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/product_manager/tasks.md",
+      "sha256": "6983e4127687f83d874af83afbde098c9ce60cf69e5154f852158a304b47c166",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/product_manager/clarify.md",
+      "sha256": "cc11288111fe74754d1b78c79e6574dd93cfde7b5fb68923ab6d6dac82004b7b",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/product_manager/checklist.md",
+      "sha256": "c45928ae5e224c445263ba2f9ee37937c4e6f742e7090449762273bf04284092",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/product_manager/request.md",
+      "sha256": "b26649716e2cfe3f4f9e0c09038f6e60eef4f3d129387c599f783aed7dcfe9ee",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/product_manager/specify.md",
+      "sha256": "65b925213482ba3c59d6ae18604da86317664ee8f645d92f843e6c62b11e9ae4",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/product_manager/review.md",
+      "sha256": "3470de8fc8940bd891b61ed77549fe08162f85cb888346fd943d5310de3c903e",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/maintainer/constitution.md",
+      "sha256": "dfe30835a3df4d91765ffa6e4e1257af9207bf4fdccf8a315ffa7d4bd3709d22",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/maintainer/architecture.md",
+      "sha256": "4025f728e5f900c8182d94b2ea536a4cb728a6383908e6132b1ffd90dcba4af5",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/maintainer/push.md",
+      "sha256": "e537feec32778b938e447e364195f257fa5643984767aa2b64df1f703a80e5d6",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/maintainer/analyze.md",
+      "sha256": "271ab6a5f5fd85f83292ae328d87492584928e0724987a31b2a6c0fe304c8c1c",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/maintainer/fact-check.md",
+      "sha256": "0cddfa540fd081a481db8bee5ac7ee94c40dd847d4ce93dcc8f5f6c7acb4986f",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/maintainer/tasks.md",
+      "sha256": "8061db99743e860dceb502fc925aad00983e4222ad314afd4e5bca212d2c77fe",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/maintainer/clarify.md",
+      "sha256": "7f6c5e85130e466ce4390efaa9240f902c20c92383a2ebd4b510cf50be67bca8",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/maintainer/request.md",
+      "sha256": "efed08d40553902f32310078f6d09af72d21f0d655d347c600c734ba51032d51",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/maintainer/review.md",
+      "sha256": "dda2cf5871c2f8791a0ec3329481f99637b1c69bf8f9a2006221c61c6fe39813",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/architect/constitution.md",
+      "sha256": "333a26177d38bce9f06aeaf6e4a48d5acc0aa96b250c7769130349496b850946",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/architect/architecture.md",
+      "sha256": "f8855f0129bb4ffa03d1d5f2eff233542dbb47fba771027a211781c9d11eabf8",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/architect/push.md",
+      "sha256": "bf2572d25f57ee7cb6e51e26155bb693d132108e754695b5b37f0da2e0dedcf8",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/architect/analyze.md",
+      "sha256": "e25843933690db098f86b33720ac680eee42a0c16896ae153de7b30d084e6fd6",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/architect/fact-check.md",
+      "sha256": "72cd8239dabfb385dca5eb81ee6be6a6800a463e14a9592816e811033eafd3f3",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/architect/tasks.md",
+      "sha256": "b72e1b3fa3128f0ccab32b6d16cae22ee9169b8b18341f65b2d88535dd12ff50",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/architect/clarify.md",
+      "sha256": "55269d936b11bdf776b8601b629ca8967049d972a90b76be8c7b5a694a16bdda",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/architect/plan.md",
+      "sha256": "f43d5b1e6a23dc4cdf498ee36ae762d362a45e89ab61e32c0a06050f91666c04",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/architect/request.md",
+      "sha256": "84d7d27a91a5d18013a55c32ed0f6b91eefba26d0d988a8b28dc5c36e8168b73",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/architect/specify.md",
+      "sha256": "9c7cc12432d254bec65470c602eb91d864821269d83c4026bb256f762b8bdbf4",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/architect/review.md",
+      "sha256": "95f2ae3d9efa9dd7ba254e782a88a6ddd8751dcbc7196f13265d546ef341fc0f",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/fullstack_engineer/constitution.md",
+      "sha256": "3d404529ce08ff8743460245451525e12d34e9768a7f08c6b19afbf0d0def0c9",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/fullstack_engineer/implement.md",
+      "sha256": "d07882807eead9e42fdd638f38b9f525aede1bf698c99cf85f65df1f9743109e",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/fullstack_engineer/architecture.md",
+      "sha256": "1a5d4cd1a890c3b1540712fbd67de687338f583ce8bb39e25ffc15b95a89c614",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/fullstack_engineer/push.md",
+      "sha256": "9387bd5825231b2e5db6fd70142bd62fd1ba3db5b06e6481b14d0e1187944758",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/fullstack_engineer/analyze.md",
+      "sha256": "2c19ff34236ee8c3124893ac4620cbdb0af757374a1f2e7bf036fe620c3b100a",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/fullstack_engineer/fact-check.md",
+      "sha256": "9e3ded4ec0a4c4715c329e8731615ceaf2b327fd309b4ccaeef7bbdfd733cd0c",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/fullstack_engineer/tests.md",
+      "sha256": "84fec38c62bfe874a4634b898664052dcba0ba9661a1f1743cdd916e2a3e247a",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/fullstack_engineer/tasks.md",
+      "sha256": "e78cc3e815081f341c969f8f317766ce85d3f4c12b4211a206c89bc9211be03c",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/fullstack_engineer/clarify.md",
+      "sha256": "131aaff4c964a21bdaa0c572e6005a0c15345f2c5c4e2b4906e86b52a6f0337d",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/fullstack_engineer/checklist.md",
+      "sha256": "36866f5425cb887ac0423e855efd83fc3afc9c814ff5bd9df8b0ce608f021974",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/fullstack_engineer/plan.md",
+      "sha256": "c565b9fd14897f508a6ee5fe7eb14a7fc9f0670c9f378d3829dd2f76e8898269",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/fullstack_engineer/request.md",
+      "sha256": "e91071799300909cbfad242614f3427e9b942b68ce5a34b30f54fce95d6e4ddc",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/fullstack_engineer/specify.md",
+      "sha256": "b63c7405cf6fb579b0a43dc6e5db51755f9e783759c4ee212fa80025d2881da7",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/fullstack_engineer/review.md",
+      "sha256": "74c8762361678f1afc160ef724c72845cf1a70d201a7d726295e85f2a9d34d69",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/data_scientist/constitution.md",
+      "sha256": "c59e58a0b2e8263cf5811968fc85f9c541448b73e35ddcb3b5255f1414a05a39",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/data_scientist/architecture.md",
+      "sha256": "8e9a8b11348fcbc97b35e62823a7085a0e1c1cdfd99c569b4ff019cd1eb123f7",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/data_scientist/push.md",
+      "sha256": "4373fde571947d3b9fda4252eb0f246b6b58dd0310d415ea99c3f6e3cad6e35f",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/data_scientist/analyze.md",
+      "sha256": "551bd31ce95a0cfc84d3fc69e81a9b38c9d29fe8b5cb8ce12a3142577d6aae81",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/data_scientist/fact-check.md",
+      "sha256": "ffeea7afe8f78bb71ecebe173b6f6a159aa47c249126f2ade442a80c4eb06184",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/data_scientist/tests.md",
+      "sha256": "a3c9a7f177d16144b448cbefa900f19c64ea19ac7b60ad8d898aa08513a6b743",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/data_scientist/tasks.md",
+      "sha256": "8d3e7f7e4b6aa8fb523dbac499f62789abd6e8c84ea700365cebc2cd3997a9cf",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/data_scientist/clarify.md",
+      "sha256": "bb1544dddcc60e9dd3afe209fbe76333d20c33b61eacb269b93f8bb62bfe3c48",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/data_scientist/checklist.md",
+      "sha256": "58cf8d8227ea48c3881ba2f1ded1e03fcdee46f7679a109e88717f49785f14a1",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/data_scientist/plan.md",
+      "sha256": "d414ec5551ef6f150efd5099f357af4f05d852f79c27febdf058a1119bd5e607",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/data_scientist/request.md",
+      "sha256": "d880234adef638d96e78187c2eae737d03552ec94cdb5a5f814ebeddc6ca14d2",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/data_scientist/specify.md",
+      "sha256": "6e09cabf8c59f3427a9b219f9aaff904b1dcb07b508ee7027ac620db37a33208",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/data_scientist/review.md",
+      "sha256": "9509c5804ca7724700b40a841afdafd1c898a29462a1e3f1b762b362e8203832",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/frontend_engineer/constitution.md",
+      "sha256": "c7feb7990c9acb2523b7de0336ec88672a6fc2cf3475f5258c0bc2765f641694",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/frontend_engineer/implement.md",
+      "sha256": "d3436884f09ce21a3e7c433cf057c5d3f6e9bae6ccba929724dd87734ecff30d",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/frontend_engineer/architecture.md",
+      "sha256": "8327d453994374a5ce0ba3cdb4ec30d632872728c9fc810d8c93e0d18dc72ce6",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/frontend_engineer/push.md",
+      "sha256": "22684cd3bc1db5eccd7d4323fa3b5120b5b153a189b62a6b5bc6469bd9a097c2",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/frontend_engineer/analyze.md",
+      "sha256": "da74f7d2df321b03487eca2e86c677d9a38499e79cd2ff39d7a48320c67fb172",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/frontend_engineer/fact-check.md",
+      "sha256": "dd5f82f1a96835c0ac2d6d3742486564df9ec9eff7ed27fa6eef9676cf5b3d5d",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/frontend_engineer/tests.md",
+      "sha256": "eae946fadb5120ffda42bc8d9a507977db507926b4f8b8b206f88c4804d7980e",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/frontend_engineer/tasks.md",
+      "sha256": "ca3067b258a18d6fed4c6076e0993caafe166d9058bdde9dfa623a3f8995b100",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/frontend_engineer/clarify.md",
+      "sha256": "ed91dbce5e4d44ad31047d70aac3c8d614362a6e00575daa7d4303d10254fa78",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/frontend_engineer/checklist.md",
+      "sha256": "6f70bf71ae1c7e0cef114dcd058d1b23d66c18c6481ccb3e5832177afa2be66e",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/frontend_engineer/plan.md",
+      "sha256": "d1b5411cbb21a2f6d355ef7a443496d8332af6ba3275b72e1e724de53d4b7bf6",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/frontend_engineer/request.md",
+      "sha256": "a63eeb21bc73e62a83f3040e0be5e50671036803d34eec9019e6edffd3b46754",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/frontend_engineer/specify.md",
+      "sha256": "2342f22d4eacf71702c4bf6bb31aec81c474f5e1360a5b91c215d6afe60add39",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/frontend_engineer/review.md",
+      "sha256": "4c58b7101d8e15c2da08feee900de4de8c4f5396a976b6b3649bb07e81d27452",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/ml_engineer/constitution.md",
+      "sha256": "1cc13b4a64d6c34822707989250f611cb7400abb1d07ad80ba3f96170843df71",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/ml_engineer/implement.md",
+      "sha256": "af7b6651c730b694562b5ca8d90b1c8b773b2a945336d54d7e1d6f29fa9a0b04",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/ml_engineer/architecture.md",
+      "sha256": "b5bb25faea8bffa734c36e67f71c300237260b4bfa12b4a2d43edbaa9e3aface",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/ml_engineer/push.md",
+      "sha256": "1e21de8f212676897a1da539d2b6a817a7d254d12acfd80aa4131332415f2729",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/ml_engineer/analyze.md",
+      "sha256": "83add483d5d92592e3b111d5e39d75ad6166377fe38e32412d8d17426446152a",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/ml_engineer/fact-check.md",
+      "sha256": "6d5c4ee23db0ed581e1bf1fb1582a3caacc637280573e4a7984ed258c75eedbf",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/ml_engineer/tests.md",
+      "sha256": "f33b845c9830b6f0505764302f29b208360eebc4d77a37e92e8372138dd6c2d7",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/ml_engineer/tasks.md",
+      "sha256": "821454dba14e6555da70ac017d802170bb784aedf5065d6a8b1c1c9894a06bbf",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/ml_engineer/clarify.md",
+      "sha256": "83ed94e1f56833b2c21e283c97523ea583aa7b02c741af5d5fd25c0bc8121607",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/ml_engineer/checklist.md",
+      "sha256": "39fa634dab0365b9638bac44124d87f808cf10a0efcf1978b3389fbbb7e544e3",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/ml_engineer/plan.md",
+      "sha256": "4d1e01d8320001205febf3bd85655f75f70ad82ae2180376c23a1ecb6509f757",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/ml_engineer/request.md",
+      "sha256": "2aa45e58aed53beb9c35bef45d0da1abdbcebdcc54cdcf3bf1dde9fb24c2a7cd",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/ml_engineer/specify.md",
+      "sha256": "fa9fa1197f88c2cad3bb8499df469fc6ae4eed672c86f8160e50418e74dc6a60",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/ml_engineer/review.md",
+      "sha256": "a7e32cc7d319fd5f03bee4f9d8921df2bec4a462d7b2e1fdca9acc270030832e",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/sre/constitution.md",
+      "sha256": "3bb000811dc3849d106f473d0e570a8973e3e63e5682f2f5e591963890d956ab",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/sre/implement.md",
+      "sha256": "172246f996053b5be5f542df58cd9f4fbc9865f1c3eb6ed7f7fb4db0413e5f1d",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/sre/architecture.md",
+      "sha256": "5f82b553a4d344898f9371b220ad686a1e5cdf850ae936011fb9106e884a00ac",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/sre/push.md",
+      "sha256": "f76889788ba61c34ff641159bd7d8eb893d3fc84ca2277b2eb465679da5e8646",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/sre/analyze.md",
+      "sha256": "4208ac7a968e8adc9f5e1c9aa87a523b548a2f379a6ef0c971c9aaf7dd7cd7f4",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/sre/fact-check.md",
+      "sha256": "d4c2c8b75a0f31065df3442e435d93cf49c991db56e05efad61d04537beee5ce",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/sre/tests.md",
+      "sha256": "d2b20b1e3b692dca428c7a90d5413af351d26a61943a9ebd69cc2ee0beca4dfb",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/sre/tasks.md",
+      "sha256": "3ff8ea4fd0125c298bb9da57dfcbe0d9627ebd2be056fa3752be20914971c72f",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/sre/clarify.md",
+      "sha256": "001288eeb58c5f397b51bd0757ab56a39390a545256093370e041a53328f56e2",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/sre/plan.md",
+      "sha256": "eb9668bbe0837b24b763901717678364c10b6f379563254e3a033878d25d22a5",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/sre/request.md",
+      "sha256": "ad7bf76302f94fc73403e7e581a524b90e2c9f8e3355c294f54680e3cc10021e",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/sre/review.md",
+      "sha256": "350d133aae7fbf685776d3ade28ee3361d836bcc2b2ae8ed6892eb32ad996061",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/security_compliance/constitution.md",
+      "sha256": "bfba6fd02f203ae2a47e88cbc7005778242557aee309f7c09e5cae0f4acbc199",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/security_compliance/architecture.md",
+      "sha256": "e1cfe21a7a0eaa0d0d2a83734effdd0654dbb446b79be90f45856c9659458fd5",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/security_compliance/push.md",
+      "sha256": "4fc0c981e4b32db501b1cfeaa3140455bc9d6fe7af7a897cc59a0a24134ca020",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/security_compliance/analyze.md",
+      "sha256": "2bd7c16c2f5723c33d1f3f1f6833c6046bb985a83b3a237638fbca20851d3781",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/security_compliance/fact-check.md",
+      "sha256": "2f968affd4126dd24ab8eba70b4feadfbd10078b77e5d3cb8812e00fa4359eea",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/security_compliance/tasks.md",
+      "sha256": "39f931d095a9581392c54c8378387f9faf4b5547607c1b9399dd1809c12236d7",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/security_compliance/clarify.md",
+      "sha256": "392d5b4d338063327a61f2cdab36ee3f47ef00b1e553b9cf7f65a508f7675fd0",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/security_compliance/checklist.md",
+      "sha256": "7c4a832392d08c3228c349ebe0739601ca0055a05acb7edf0c55c9a6f7e50141",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/security_compliance/plan.md",
+      "sha256": "e3f1e04fa3d28768be7af08c32227091388386486a3f786d3f2a257f3116df3f",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/security_compliance/request.md",
+      "sha256": "3a3227683313edbc26169f71e763d503c6eb1ddd315291518634a104c34edba9",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/security_compliance/review.md",
+      "sha256": "d7c9e515dbc84e48f46be2a3237ffbd1e3bb6b471222009f868e5b85a87179ae",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/data_engineer/constitution.md",
+      "sha256": "f9a52667b12a4f3009e05b724152a0f55ad273c134b47f32728e732b775edd6e",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/data_engineer/implement.md",
+      "sha256": "35510f4cbba5250eb374ed80e39e2c89f5ae4fd37890d1ac97966069cf826b7f",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/data_engineer/architecture.md",
+      "sha256": "5ca1cea808c9f41989c65cc0b175462c3e04002bfe931349f6f40a763ebade19",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/data_engineer/push.md",
+      "sha256": "0926bd7d0252e643e387475526c96fed7216361c0b520156a99b3c4b435395e6",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/data_engineer/analyze.md",
+      "sha256": "9ae6637d1a3dc04640bd46eb8af1c895ad6c2c685fa1c68a7c62448ff80b2484",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/data_engineer/fact-check.md",
+      "sha256": "9262fa3b2562d555f31346fab2f44dc1993359179a48d16979e709c59f863632",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/data_engineer/tests.md",
+      "sha256": "cbe0c214f11da447ad6d1e3260f49c1ba32e473a50b64a2170679892d811fc6b",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/data_engineer/tasks.md",
+      "sha256": "1de9a19dd2effe1cabaa5b976d7f0c6633d135e014907357b5a714da76e2fb93",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/data_engineer/clarify.md",
+      "sha256": "5dd02713908b18e44ab9b344dcece853410c0b79b082b66d02279fff2ce43395",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/data_engineer/checklist.md",
+      "sha256": "f15e413f220ee4ddcb67c17bc19e4ec8022b3df128a561e7abe309343853665c",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/data_engineer/plan.md",
+      "sha256": "d62b3f71271dd260b22c0e643ff2cc78980a62e3e103621d1d1763d4f68b37fd",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/data_engineer/request.md",
+      "sha256": "83e6495998716e04036509ec71ea7b72a5bb435cb44d40cc23f370962986a95c",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/data_engineer/specify.md",
+      "sha256": "c984dbe557834f35b56e725919c3789a28b95833a016844a9377c9843aaa2c0f",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/personas/partials/data_engineer/review.md",
+      "sha256": "04db5172dd6f0aa6621e5ac2d663b4ba276671d6ca57102b3b63f5d6c80d7786",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/request-quickfix-template.md",
+      "sha256": "30d29f73a9c500c14e349cebb15e6feee184edab026c975aee3b1b40d3548f5e",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/agent-rules/specify-rules.md",
+      "sha256": "c1ee2220a7d08530446e2dd39026f583ed34d3e5246d20bcf9932f0768dc6323",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/checklist-template.md",
+      "sha256": "bcda2dc4379c1f2991dd9f7ed18cf64ce09a6657990599633a5689509acf474e",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/qa-test-plan-template.md",
+      "sha256": "f02f9d86ee934d95078565981ad1b3f84c60af35e15f529c54aeea49898410ca",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/gbm-progress-template.md",
+      "sha256": "71cedff10bd5a4db6d26fe255ee759707faa8e55ae31ea5415d91447fc9459b0",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/AGENTS-template.md",
+      "sha256": "79b2cc1d069c3205ca8df96960b10a69c251775b5be54b725e734f9c21b39233",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/request-lite-template.md",
+      "sha256": "6b09f94d5da776981f94cb61063338ddebe9ae9233594741fb2197663d27d772",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/Makefile.example.backup",
+      "sha256": "47f9d94bd824f760dbf7e86f656b2a58ec8960c5b77acac69c966ce38fa61848",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/tasks-template.md",
+      "sha256": "86165099bb41e21c7a3e0c2872efabc5f8f399786e315c5447bad0f2b827a410",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/Makefile.example",
+      "sha256": "dd21b46c047587261843663e6337cb583dea3413f34b84cc3541349c826717e6",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/spec-template.md",
+      "sha256": "1f8d5dd5f367a8aaf3ecb0db93f94315a5b08888a1d4f4a2470fae739f21b583",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/pm-synthesis-template.md",
+      "sha256": "b1dd074464498e873dea4c228db38062d2926d7ae8de1868cab9487c7ba9f367",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/request-template.md",
+      "sha256": "d9c5cba6f4c3d0733184476623bf5fb82b590c96b51db75048f6e0e74b65726b",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/lite.implement.md",
+      "sha256": "c2f1be5f43082d7c5854ee311cc3014e640f29244da9b8e04268da92adcd1e71",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/qa.plan.md",
+      "sha256": "f924105e5947df0b524f8ed038117247b2244e68b8b8bf563c72088b996887fc",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/document.md",
+      "sha256": "0ba684d3d3060a0b8e7a5a7c4d51e50a42d848bfdbe928dd1fec5a8c4b8d6034",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/constitution.md",
+      "sha256": "e53fe21af18f81a27d77bef088535492740a5d0ddc64ba46318bc84d1a8f3eb3",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/validate-constitution.md",
+      "sha256": "398b76e70d1843dde9f1d742912761be3ddd17a9cf23e79c99467afcce674a16",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/qa.review-tests.md",
+      "sha256": "8248c49c030db042bf71b6344d838e9df4ca852abf72e39ef2913862a901d483",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/implement.md",
+      "sha256": "09f8c975a1341f39ac226c22d5b299828dae66765e4e3c62d1612d3a2578b822",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/architecture.md",
+      "sha256": "80e63d40a1c9f788f3807eea5965a07c34e1272e36ec00a6eb836bc7698a91b6",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/validate-architecture.md",
+      "sha256": "31c5eadb2ddf114b96f6c02289ad68835ab5cb9c6a4fe3a8ac2cf9c40a241c86",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/setup.md",
+      "sha256": "96437c68c3ff5cabfa4ae35e3b94383d4ba893af2fb71769460377d42b70eda1",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/pm.handoff.md",
+      "sha256": "7534f9f887468c9801e74cfc2d4cd6b1595df33b3b507533e5791d2d16a267a1",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/push.md",
+      "sha256": "b109e9639cfa790298381de8728fdc696fe24f32827865c52ba50e0fea6dfa0d",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/gbm.md",
+      "sha256": "00ec4c0d75ca8466b4f0878d3eb489bb8c4209ed60f01ec3fc9ee446e3253b1a",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/preflight.md",
+      "sha256": "ebb870a4aef8d041c574d7805ccfa4b0843f1b4ff3f45f084dac081f6aee0e4e",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/ci-matrix.md",
+      "sha256": "16cd113b51eaceddb75f1e5f7cf2835f578688a07e261d76ffcc19230ac12882",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/analyze.md",
+      "sha256": "96732133185fd2854e3c7db1161f1df9ca9acbc94bd4029dc52b3b190fc92834",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/pm.stories.md",
+      "sha256": "fd391fa313cc0a26d21d4f9fb936a5e4dd8cd03962e136e0db7628aca1549cb8",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/lite.plan.md",
+      "sha256": "b8da88dcb8e72f28bc9569527c96d45cd78219237e6ab35c6ea5f5e8fd462df3",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/fact-check.md",
+      "sha256": "d5bb50129be2babdfda21dbc2dc0d8080f51901c57fb1911f38910e769690bef",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/help.md",
+      "sha256": "dd2a78e734d1476f50ee7a5b5eddd19c222bf83a8b813cfc65520fcf1ba58ae1",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/tests.md",
+      "sha256": "7edb896f1bffe51de234004d77ce04b8069bbd5d7852618136ae69dce227390f",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/pm.align.md",
+      "sha256": "e8d3a90822d01510ab49e5838fd8ce4bbe7018c997b922de4916332ddde3c88c",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/lite.push.md",
+      "sha256": "aae437489201664f2d282c7ff0edf7572e7a1679af00785a34d47139460abaae",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/lite.request.md",
+      "sha256": "4c70fd788ffa52154ecdfd011c409adb846f0073ee6251d069ccbeef0043313e",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/tasks.md",
+      "sha256": "82945eec3718f1606d67835df332f28bc6d193cff7ada6ec98104239741d71a5",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/clarify.md",
+      "sha256": "da11398bdcadea228031c70b63e8120fd4a82f6bfcd200d197ef9f8987835356",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/branch-status.md",
+      "sha256": "dd03f5664d04ee10c562ae4f4cf34ac26db3cb4e897e762827053abb7e96e033",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/pm.research.md",
+      "sha256": "7be57b59f8c67c451531e4d865fa8a519a3d5b7dfe74be7b80edd464e855ffec",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/qa.implement.md",
+      "sha256": "fe92d52beed1ad5c4bbef06a72efe54fc35a0e8f10d225332994c377ef06daf6",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/ci-setup.md",
+      "sha256": "ad219fecea95c3dd159c5d43fe938f208e3a565b3877cec9a51aaf9b9e73cac1",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/upload-spec.md",
+      "sha256": "b0d6e3b0cf1131de944f63697c0fba32a25b3546f7a7c6956b4bc9b3a26678de",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/qa.scaffold-tests.md",
+      "sha256": "9d3c6296dca743a0943c87f2dc2d7e84361ab5d157795d8144530cc33d802b81",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/checklist.md",
+      "sha256": "f6dff9292e6d706d03af1704f37520b3354c86f5ea7248928c564ae1b116ea65",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/pm.validate-problem.md",
+      "sha256": "f141421cd4f5355d0f94afd9ca695f229656c896cf50e92f25ddca79236050c7",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/telemetry-check.md",
+      "sha256": "2a7a475503f9a2a972ca54058ed9ab736669cc4219c03dff12e79f510d01ee1d",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/pm.interview.md",
+      "sha256": "6fe41a6e1f668b662fe3bbd23ec1a96d1d258a8a237ff5b67a38b24e2e517a40",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/qa.tasks.md",
+      "sha256": "41d84013b8346e14ac8c1581122e29f5f0feb7ee3d15aee346b7d64d09865e0e",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/plan.md",
+      "sha256": "a1ec1aa0c1cb9b929d106142114c1ac3befe6c3d47cedd0e93f9176c4f413034",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/pm.prd.md",
+      "sha256": "edf0abedd0b1a789f7f98a4b81e0a13d5db97e2e49f7d478e0ba83a7a03cf5eb",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/design.md",
+      "sha256": "5bf945d688f54caadd135eb25cc006a187d0c81cb66ad172956bfc9af02a4c82",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/docs.md",
+      "sha256": "67891e1510dfeaa86fe03f33dea713dc5380408187aeadf33a7b00701272aef6",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/security-setup.md",
+      "sha256": "3ee79822040ccda42083254a5bf7048f33d6bad3db39ec10284001af952955c8",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/request.md",
+      "sha256": "70304d5fa58218cf750cb39bee87434460b36bcfd22356755c471f4dff45b99b",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/specify.md",
+      "sha256": "e079d2057c4fc2eb678f23764bdb498007feb3896aa951026f336c6ccae2b9cd",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/review.md",
+      "sha256": "e1eead7be53d3207090d26ea2a1b9d0c717c90b2c9e3b9dad148568b513c3770",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/ready-to-push.md",
+      "sha256": "59e9c7801d4cdd184d6bea9d5b6cff53d6824b158668ab79d90dcb22d2f55a19",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/qa.generate-fixtures.md",
+      "sha256": "22378a6ded817e5854b0d1e4a8c120a4605d22578906bd5f8eb2562d80f5623d",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/persona.md",
+      "sha256": "4f2201689c30de3e61ba139e47aa5d47367c3a83c21757f69c6e79156632b5d2",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/quickfix.md",
+      "sha256": "b449748bda60b44b11262d13da201ce7e3f4bdd3ee403b29e067160279dff860",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/validate-conventions.md",
+      "sha256": "b245f26bf69aa72209adc2b6e47c7b8b5c6957c973a9e45a59b250a1cc0c2b5e",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/commands/pm.discover.md",
+      "sha256": "5b3fd18dfdd7291865489f3e19c60e5f7e2aeb19d99e8abcb25efd3b32b751c6",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/github-workflows/augment-code-analysis.yml",
+      "sha256": "97e9ff20f5221e2d705788dbe5e79260e2ebaa788180bcd81ab05c1556417fb9",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/github-workflows/basic-ci.yml",
+      "sha256": "7a6e25211275efba3d2831465220360ee59225e1a2c2f989b568331b9274cf87",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/github-workflows/slice-validation.yml",
+      "sha256": "01301cff9ed661c7211b183e5196e2c72f3fcffaf1fce5bf31f9c42911cf8854",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/github-workflows/intelligent-pr-review.yml",
+      "sha256": "ae84707b78847d87a0e583679e210bce2f6c1eb684533dd24c2015ffdf4a6ff5",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/github-workflows/enhanced-security.yml",
+      "sha256": "075657a11fa3ddb14a086e1201de187b91e30326cd7219998c20456c8b970389",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/github-workflows/enhanced-pr-review.yml",
+      "sha256": "f12953607e55f92edcec57e693b50e70144511096e70bd3e6fa91e6e6776e065",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/github-workflows/pr-review.yml",
+      "sha256": "45a56fc2a6d77b276feb036477ad8c25dc2d09d549e9f2533f9fed0cfe81f1bb",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/github-workflows/comprehensive-ci.yml",
+      "sha256": "6b809ff4dd96d4fa9e040c931dfe0797e45bf8d83acd37d926386d29ce79601b",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/github-workflows/README.md",
+      "sha256": "4802edf6bc8b583c0c7db95e7dcaf8a69f0933082a8d0e884c12664a1b2f9bb3",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/github-workflows/release-please.yml",
+      "sha256": "e3cc7e2094c503b67cebfb8233817065dcdb583d83f17d8555737b734a9225db",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/github-workflows/observability-ci.yml",
+      "sha256": "77e4588d1e81872033479183c1f9f285649a7322aee353eefa8f268bb1caf70d",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/github-workflows/slo-lint.yml",
+      "sha256": "efdc50a17e511b5e50f97ebfc995a9134da9316a664b3032532512b626c92850",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/_concise-style.md",
+      "sha256": "6eec4b8bd379f321019b64d4a6a4e4d9f1da467d4961ad3f3cd7d8b8f921a280",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/ac-overrides.yaml",
+      "sha256": "064f3de714cb2702df9afb3341f0ea7b3ab1b7f41d4100c4a4b922d229e6d8c5",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/reference/pm-interview-templates.md",
+      "sha256": "a057f6af4c95240718bb99ee83adfb035193940c97d96c1e341999b810366af2",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/reference/participants-loading.md",
+      "sha256": "3b78e1932f983de4399c9598c357c71172c02a46ce9449a358be8e91a1b9ddb3",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/reference/pm-handoff-templates.md",
+      "sha256": "3f3a7e1e38f0b3e3cd43b0f383c92d04c281f72b175ab4a24fe2ab3244c8adb7",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/reference/architecture-context-loading.md",
+      "sha256": "7053a770229d42b33cffe549360550dde71c552810be57b1391a3829b7493725",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/reference/pm-research-templates.md",
+      "sha256": "e3c2abad0be830a8afdea02ed400d70586c66087fc178df9cede373dbe44ea37",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/reference/prerequisite-validation.md",
+      "sha256": "499f8d579620d3df9f5b126bbd40ba01be2f22301d5ac47960ddf485940ec5aa",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/reference/pm-validation-template.md",
+      "sha256": "974532283de6ba06a6b371643975a0e360e1a4699815d19e134aab349a00e854",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/reference/help-workflows.md",
+      "sha256": "7d972db917d5f3b0718caf5a1db504b7f7f7998adfec9bcd82b7d38d287448e3",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/reference/persona-next-steps.md",
+      "sha256": "19d01e5acd8b3e1e5376906c4d2ab3ebf7b2bc60b94903c97c80ffe8bf3dcf3e",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/reference/pm-stories-templates.md",
+      "sha256": "a07e2d0995cc1447589c80fb6f968ca4798560c548b77053d9abab29cbdadef2",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/reference/oss-licensing-policy.md",
+      "sha256": "f34cbaa9900606e8ec7731755c22a417452b4956e88d7c915493b2a99125d85f",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/implementation-summary-template.md",
+      "sha256": "61497ee1feacfe01b08eb76e46f9c7a16e92d73e6d83339c82027398900c3acb",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/plan-template.md",
+      "sha256": "5f93c58a4433781c30f25ba4c2c4735ce8f15b69e0069644becc7033e0ffbecc",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/agent_templates/gemini/GEMINI.md",
+      "sha256": "5eef533af4a6ba778f12211e3944b16c23d47e110d56d61f4ad6c9543b2eb64e",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gobuildme/templates/agent_templates/qwen/QWEN.md",
+      "sha256": "d4e58030495e58ac9d6f208c672d9a4cf51778e197dbab39d544644b2a2dfa54",
+      "strategy": "merge",
+      "mode": "644"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "38fa90c418e4f3e604005ee2b8a513870e710b77bcd89b110d31ce036a153f2c",
+      "strategy": "replace",
+      "mode": "644"
+    },
+    {
+      "path": "CLAUDE.md",
+      "sha256": "d431870ee136bc12ba157fa379fb56d82d7ad1fe5b30a4f5d6398cbb2f80daa0",
+      "strategy": "replace",
+      "mode": "644"
+    }
+  ],
+  "changelog_url": "https://github.com/gofundme/gobuildme/releases/tag/v0.10.1",
+  "telemetry": {
+    "enabled": true,
+    "configured_at": "2026-01-30T04:33:05.929683Z"
+  },
+  "upload_spec": {
+    "auto_upload": false,
+    "s3_bucket": "tools-ai-agents-spec-driven-development-gfm",
+    "configured_at": "2026-01-30T04:33:05.931557Z"
+  },
+  "github_workflows": {
+    "enabled": false,
+    "configured_at": "2026-01-30T04:33:05.933740Z"
+  }
+}

@@ -1,0 +1,59 @@
+name: PR Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Full history for better analysis
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install uv
+      uses: astral-sh/setup-uv@v2
+    
+    - name: Install dependencies
+      run: |
+        if [ -f pyproject.toml ]; then
+          uv sync --dev
+        elif [ -f requirements.txt ]; then
+          uv pip install -r requirements.txt
+        fi
+    
+    - name: Run comprehensive review
+      run: |
+        if [ -f .gobuildme/scripts/bash/comprehensive-review.sh ]; then
+          .gobuildme/scripts/bash/comprehensive-review.sh
+        else
+          echo "Comprehensive review script not found, running basic checks"
+          make lint
+          make type-check
+          make test
+        fi
+    
+    - name: Check for breaking changes
+      run: |
+        # Add your breaking change detection logic here
+        echo "Checking for breaking changes..."
+        # Example: API compatibility check, schema validation, etc.
+    
+    - name: Validate architecture
+      run: |
+        if [ -f .gobuildme/scripts/bash/validate-architecture.sh ]; then
+          .gobuildme/scripts/bash/validate-architecture.sh
+        fi
+    
+    - name: Check code conventions
+      run: |
+        if [ -f .gobuildme/scripts/bash/validate-conventions.sh ]; then
+          .gobuildme/scripts/bash/validate-conventions.sh
+        fi

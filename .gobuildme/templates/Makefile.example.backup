@@ -1,0 +1,105 @@
+## Generic Makefile (polyglot)
+# Detects languages and provides common targets across Python, Node/TS, PHP, Go, Rust, Java.
+
+.PHONY: help install test lint format type-check build security ci pre-commit
+.DEFAULT_GOAL := help
+
+## Detection
+HAS_PYTHON := $(shell test -f pyproject.toml -o -f requirements.txt -o -f setup.py && echo true)
+HAS_NODE   := $(shell test -f package.json && echo true)
+HAS_TS     := $(shell test -f tsconfig.json && echo true)
+HAS_PHP    := $(shell test -f composer.json && echo true)
+HAS_GO     := $(shell test -f go.mod && echo true)
+HAS_RUST   := $(shell test -f Cargo.toml && echo true)
+HAS_JAVA   := $(shell test -f pom.xml -o -f build.gradle -o -f build.gradle.kts && echo true)
+
+help: ## Show this help
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[32m%-18s\033[0m %s\n", $$1, $$2}'
+	@echo "\nDetected: PY=$(HAS_PYTHON) NODE=$(HAS_NODE) TS=$(HAS_TS) PHP=$(HAS_PHP) GO=$(HAS_GO) RUST=$(HAS_RUST) JAVA=$(HAS_JAVA)"
+
+install: ## Install dependencies (best-effort)
+ifeq ($(HAS_PYTHON),true)
+	@echo "[python] installing..."; \
+	if command -v uv >/dev/null 2>&1; then \
+		if [ -f pyproject.toml ]; then uv sync --dev; elif [ -f requirements.txt ]; then uv pip install -r requirements.txt; fi; \
+	else echo "uv not found"; fi
+endif
+ifeq ($(HAS_NODE),true)
+	@echo "[node] installing..."; \
+	if command -v pnpm >/dev/null 2>&1; then pnpm i; \
+	elif command -v yarn >/dev/null 2>&1; then yarn; \
+	elif command -v bun >/dev/null 2>&1; then bun install; \
+	else npm i; fi
+endif
+ifeq ($(HAS_PHP),true)
+	@echo "[php] installing..."; \
+	if command -v composer >/dev/null 2>&1; then composer install --no-interaction; else echo "composer not found"; fi
+endif
+ifeq ($(HAS_GO),true)
+	@echo "[go] tidy..."; go mod tidy || true
+endif
+ifeq ($(HAS_RUST),true)
+	@echo "[rust] fetch..."; cargo fetch || true
+endif
+ifeq ($(HAS_JAVA),true)
+	@echo "[java] resolve..."; if [ -f pom.xml ]; then mvn -q -DskipTests dependency:resolve || true; else ./gradlew --quiet --no-daemon tasks || true; fi
+endif
+
+lint: ## Lint code
+	@.gobuildme/scripts/bash/run-lint.sh || true
+
+format: ## Format code
+	@.gobuildme/scripts/bash/run-format.sh || true
+
+format-check: ## Verify formatting (non-mutating)
+	@.gobuildme/scripts/bash/format-check.sh || true
+
+type-check: ## Static type checks
+	@.gobuildme/scripts/bash/run-type-check.sh || true
+
+test: ## Run tests
+	@.gobuildme/scripts/bash/run-tests.sh || true
+
+build: ## Build artifacts
+ifeq ($(HAS_NODE),true)
+	@echo "[node] build"; npm run build 2>/dev/null || yarn build 2>/dev/null || pnpm build 2>/dev/null || true
+endif
+ifeq ($(HAS_PYTHON),true)
+	@echo "[python] build"; if command -v uv >/dev/null 2>&1; then uv build || true; fi
+endif
+
+security: ## Security scans
+	@.gobuildme/scripts/bash/security-scan.sh || true
+
+ci: install lint type-check test security ## Run typical CI pipeline
+	@echo "CI pipeline done"
+
+pre-commit: format lint type-check test ## Run local pre-commit checks
+	@echo "OK to commit"
+
+# Architecture & conventions
+analyze-architecture: ## Generate architecture analysis report
+	@.gobuildme/scripts/bash/analyze-architecture.sh || true
+
+extract-conventions: ## Generate conventions report
+	@.gobuildme/scripts/bash/extract-conventions.sh || true
+
+validate-architecture: ## Validate architecture boundaries
+	@.gobuildme/scripts/bash/validate-architecture.sh
+
+validate-conventions: ## Validate formatting and style
+	@.gobuildme/scripts/bash/validate-conventions.sh
+
+# Git helpers
+branch-status: ## Show branch, status, ahead/behind
+	@.gobuildme/scripts/bash/branch-status.sh || true
+
+ready-to-push: ## Run pre-push checks
+	@.gobuildme/scripts/bash/ready-to-push.sh || true
+
+# Housekeeping
+clean: ## Remove build/test caches
+	@rm -rf __pycache__ .pytest_cache .mypy_cache .ruff_cache build/ dist/ *.egg-info/ node_modules/.cache .coverage coverage.xml htmlcov
+
+clean-deps: ## Remove dependency artifacts (use with caution)
+	@rm -rf node_modules/ ; rm -f package-lock.json yarn.lock pnpm-lock.yaml bun.lockb || true

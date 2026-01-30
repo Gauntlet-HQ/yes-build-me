@@ -1,0 +1,240 @@
+"""
+Integration tests for {SERVICE_NAME} external service
+
+This file contains:
+- 2 SAMPLE tests demonstrating best practices
+- TODO tests for service integration
+
+Testing Pattern:
+1. Setup: Mock external service or use test environment
+2. Execute: Call service integration
+3. Verify: Response and side effects
+4. Cleanup: Reset mocks
+"""
+
+import pytest
+from unittest.mock import Mock, patch
+from tests.fixtures.mock_services import mock_{SERVICE_NAME}
+
+# ============================================================================
+# SAMPLE TESTS - Demonstrating Best Practices
+# ============================================================================
+
+def test_{SERVICE_NAME}_successful_request(mock_{SERVICE_NAME}):
+    """
+    SAMPLE TEST: Successful request to {SERVICE_NAME}
+    
+    This demonstrates:
+    - Mocking external service
+    - Testing successful response
+    - Verifying request parameters
+    - Checking side effects
+    """
+    # Setup: Configure mock response
+    mock_{SERVICE_NAME}.return_value = {
+        "status": "success",
+        "data": {"id": "test_123"}
+    }
+    
+    # Execute: Call service integration
+    from app.integrations.{SERVICE_NAME} import call_{SERVICE_NAME}
+    result = call_{SERVICE_NAME}(param1="value1", param2="value2")
+    
+    # Verify: Successful response
+    assert result["status"] == "success"
+    assert result["data"]["id"] == "test_123"
+    
+    # Verify: Service called with correct parameters
+    mock_{SERVICE_NAME}.assert_called_once_with(
+        param1="value1",
+        param2="value2"
+    )
+    
+    # TODO: Verify side effects (database updates, logs, etc.)
+
+
+def test_{SERVICE_NAME}_error_handling(mock_{SERVICE_NAME}):
+    """
+    SAMPLE TEST: Error handling for {SERVICE_NAME}
+    
+    This demonstrates:
+    - Mocking service error
+    - Testing error handling
+    - Verifying retry logic
+    - Checking fallback behavior
+    """
+    # Setup: Configure mock to raise error
+    mock_{SERVICE_NAME}.side_effect = Exception("Service unavailable")
+    
+    # Execute: Call service integration (should handle error)
+    from app.integrations.{SERVICE_NAME} import call_{SERVICE_NAME}
+    
+    # Verify: Error handled gracefully
+    with pytest.raises(Exception) as exc_info:
+        call_{SERVICE_NAME}(param1="value1")
+    
+    assert "Service unavailable" in str(exc_info.value)
+    
+    # TODO: Verify retry attempts
+    # TODO: Verify fallback behavior
+    # TODO: Verify error logging
+
+
+# ============================================================================
+# TODO TESTS - Fill in the implementation
+# ============================================================================
+
+def test_{SERVICE_NAME}_timeout(mock_{SERVICE_NAME}):
+    """
+    TODO: Test timeout handling
+    
+    Test scenarios:
+    - Request times out
+    - Timeout configured correctly
+    
+    Assertions:
+    - Timeout error raised
+    - Request cancelled
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement timeout test")
+
+
+def test_{SERVICE_NAME}_retry_logic(mock_{SERVICE_NAME}):
+    """
+    TODO: Test retry mechanism
+    
+    Test scenarios:
+    - First attempt fails
+    - Retry succeeds
+    - Max retries exceeded
+    
+    Assertions:
+    - Correct number of retries
+    - Exponential backoff applied
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement retry test")
+
+
+def test_{SERVICE_NAME}_circuit_breaker(mock_{SERVICE_NAME}):
+    """
+    TODO: Test circuit breaker pattern
+    
+    Test scenarios:
+    - Multiple failures trigger circuit breaker
+    - Circuit breaker opens
+    - Circuit breaker closes after timeout
+    
+    Assertions:
+    - Circuit breaker state changes correctly
+    - Requests blocked when open
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement circuit breaker test")
+
+
+def test_{SERVICE_NAME}_rate_limiting(mock_{SERVICE_NAME}):
+    """
+    TODO: Test rate limiting
+    
+    Test scenarios:
+    - Rate limit not exceeded
+    - Rate limit exceeded
+    - Rate limit reset
+    
+    Assertions:
+    - Requests throttled correctly
+    - Rate limit headers respected
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement rate limiting test")
+
+
+def test_{SERVICE_NAME}_authentication(mock_{SERVICE_NAME}):
+    """
+    TODO: Test authentication
+    
+    Test scenarios:
+    - Valid credentials
+    - Invalid credentials
+    - Expired credentials
+    - Token refresh
+    
+    Assertions:
+    - Auth headers sent correctly
+    - Token refresh works
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement authentication test")
+
+
+def test_{SERVICE_NAME}_request_validation(mock_{SERVICE_NAME}):
+    """
+    TODO: Test request validation
+    
+    Test scenarios:
+    - Valid request
+    - Missing required fields
+    - Invalid field types
+    
+    Assertions:
+    - Validation errors caught
+    - Invalid requests rejected
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement request validation test")
+
+
+def test_{SERVICE_NAME}_response_parsing(mock_{SERVICE_NAME}):
+    """
+    TODO: Test response parsing
+    
+    Test scenarios:
+    - Valid response format
+    - Invalid response format
+    - Missing fields
+    
+    Assertions:
+    - Response parsed correctly
+    - Errors handled gracefully
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement response parsing test")
+
+
+def test_{SERVICE_NAME}_webhook_handling(mock_{SERVICE_NAME}):
+    """
+    TODO: Test webhook handling (if applicable)
+    
+    Test scenarios:
+    - Valid webhook received
+    - Invalid webhook signature
+    - Webhook processing
+    
+    Assertions:
+    - Webhook verified
+    - Webhook processed correctly
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement webhook test")
+
+
+# ============================================================================
+# HELPER FUNCTIONS (Optional)
+# ============================================================================
+
+def create_mock_response(status="success", **kwargs):
+    """
+    Helper function to create mock service response
+    
+    Usage:
+        response = create_mock_response(status="success", data={"id": "123"})
+    """
+    defaults = {
+        "status": status,
+        "data": {}
+    }
+    defaults.update(kwargs)
+    return defaults
+

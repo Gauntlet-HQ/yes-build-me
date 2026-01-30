@@ -1,0 +1,281 @@
+"""
+Integration tests for {MODEL_NAME} database model
+
+This file contains:
+- 2 SAMPLE tests demonstrating best practices
+- TODO tests for CRUD operations
+
+Testing Pattern:
+1. Setup: Create test database session
+2. Execute: Perform database operation
+3. Verify: Assert database state
+4. Cleanup: Rollback transaction (handled by fixture)
+"""
+
+import pytest
+from sqlalchemy.exc import IntegrityError
+from app.models import {MODEL_NAME}
+from tests.fixtures.database_fixtures import db_session, clean_database
+
+# ============================================================================
+# SAMPLE TESTS - Demonstrating Best Practices
+# ============================================================================
+
+def test_create_{MODEL_NAME_LOWER}_success(db_session):
+    """
+    SAMPLE TEST: Create {MODEL_NAME} with valid data
+    
+    This demonstrates:
+    - Creating model instance
+    - Committing to database
+    - Verifying fields
+    - Checking auto-generated fields (id, timestamps)
+    """
+    # Setup: Prepare test data
+    {MODEL_NAME_LOWER}_data = {
+        "name": "Test {MODEL_NAME}",
+        "email": "test@example.com",
+        # TODO: Add required fields
+    }
+    
+    # Execute: Create model
+    {MODEL_NAME_LOWER} = {MODEL_NAME}(**{MODEL_NAME_LOWER}_data)
+    db_session.add({MODEL_NAME_LOWER})
+    db_session.commit()
+    db_session.refresh({MODEL_NAME_LOWER})
+    
+    # Verify: Model created successfully
+    assert {MODEL_NAME_LOWER}.id is not None
+    assert {MODEL_NAME_LOWER}.name == {MODEL_NAME_LOWER}_data["name"]
+    assert {MODEL_NAME_LOWER}.email == {MODEL_NAME_LOWER}_data["email"]
+    
+    # Verify: Auto-generated fields
+    assert {MODEL_NAME_LOWER}.created_at is not None
+    assert {MODEL_NAME_LOWER}.updated_at is not None
+    
+    # TODO: Add more field validations
+
+
+def test_query_{MODEL_NAME_LOWER}_with_filters(db_session):
+    """
+    SAMPLE TEST: Query {MODEL_NAME} with filters
+    
+    This demonstrates:
+    - Creating multiple test records
+    - Querying with filters
+    - Verifying query results
+    """
+    # Setup: Create test data
+    {MODEL_NAME_LOWER}_1 = {MODEL_NAME}(name="Active User", status="active")
+    {MODEL_NAME_LOWER}_2 = {MODEL_NAME}(name="Inactive User", status="inactive")
+    {MODEL_NAME_LOWER}_3 = {MODEL_NAME}(name="Active Admin", status="active")
+    
+    db_session.add_all([{MODEL_NAME_LOWER}_1, {MODEL_NAME_LOWER}_2, {MODEL_NAME_LOWER}_3])
+    db_session.commit()
+    
+    # Execute: Query active users
+    active_users = db_session.query({MODEL_NAME}).filter_by(status="active").all()
+    
+    # Verify: Correct results returned
+    assert len(active_users) == 2
+    assert all(user.status == "active" for user in active_users)
+    
+    # TODO: Add more query tests
+
+
+# ============================================================================
+# TODO TESTS - Fill in the implementation
+# ============================================================================
+
+def test_create_{MODEL_NAME_LOWER}_with_missing_required_fields(db_session):
+    """
+    TODO: Test creating {MODEL_NAME} without required fields
+    
+    Test scenarios:
+    - Missing name
+    - Missing email
+    - Missing other required fields
+    
+    Assertions:
+    - IntegrityError raised
+    - Database unchanged
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement required fields test")
+
+
+def test_create_{MODEL_NAME_LOWER}_with_duplicate_unique_field(db_session):
+    """
+    TODO: Test creating {MODEL_NAME} with duplicate unique field
+    
+    Test scenarios:
+    - Duplicate email
+    - Duplicate username
+    - Duplicate other unique fields
+    
+    Assertions:
+    - IntegrityError raised
+    - Database unchanged
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement duplicate test")
+
+
+def test_read_{MODEL_NAME_LOWER}_by_id(db_session):
+    """
+    TODO: Test reading {MODEL_NAME} by ID
+    
+    Test scenarios:
+    - Valid ID
+    - Invalid ID
+    
+    Assertions:
+    - Correct record returned
+    - None returned for invalid ID
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement read by ID test")
+
+
+def test_update_{MODEL_NAME_LOWER}_success(db_session):
+    """
+    TODO: Test updating {MODEL_NAME}
+    
+    Test scenarios:
+    - Update single field
+    - Update multiple fields
+    - Update timestamp updated
+    
+    Assertions:
+    - Fields updated correctly
+    - updated_at timestamp changed
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement update test")
+
+
+def test_delete_{MODEL_NAME_LOWER}_success(db_session):
+    """
+    TODO: Test deleting {MODEL_NAME}
+    
+    Test scenarios:
+    - Soft delete (if applicable)
+    - Hard delete (if applicable)
+    - Cascade delete (if applicable)
+    
+    Assertions:
+    - Record removed or marked deleted
+    - Related records handled correctly
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement delete test")
+
+
+def test_{MODEL_NAME_LOWER}_relationships(db_session):
+    """
+    TODO: Test model relationships
+    
+    Test scenarios:
+    - One-to-many relationships
+    - Many-to-many relationships
+    - Foreign key constraints
+    
+    Assertions:
+    - Relationships loaded correctly
+    - Cascade behavior works
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement relationships test")
+
+
+def test_{MODEL_NAME_LOWER}_validation(db_session):
+    """
+    TODO: Test model-level validation
+    
+    Test scenarios:
+    - Email format validation
+    - Phone format validation
+    - Custom validators
+    
+    Assertions:
+    - Validation errors raised
+    - Invalid data rejected
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement validation test")
+
+
+def test_{MODEL_NAME_LOWER}_default_values(db_session):
+    """
+    TODO: Test default values
+    
+    Test scenarios:
+    - Default status
+    - Default timestamps
+    - Default other fields
+    
+    Assertions:
+    - Defaults applied correctly
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement defaults test")
+
+
+def test_{MODEL_NAME_LOWER}_indexes(db_session):
+    """
+    TODO: Test database indexes
+    
+    Test scenarios:
+    - Query performance with indexes
+    - Unique indexes enforced
+    
+    Assertions:
+    - Queries use indexes
+    - Unique constraints work
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement indexes test")
+
+
+def test_{MODEL_NAME_LOWER}_transactions(db_session):
+    """
+    TODO: Test transaction behavior
+    
+    Test scenarios:
+    - Commit transaction
+    - Rollback transaction
+    - Concurrent transactions
+    
+    Assertions:
+    - ACID properties maintained
+    - Isolation levels work
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement transactions test")
+
+
+# ============================================================================
+# HELPER FUNCTIONS (Optional)
+# ============================================================================
+
+def create_test_{MODEL_NAME_LOWER}(db_session, **kwargs):
+    """
+    Helper function to create test {MODEL_NAME}
+    
+    Usage:
+        {MODEL_NAME_LOWER} = create_test_{MODEL_NAME_LOWER}(db_session, name="Test")
+    """
+    defaults = {
+        "name": "Test {MODEL_NAME}",
+        "email": "test@example.com",
+        # TODO: Add default values for required fields
+    }
+    defaults.update(kwargs)
+    
+    {MODEL_NAME_LOWER} = {MODEL_NAME}(**defaults)
+    db_session.add({MODEL_NAME_LOWER})
+    db_session.commit()
+    db_session.refresh({MODEL_NAME_LOWER})
+    
+    return {MODEL_NAME_LOWER}
+

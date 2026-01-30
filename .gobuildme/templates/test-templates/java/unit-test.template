@@ -1,0 +1,303 @@
+package {PACKAGE_NAME};
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.CsvSource;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+/**
+ * Unit tests for {CLASS_NAME}
+ *
+ * This file contains:
+ * - 2 SAMPLE tests demonstrating best practices
+ * - TODO tests for remaining scenarios
+ *
+ * Testing Pattern:
+ * 1. Setup: Create test data (no external dependencies)
+ * 2. Execute: Call the function/method
+ * 3. Verify: Assert the output
+ * 4. Cleanup: Not needed (unit tests are isolated)
+ *
+ * Unit Test Principles:
+ * - Test ONE function/method at a time
+ * - No database, no network, no file system
+ * - Use mocks for all dependencies
+ * - Fast execution (< 100ms per test)
+ * - Deterministic (same input = same output)
+ */
+class {CLASS_NAME}Test {
+
+    private {CLASS_NAME} instance;
+
+    @Mock
+    private DependencyInterface mockDependency;
+
+    private AutoCloseable closeable;
+
+    // ========================================================================
+    // SETUP AND TEARDOWN
+    // ========================================================================
+
+    @BeforeEach
+    void setUp() {
+        closeable = MockitoAnnotations.openMocks(this);
+        instance = new {CLASS_NAME}(mockDependency);
+    }
+
+    @AfterEach
+    void tearDown() throws Exception {
+        closeable.close();
+    }
+
+    // ========================================================================
+    // SAMPLE TESTS - Demonstrating Best Practices
+    // ========================================================================
+
+    @Test
+    @DisplayName("Should return correct output with valid input")
+    void test{METHOD_NAME}WithValidInput() {
+        // SAMPLE TEST: Test method with valid input
+        //
+        // This demonstrates:
+        // - Testing a single method
+        // - Using simple, predictable inputs
+        // - Clear assertions
+        // - No external dependencies
+
+        // Arrange
+        String input = "test_input";
+        String expectedOutput = "expected_result";
+
+        // Act
+        String result = instance.{METHOD_NAME}(input);
+
+        // Assert
+        assertEquals(expectedOutput, result);
+        // TODO: Add more specific assertions
+    }
+
+    @Test
+    @DisplayName("Should process data correctly with mocked dependency")
+    void test{METHOD_NAME}WithMockedDependency() {
+        // SAMPLE TEST: Test method with mocked dependency
+        //
+        // This demonstrates:
+        // - Testing a class method
+        // - Mocking external dependencies
+        // - Verifying method calls
+        // - Isolating the unit under test
+
+        // Arrange
+        when(mockDependency.getData()).thenReturn(Map.of("key", "value"));
+
+        // Act
+        Object result = instance.process();
+
+        // Assert
+        assertNotNull(result);
+        verify(mockDependency, times(1)).getData();
+        // TODO: Add more specific assertions
+    }
+
+    // ========================================================================
+    // TODO TESTS - Fill in the implementation
+    // ========================================================================
+
+    @Test
+    @DisplayName("TODO: Should handle empty input correctly")
+    void test{METHOD_NAME}WithEmptyInput() {
+        // TODO: Test method with empty input
+        //
+        // Test scenarios:
+        // - Empty string
+        // - Empty list
+        // - Null value
+        //
+        // Assertions:
+        // - Returns default value
+        // - Throws exception
+        // - Returns empty result
+
+        fail("TODO: Implement empty input test");
+    }
+
+    @Test
+    @DisplayName("TODO: Should validate input types")
+    void test{METHOD_NAME}WithInvalidInput() {
+        // TODO: Test method with invalid input
+        //
+        // Test scenarios:
+        // - Wrong type
+        // - Invalid format
+        // - Out of range values
+        //
+        // Assertions:
+        // - Throws IllegalArgumentException
+        // - Throws NullPointerException
+        // - Returns error result
+
+        fail("TODO: Implement invalid input test");
+    }
+
+    @Test
+    @DisplayName("TODO: Should handle edge cases")
+    void test{METHOD_NAME}EdgeCases() {
+        // TODO: Test edge cases
+        //
+        // Test scenarios:
+        // - Maximum values
+        // - Minimum values
+        // - Boundary conditions
+        //
+        // Assertions:
+        // - Handles edge cases correctly
+        // - No overflow/underflow
+
+        fail("TODO: Implement edge cases test");
+    }
+
+    @Test
+    @DisplayName("TODO: Should initialize correctly")
+    void testInitialization() {
+        // TODO: Test class initialization
+        //
+        // Test scenarios:
+        // - Default initialization
+        // - Initialization with parameters
+        // - Invalid initialization parameters
+        //
+        // Assertions:
+        // - Instance created correctly
+        // - Fields set properly
+        // - Throws errors for invalid params
+
+        fail("TODO: Implement initialization test");
+    }
+
+    @Test
+    @DisplayName("TODO: Should handle errors gracefully")
+    void test{METHOD_NAME}ErrorHandling() {
+        // TODO: Test method error handling
+        //
+        // Test scenarios:
+        // - Dependency throws exception
+        // - Invalid state
+        // - Resource not available
+        //
+        // Assertions:
+        // - Exception handled gracefully
+        // - Error message is clear
+        // - State remains consistent
+
+        fail("TODO: Implement error handling test");
+    }
+
+    @Test
+    @DisplayName("TODO: Should be idempotent")
+    void test{METHOD_NAME}Idempotency() {
+        // TODO: Test method idempotency
+        //
+        // Test scenarios:
+        // - Call method multiple times with same input
+        // - Verify same output each time
+        //
+        // Assertions:
+        // - Method is idempotent
+        // - No side effects
+
+        fail("TODO: Implement idempotency test");
+    }
+
+    // ========================================================================
+    // PARAMETRIZED TESTS
+    // ========================================================================
+
+    @ParameterizedTest
+    @CsvSource({
+        "input1, output1",
+        "input2, output2",
+        "input3, output3"
+        // TODO: Add more test cases
+    })
+    @DisplayName("Should return correct output for various inputs")
+    void test{METHOD_NAME}Parametrized(String input, String expectedOutput) {
+        // SAMPLE: Parametrized test for multiple inputs
+        //
+        // This demonstrates:
+        // - Testing multiple scenarios with one test
+        // - Using @ParameterizedTest
+        // - Reducing code duplication
+
+        String result = instance.{METHOD_NAME}(input);
+        assertEquals(expectedOutput, result);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"", "  ", "\t", "\n"})
+    @DisplayName("Should handle whitespace inputs")
+    void test{METHOD_NAME}WithWhitespace(String input) {
+        // SAMPLE: Test with various whitespace inputs
+
+        String result = instance.{METHOD_NAME}(input);
+        assertTrue(result.isEmpty() || result.isBlank());
+    }
+
+    // ========================================================================
+    // EXCEPTION TESTS
+    // ========================================================================
+
+    @Test
+    @DisplayName("Should throw exception on invalid input")
+    void test{METHOD_NAME}ThrowsException() {
+        // SAMPLE: Test exception throwing
+        //
+        // This demonstrates:
+        // - Testing exceptions
+        // - Using assertThrows
+        // - Verifying exception message
+
+        IllegalArgumentException exception = assertThrows(
+            IllegalArgumentException.class,
+            () -> instance.{METHOD_NAME}("invalid_input")
+        );
+
+        assertEquals("Invalid input", exception.getMessage());
+    }
+
+    // ========================================================================
+    // HELPER METHODS
+    // ========================================================================
+
+    private {CLASS_NAME} createInstance(Object... dependencies) {
+        /**
+         * Helper method to create {CLASS_NAME} instance
+         *
+         * Usage:
+         *   {CLASS_NAME} instance = createInstance(mockDep);
+         */
+        return new {CLASS_NAME}(dependencies);
+    }
+
+    private Map<String, Object> createTestData() {
+        /**
+         * Helper method to create test data
+         *
+         * Usage:
+         *   Map<String, Object> data = createTestData();
+         */
+        return Map.of(
+            "id", 1,
+            "name", "Test",
+            "email", "test@example.com"
+        );
+    }
+}
+

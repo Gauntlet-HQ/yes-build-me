@@ -1,0 +1,243 @@
+"""
+Integration tests for {QUEUE_NAME} message queue
+
+This file contains:
+- 2 SAMPLE tests demonstrating best practices
+- TODO tests for producer and consumer
+
+Testing Pattern:
+1. Setup: Connect to test queue
+2. Execute: Publish/consume message
+3. Verify: Message processed correctly
+4. Cleanup: Purge test queue
+"""
+
+import pytest
+import json
+from tests.fixtures.queue_fixtures import (
+    rabbitmq_connection,
+    test_queue,
+    purge_queue,
+)
+
+# ============================================================================
+# SAMPLE TESTS - Demonstrating Best Practices
+# ============================================================================
+
+def test_publish_message_to_{QUEUE_NAME}_success(test_queue):
+    """
+    SAMPLE TEST: Publish message to queue
+    
+    This demonstrates:
+    - Publishing message to queue
+    - Verifying message format
+    - Checking queue depth
+    """
+    # Setup: Prepare message
+    message = {
+        "type": "test_event",
+        "data": {
+            "user_id": 123,
+            "action": "test_action"
+        },
+        "timestamp": "2025-01-07T12:00:00Z"
+    }
+    
+    # Execute: Publish message
+    from app.queue.producer import publish_to_{QUEUE_NAME}
+    result = publish_to_{QUEUE_NAME}(message)
+    
+    # Verify: Message published successfully
+    assert result is True
+    
+    # Verify: Message in queue
+    queue_depth = test_queue.get_message_count()
+    assert queue_depth == 1
+    
+    # TODO: Verify message format
+
+
+def test_consume_message_from_{QUEUE_NAME}_success(test_queue):
+    """
+    SAMPLE TEST: Consume and process message from queue
+    
+    This demonstrates:
+    - Publishing test message
+    - Consuming message
+    - Verifying processing
+    - Checking side effects
+    """
+    # Setup: Publish test message
+    message = {
+        "type": "test_event",
+        "data": {"user_id": 123}
+    }
+    test_queue.publish(json.dumps(message))
+    
+    # Execute: Consume message
+    from app.queue.consumer import process_{QUEUE_NAME}_message
+    result = process_{QUEUE_NAME}_message()
+    
+    # Verify: Message processed successfully
+    assert result is True
+    
+    # Verify: Queue empty
+    queue_depth = test_queue.get_message_count()
+    assert queue_depth == 0
+    
+    # TODO: Verify side effects (database, emails, etc.)
+
+
+# ============================================================================
+# TODO TESTS - Fill in the implementation
+# ============================================================================
+
+def test_publish_invalid_message_format(test_queue):
+    """
+    TODO: Test publishing invalid message format
+    
+    Test scenarios:
+    - Missing required fields
+    - Invalid JSON
+    - Wrong data types
+    
+    Assertions:
+    - Error raised
+    - Message not published
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement invalid format test")
+
+
+def test_consume_message_processing_error(test_queue):
+    """
+    TODO: Test message processing error handling
+    
+    Test scenarios:
+    - Processing raises exception
+    - Message requeued or sent to DLQ
+    
+    Assertions:
+    - Error handled gracefully
+    - Message not lost
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement error handling test")
+
+
+def test_message_retry_logic(test_queue):
+    """
+    TODO: Test message retry mechanism
+    
+    Test scenarios:
+    - First attempt fails
+    - Retry succeeds
+    - Max retries exceeded
+    
+    Assertions:
+    - Retry count incremented
+    - Message eventually processed or moved to DLQ
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement retry test")
+
+
+def test_dead_letter_queue(test_queue):
+    """
+    TODO: Test dead letter queue behavior
+    
+    Test scenarios:
+    - Message fails max retries
+    - Message moved to DLQ
+    
+    Assertions:
+    - Message in DLQ
+    - Original queue empty
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement DLQ test")
+
+
+def test_message_acknowledgment(test_queue):
+    """
+    TODO: Test message acknowledgment
+    
+    Test scenarios:
+    - Successful processing with ack
+    - Failed processing with nack
+    - No ack (message requeued)
+    
+    Assertions:
+    - Ack removes message from queue
+    - Nack requeues or sends to DLQ
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement acknowledgment test")
+
+
+def test_message_ordering(test_queue):
+    """
+    TODO: Test message ordering
+    
+    Test scenarios:
+    - FIFO queue behavior
+    - Priority queue behavior (if applicable)
+    
+    Assertions:
+    - Messages processed in correct order
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement ordering test")
+
+
+def test_concurrent_consumers(test_queue):
+    """
+    TODO: Test multiple concurrent consumers
+    
+    Test scenarios:
+    - Multiple consumers processing messages
+    - No duplicate processing
+    
+    Assertions:
+    - Each message processed once
+    - No race conditions
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement concurrent consumers test")
+
+
+def test_queue_durability(test_queue):
+    """
+    TODO: Test queue durability
+    
+    Test scenarios:
+    - Messages persist after restart
+    - Durable vs transient queues
+    
+    Assertions:
+    - Durable messages survive restart
+    """
+    # TODO: Implement test
+    pytest.skip("TODO: Implement durability test")
+
+
+# ============================================================================
+# HELPER FUNCTIONS (Optional)
+# ============================================================================
+
+def publish_test_message(test_queue, **kwargs):
+    """
+    Helper function to publish test message
+    
+    Usage:
+        publish_test_message(test_queue, user_id=123)
+    """
+    defaults = {
+        "type": "test_event",
+        "data": {},
+        "timestamp": "2025-01-07T12:00:00Z"
+    }
+    defaults.update(kwargs)
+    
+    test_queue.publish(json.dumps(defaults))
+
